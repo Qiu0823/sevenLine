@@ -6,7 +6,7 @@
       </div> -->
 			<top-header></top-header>
 			<router-link to="/">
-				<img src="../assets/img/home.png" class="img1" />
+				<img src="~@/assets/img/home.png" class="img1" />
 			</router-link>
 
 			<dv-border-box-1 class="main-container">
@@ -590,7 +590,7 @@
 		color: #fff;
 
 		#dv-full-screen-container {
-			background-image: url('../assets/img/bg.png');
+			background-image: url('~@/assets/img/bg.png');
 			background-size: 100% 100%;
 			box-shadow: 0 0 3px blue;
 			display: flex;
