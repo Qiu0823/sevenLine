@@ -4,9 +4,9 @@
     <dv-decoration-5 class="header-center-decoration" />
     <dv-decoration-8 class="header-right-decoration" :reverse="true" />
     <div class="center-title">设备故障诊断系统</div>
-    <div @click="link" class="d1">
+    <!-- <div @click="link" class="d1">
       <img  src="@/assets/img/home.png" alt="">
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -16,12 +16,11 @@ export default {
   name: 'TopHeader',
   methods:{
     		//控制跳转主页
-		link(){
-			this.$router.push({
-				path: `/`
-			})
-
-		}
+		// link(){
+		// 	this.$router.push({
+		// 		path: `/`
+		// 	})
+		// }
   }
 }
 </script>
