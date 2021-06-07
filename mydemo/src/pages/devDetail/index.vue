@@ -340,9 +340,9 @@
 </template>
 
 <script>
-	import topHeader from '@/components/topHeader'
-	import BottomCharts from '@/components/BottomCharts'
-	import deviceInfo from '@/components/deviceInfo'
+	import topHeader from './components/topHeader1.vue'
+	import BottomCharts from './components/BottomCharts.vue'
+	import deviceInfo from './components/deviceInfo.vue'
 	import {pending,handled,frm} from '@/api/detail.js'
 	// import {getnews} from '../../api/test.js'
 
