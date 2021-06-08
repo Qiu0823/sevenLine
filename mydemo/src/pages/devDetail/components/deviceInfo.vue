@@ -2,7 +2,7 @@
   <div class="device-info-con areaBorderStyle">
       <div class="device-info-title">
           <h3>设备信息</h3>
-          <div>设备名称：1#RGV小车</div>
+          <div>设备名称：{{devName}}</div>
           <div>设备厂家：上海西重所</div>
       </div>
       <div class="device-status">
@@ -26,6 +26,10 @@ export default {
             ]
         }
     },
+    mounted() {
+        console.log(this.devName)
+    },
+    props:['devName']
 }
 </script>
 

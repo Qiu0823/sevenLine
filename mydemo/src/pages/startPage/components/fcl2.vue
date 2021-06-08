@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <div class="fcl21" @click="link(3)">
+    <div class="fcl21" @click="linkDetail1(3, '3#收口机')">
       <oneCell :device="fcl21"></oneCell>
     </div>
-    <div class="fcl22" @click="link(7)">
+    <div class="fcl22" @click="linkDetail1(7, '3#车丝机')">
       <oneCell :device="fcl22"></oneCell>
     </div>
-    <div class="fcl23" @click="link(17)">
+    <div class="fcl23" @click="linkDetail1(17, '3#修扣黑皮扣')">
       <oneCell :device="fcl23"></oneCell>
     </div>
-    <div class="fcl24" @click="link(17)">
+    <div class="fcl24" @click="linkDetail1(17, '3#吹水黑皮扣')">
       <oneCell :device="fcl24"></oneCell>
     </div>
   </div>
@@ -41,11 +41,18 @@ export default {
       },
     };
   },
-	methods:{
-		link(id){
-			this.$emit('linkDetail',id)
-		}
-	}
+  methods: {
+    link(id) {
+      this.$emit("linkDetail", id);
+    },
+    linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
+  },
 };
 </script>
 
@@ -58,19 +65,19 @@ div {
 .fcl21 {
   height: 10%;
   margin-top: 7%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcl22 {
   height: 10%;
   margin-top: 15%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcl23 {
   height: 10%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcl24 {
   height: 10%;
-	cursor:pointer;
+  cursor: pointer;
 }
 </style>

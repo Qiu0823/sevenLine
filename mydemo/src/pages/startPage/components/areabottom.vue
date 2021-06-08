@@ -7,9 +7,9 @@
       </div>
       <div class="dryMachine areaBorderStyle">
         <one-cell :device="arb7"></one-cell>
-				<div @click="link(32)" style="cursor:pointer;">
-					<one-cell :device="arb8" class="dry-two"></one-cell>
-				</div>
+        <div @click="linkDetail1(32,'烘干机')" style="cursor: pointer">
+          <one-cell :device="arb8" class="dry-two"></one-cell>
+        </div>
       </div>
       <div class="b21">
         <one-cell :device="arb3"></one-cell>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="b2">
-      <div class="b22 areaBorderStyle" @click="link(31)">
+      <div class="b22 areaBorderStyle" @click="linkDetail1(31,'涂层')">
         <div class="dv-title">涂层区</div>
         <one-cell :device="arb4"></one-cell>
       </div>
@@ -25,7 +25,7 @@
         <one-cell :device="arb2"></one-cell>
         <div class="b23-bottom"></div>
       </div>
-      <div class="b24 areaBorderStyle" @click="link(30)">
+      <div class="b24 areaBorderStyle" @click="linkDetail1(30,'退磁')">
         <div class="dv-title">退磁</div>
         <one-cell :device="arb5"></one-cell>
       </div>
@@ -79,11 +79,18 @@ export default {
       },
     };
   },
-	methods:{
-		link(id){
-			this.$emit('linkDetail',id)
-		}
-	}
+  methods: {
+    link(id) {
+      this.$emit("linkDetail", id);
+    },
+    linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
+  },
 };
 </script>
 
@@ -186,7 +193,7 @@ export default {
   float: left;
   padding-top: 3vh;
   position: relative;
-	cursor:pointer;
+  cursor: pointer;
   .dv-title {
     position: absolute;
     top: 0vh;
@@ -238,7 +245,7 @@ export default {
   float: left;
   padding-top: 3vh;
   position: relative;
-	cursor:pointer;
+  cursor: pointer;
   .dv-title {
     position: absolute;
     top: 0vh;

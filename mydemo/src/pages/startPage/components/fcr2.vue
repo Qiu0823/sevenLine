@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <div class="fcr21" @click="link(1)">
+    <div class="fcr21" @click="linkDetail1(1,'1#收口机')">
       <oneCell :device="fcr21"></oneCell>
     </div>
-    <div class="fcr22" @click="link(5)">
+    <div class="fcr22" @click="linkDetail1(5,'1#车丝机')">
       <oneCell :device="fcr22"></oneCell>
     </div>
-    <div class="fcr23" @click="link(15)">
+    <div class="fcr23" @click="linkDetail1(15,'1#修扣黑皮扣')">
       <oneCell :device="fcr23"></oneCell>
     </div>
-    <div class="fcr24">
+    <div class="fcr24" @click="linkDetail1(15,'1#吹水黑皮扣')">
       <oneCell :device="fcr24"></oneCell>
     </div>
   </div>
@@ -45,7 +45,14 @@ export default {
 	methods:{
 		link(id){
 			this.$emit('linkDetail',id)
-		}
+		},
+     linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
 	}
 };
 </script>

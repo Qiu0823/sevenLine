@@ -2,24 +2,24 @@
   <div class="area-container">
     <div v-if="deviceListName == '上料区域'" class="shangliao">
       <div class="shangliao-left">
-				<div style="flex: 1;cursor:pointer;" @click="linkDetail(10)">
+				<div style="flex: 1;cursor:pointer;" @click="linkDetail1(10,'乳化液')">
 					<one-cell :device="shang01"></one-cell>
 				</div>
-				<div style="flex: 1;cursor:pointer;" @click="linkDetail(11)">
+				<div style="flex: 1;cursor:pointer;" @click="linkDetail1(11,'液压油')">
 					 <one-cell :device="shang02"></one-cell>
 				</div>
       </div>
       <div class="shangliao-center">1#电气室</div>
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
-        <div class="shaoliao-right-left" style="cursor:pointer;" @click="linkDetail(35)">
+        <div class="shaoliao-right-left" style="cursor:pointer;" @click="linkDetail1(35,'1#喷码机')">
           <one-cell :device="shang03"></one-cell>
         </div>
         <div class="shangliao-right-center">
           <one-cell :device="shang04"></one-cell>
           <one-cell :device="shang05"></one-cell>
         </div>
-        <div class="shangliao-right-right"  @click="linkDetail(36)">
+        <div class="shangliao-right-right"  @click="linkDetail1(36,'2#喷码机')">
           <one-cell :device="shang06"></one-cell>
         </div>
       </div>
@@ -49,10 +49,10 @@
           <!-- <img src="@/assets/img/door.png" alt=""> -->
             <i class="iconfont icon-mendoor13"></i>
         </div>
-        <div class="returnFix-top" @click="linkDetail(20)">
+        <div class="returnFix-top" @click="linkDetail1(20,'2#带锯')">
           <one-cell :device="returnFix01"></one-cell>
         </div>
-        <div class="returnFix-center" @click="linkDetail(19)">
+        <div class="returnFix-center" @click="linkDetail1(19,'1#带锯')">
           <one-cell :device="returnFix02"></one-cell>
         </div>
         <div class="returnFix-bottom">
@@ -124,6 +124,13 @@ export default {
 			this.$router.push({
 				path:'/index',
 				query:{'id':id}
+			})
+		},
+    	linkDetail1(id,name){
+        console.log(name)
+			this.$router.push({
+				path:'/index',
+				query:{'id':id,'name': name}
 			})
 		},
 	},

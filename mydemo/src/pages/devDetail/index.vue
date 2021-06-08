@@ -12,7 +12,7 @@
 			<dv-border-box-1 class="main-container">
 				<div class="left-container">
 					<dv-border-box-3 class="left-chart-container">
-						<device-info style="width: 85%;margin:30px auto"></device-info>
+						<device-info style="width: 85%;margin:30px auto" :devName='devName'></device-info>
 					</dv-border-box-3>
 				</div>
 
@@ -350,6 +350,7 @@
 		},
 		data() {
 			return {
+				devName:'',
 				historyData:[
 					{
 						reason:'电机过载',
@@ -592,6 +593,8 @@
 		// })
 		this.queryPendingError(this.$route.query.id)
 		this.queryHandledError(this.$route.query.id)
+		this.devName = this.$route.query.name;
+		console.log(this.devName)
 		
 		// alert(this.pendingError)
 
