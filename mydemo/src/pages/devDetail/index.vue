@@ -77,8 +77,10 @@
 									<el-table-column prop="solveTime" align="center" label="故障处理时间">
 									</el-table-column>
 									<el-table-column align="center" label="操作">
-										<el-button @click="showDialog5" type="text" size="small">处理结果
-										</el-button>
+										<template slot-scope="scope">
+											<el-button @click="showDialog5(scope.$index)" type="text" size="small">处理结果
+											</el-button>
+										</template>
 									</el-table-column>
 								</el-table>
 							</div>
@@ -249,17 +251,15 @@
 		<el-dialog :visible.sync="centerDialogVisible5" width="40%" center>
 			<div style="width: 100%;margin: auto;margin-top: 50px;">
 				<span>故障名称:</span>
-				<el-input :disabled="true" type="text" style="width: 75%;margin-left: 20px;" v-model="input" placeholder="请输入内容">
+				<el-input :disabled="true" type="text" style="width: 75%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
 					</el-input>
 			</div>
 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
 				<div style="flex: 0.5;">选择故障原因：</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="电机过载"></el-checkbox>
-						</el-checkbox-group>
+					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
+						  <el-checkbox :label="item.reason"></el-checkbox>
 					</div>
-					<div style="flex: 1;">
+<!-- 					<div style="flex: 1;">
 						<el-checkbox-group v-model="checkList1">
 						  <el-checkbox label="油位异常"></el-checkbox>
 						</el-checkbox-group>
@@ -268,23 +268,15 @@
 						<el-checkbox-group v-model="checkList1">
 						  <el-checkbox label="油温异常"></el-checkbox>
 						</el-checkbox-group>
-					</div>
+					</div> -->
 			</div>
 			
 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
 				<div style="flex: 0.5;line-height: 70px;">选择故障措施：</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="电机保护开关"></el-checkbox>
-							<br />
-						  <el-checkbox label="电机检查"></el-checkbox>
-							<br />
-						  <el-checkbox label="液压泵检查"></el-checkbox>
-							<br />
-							<el-checkbox label="电缆检查"></el-checkbox>
-						</el-checkbox-group>
+					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
+						  <el-checkbox v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :label="item1.measures"></el-checkbox>
 					</div>
-					<div style="flex: 1;">
+<!-- 					<div style="flex: 1;">
 						<el-checkbox-group v-model="checkList1">
 						  <el-checkbox label="检查油位"></el-checkbox>
 						</el-checkbox-group>
@@ -293,7 +285,7 @@
 						<el-checkbox-group v-model="checkList1">
 						  <el-checkbox label="检查油温"></el-checkbox>
 						</el-checkbox-group>
-					</div>
+					</div> -->
 			</div>
 			<div style="width: 100%;margin: auto;margin-top: 70px;" class="clearfix">
 				<div style="float: left; line-height: 40px;">备注：</div>
@@ -473,9 +465,9 @@
 				}
 				await frm(data).then(res =>{
 					if(res.data.state === true){
-						this.frmMessage = res.data.result[0]
-						console.log(this.faultreason)
-						console.log(this.frmMessage)
+						if(res.data.result.length!=0){
+							this.frmMessage = res.data.result[0]
+						}
 					}
 				})
 			},
@@ -491,13 +483,34 @@
 			},
 			//显示查看措施信息表
 			showDialog4(row, index) {
+				// console.log("1111111"+this.pendingError[index].faultId)
 				this.queryFrm(this.pendingError[index].faultId)
-				this.tabpanIndex= 1
-				this.centerDialogVisible4 = true
+				if(this.frmMessage.length!=0){
+					this.tabpanIndex= 1
+					this.centerDialogVisible4 = true
+				}else{
+					this.$message({
+						message: '暂无可查看措施',
+						type: 'warning',
+						center: true
+					});
+				}
+
 			},
 			//显示处理结果的dialog
-			showDialog5() {
+			showDialog5(index) {
+				this.queryFrm(this.handledError[index].faultId)
+				// this.queryFrm(1)
+				if(this.frmMessage.length!=0){
 				this.centerDialogVisible5 = true
+				}else{
+					this.$message({
+						message: '暂无可查看结果',
+						type: 'warning',
+						center: true
+					});
+				}
+
 			},
 			//设置表格奇数行和偶数行的背景色
 			TableRowStyle({
