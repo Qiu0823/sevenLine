@@ -253,7 +253,6 @@ export default {
 		position: relative;
 		right: -22.5vh;
 		top:-2vh;
-
 		.iconfont{
 			font-size: 16px;
 			display: inline-block;

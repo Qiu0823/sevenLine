@@ -1,7 +1,7 @@
 <template>
   <div class="scon">
     <div class="container areaBorderStyle">
-      <div class="area-name">测量区</div>
+      <div class="area-name">测量区域</div>
       <div class="doorOne">
         <!-- <img src="@/assets/img/door.png" alt="" /> -->
         <i class="iconfont icon-mendoor13"></i>
@@ -22,9 +22,12 @@
       </div>
     </div>
     <div class="chufei">抽检台架</div>
-    <div class="load1">
+    <!-- <div class="load1">
       <span class="iconfont icon-lu1"></span>
-    </div>
+    </div> -->
+    <div class="load2">
+					<span class="iconfont icon-lu" v-for="item in 40" :key="item"></span>
+				</div>
     <div class="house">
       <div class="house-top">2#电气室</div>
       <div class="house-bottom">集控室</div>
@@ -142,7 +145,7 @@ export default {
   height: 83%;
   // background-color: tomato;
   position: relative;
-  top: -15vh;
+  top: -10vh;
   left: 16vh;
   display: flex;
   flex-direction: column;
@@ -218,18 +221,35 @@ export default {
   width: 60%;
   height: 50%;
 }
-.load1 {
-  display: inline-block;
-  position: relative;
-  top: 3vh;
-  left: 14vh;
-  transform: scaleX(20);
-  width: 30%;
-  .iconfont {
-    font-size: 36px;
-    color: grey;
-  }
-}
+// .load1 {
+//   display: inline-block;
+//   position: relative;
+//   top: 3vh;
+//   left: 14vh;
+//   transform: scaleX(20);
+//   width: 30%;
+//   .iconfont {
+//     font-size: 36px;
+//     color: grey;
+//   }
+// }
+	.load2{
+    display: flex;
+    position: absolute;
+		width: 3vh;
+		// height: 100%;
+    height: 20vh;
+		display: inline-block;
+		right: -25vh;
+		top:0vh;
+    transform: rotate(90deg);
+		.iconfont{
+			font-size: 16px;
+			display: inline-block;
+			color: grey;
+			transform: scaleY(3)translateY(50%);
+		}
+	}
 .chufei {
   // flex: 1;
   border: 1px solid #203456;

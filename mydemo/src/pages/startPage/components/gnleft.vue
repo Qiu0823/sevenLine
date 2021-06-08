@@ -71,6 +71,7 @@ div {
 .gnl1 {
   height: 10%;
 	cursor:pointer;
+  margin-left: -2.5vh;
 }
 .gnl2 {
   height: 10%;

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="b1">
-      <div class="dv-title">烘干区</div>
+      <div class="dv-title">烘干区域</div>
       <div class="b11">
         <one-cell :device="arb6"></one-cell>
       </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="b2">
       <div class="b22 areaBorderStyle" @click="linkDetail1(31,'涂层')">
-        <div class="dv-title">涂层区</div>
+        <div class="dv-title">涂层区域</div>
         <one-cell :device="arb4"></one-cell>
       </div>
       <div class="b23">
@@ -26,7 +26,7 @@
         <div class="b23-bottom"></div>
       </div>
       <div class="b24 areaBorderStyle" @click="linkDetail1(30,'退磁')">
-        <div class="dv-title">退磁</div>
+        <div class="dv-title">退磁区域</div>
         <one-cell :device="arb5"></one-cell>
       </div>
       <div class="b25">
@@ -117,7 +117,7 @@ export default {
   .dv-title {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 3vh;
     color: #1b5ccc;
   }
   // padding-left: 1vh;

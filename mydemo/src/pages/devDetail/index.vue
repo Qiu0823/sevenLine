@@ -597,7 +597,6 @@
 		console.log(this.devName)
 		
 		// alert(this.pendingError)
-
 	}
 	}
 </script>
