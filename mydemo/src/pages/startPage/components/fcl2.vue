@@ -1,43 +1,42 @@
 <template>
   <div class="container">
-    <div class="fcr21" @click="link(1)">
-      <oneCell :device="fcr21"></oneCell>
+    <div class="fcl21" @click="link(3)">
+      <oneCell :device="fcl21"></oneCell>
     </div>
-    <div class="fcr22" @click="link(5)">
-      <oneCell :device="fcr22"></oneCell>
+    <div class="fcl22" @click="link(7)">
+      <oneCell :device="fcl22"></oneCell>
     </div>
-    <div class="fcr23" @click="link(15)">
-      <oneCell :device="fcr23"></oneCell>
+    <div class="fcl23" @click="link(17)">
+      <oneCell :device="fcl23"></oneCell>
     </div>
-    <div class="fcr24">
-      <oneCell :device="fcr24"></oneCell>
+    <div class="fcl24" @click="link(17)">
+      <oneCell :device="fcl24"></oneCell>
     </div>
   </div>
 </template>
 
 <script>
-import oneCell from "./oneCell";
-import{linkDetail} from '@/util/util.js'
+import oneCell from "@/components/oneCell";
 export default {
   components: {
     oneCell,
   },
   data() {
     return {
-      fcr21: {
-        title: "1#收口机",
+      fcl21: {
+        title: "3#收口机",
         status: "nomal",
       },
-      fcr22: {
-        title: "1#车丝机",
+      fcl22: {
+        title: "3#车丝机",
         status: "nomal",
       },
-      fcr23: {
-        title: "1#修扣黑皮扣",
+      fcl23: {
+        title: "3#修扣黑皮扣",
         status: "nomal",
       },
-      fcr24: {
-        title: "1#吹水黑皮扣",
+      fcl24: {
+        title: "3#吹水黑皮扣",
         status: "nomal",
       },
     };
@@ -54,22 +53,23 @@ export default {
 div {
   width: 100%;
   height: 100%;
+  /* border: red 1px solid; */
 }
-.fcr21 {
+.fcl21 {
   height: 10%;
   margin-top: 7%;
 	cursor:pointer;
 }
-.fcr22 {
+.fcl22 {
   height: 10%;
   margin-top: 15%;
 	cursor:pointer;
 }
-.fcr23 {
+.fcl23 {
   height: 10%;
 	cursor:pointer;
 }
-.fcr24 {
+.fcl24 {
   height: 10%;
 	cursor:pointer;
 }

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import oneCell from "./oneCell";
+import oneCell from "@/components/oneCell";
 export default {
   components: {
     oneCell,

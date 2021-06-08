@@ -131,20 +131,20 @@
 
 <script>
 import TopHeader from "@/components/topHeader";
-import AreaOneCom from "@/components/AreaOneCom";
+import AreaOneCom from "./components/AreaOneCom";
 import lineDevice from "@/components/lineDevice";
 import RollCar from "@/components/rollCar";
-import fc from "@/components/fc";
-import fcl1 from "@/components/fcl1";
-import fcr1 from "@/components/fcr1";
-import fcl2 from "@/components/fcl2";
-import fcr2 from "@/components/fcr2";
-import gnleft from "@/components/gnleft";
-import gncenter from "@/components/gncenter";
-import gnright from "@/components/gnright";
-import areabottom from "@/components/areabottom";
-import detect from "@/components/detect";
-import fc1 from "@/components/fc1";
+import fc from "./components/fc";
+import fc1 from "./components/fc1";
+import fcl1 from "./components/fcl1";
+import fcr1 from "./components/fcr1";
+import fcl2 from "./components/fcl2";
+import fcr2 from "./components/fcr2";
+import gnleft from "./components/gnleft";
+import gncenter from "./components/gncenter";
+import gnright from "./components/gnright";
+import areabottom from "./components/areabottom";
+import detect from "./components/detect";
 import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
 

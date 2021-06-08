@@ -6,7 +6,7 @@
       </div> -->
 			<top-header></top-header>
 			<router-link to="/">
-				<img src="../assets/img/home.png" class="img1" />
+				<img src="~@/assets/img/home.png" class="img1" />
 			</router-link>
 
 			<dv-border-box-1 class="main-container">
@@ -343,9 +343,9 @@
 </template>
 
 <script>
-	import topHeader from '@/components/topHeader'
-	import BottomCharts from '@/components/BottomCharts'
-	import deviceInfo from '@/components/deviceInfo'
+	import topHeader from './components/topHeader1.vue'
+	import BottomCharts from './components/BottomCharts.vue'
+	import deviceInfo from './components/deviceInfo.vue'
 	import {pending,handled,frm} from '@/api/detail.js'
 	// import {getnews} from '../../api/test.js'
 
@@ -579,6 +579,7 @@
 		// })
 		this.queryPendingError(this.$route.query.id)
 		this.queryHandledError(this.$route.query.id)
+		
 		// alert(this.pendingError)
 
 	}
@@ -593,7 +594,7 @@
 		color: #fff;
 
 		#dv-full-screen-container {
-			background-image: url('../assets/img/bg.png');
+			background-image: url('~@/assets/img/bg.png');
 			background-size: 100% 100%;
 			box-shadow: 0 0 3px blue;
 			display: flex;

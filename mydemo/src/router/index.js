@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld from '@/pages/HelloWorld'
+import HelloWorld from '@/pages/startPage/HelloWorld'
 import Datail from '@/pages/detail'
-import Index from '@/pages/index'
+// import Index from '@/pages/index'
+import Index from '../pages/devDetail/index'
 import RollCar from '@/components/rollCar'
 
 Vue.use(VueRouter)

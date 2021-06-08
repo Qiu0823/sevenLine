@@ -7,12 +7,12 @@
 			<div class="dvDetail1">
 				<div class="dvDetail11">
 					<dv-border-box-4 class="rmc-bottom-container">
-						<Bottom-Charts />			
+						<!-- <Bottom-Charts />			 -->
 					</dv-border-box-4>
 				</div>
 				<div class="dvDetail12">
 					<dv-border-box-4 :reverse="true" class="rmc-bottom-container">
-						<Bottom-Charts />			
+						<!-- <Bottom-Charts />			 -->
 					</dv-border-box-4>	
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 
 <script>
 import topHeader from '@/components/topHeader'
-import BottomCharts from '@/components/BottomCharts'
+// import BottomCharts from '@/components/BottomCharts'
 export default{
 	data(){
 		return{
@@ -172,7 +172,7 @@ export default{
 	},
 	components:{
 		topHeader,
-		BottomCharts
+		// BottomCharts
 	}
 }
 </script>
