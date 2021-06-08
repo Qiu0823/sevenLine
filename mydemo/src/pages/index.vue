@@ -144,7 +144,7 @@
 
 
 <!-- 		查看电机信息dialog -->
-		<el-dialog title="电机信息" :visible.sync="centerDialogVisible3" width="30%" center>
+		<el-dialog title="电机信息" :visible.sync="centerDialogVisible3" width="70%" center>
 			<div class="" style="width:100%;display:flex;justify-content: space-between;">
 				<div style="width:50%;text-align: center;">
 					<table width="100%" border="1">
@@ -183,28 +183,28 @@
 							<td class="black_title">液压泵电机</td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头1</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头2</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头3</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头4</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头5</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头6</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头7</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 						<tr>
-							<td class="left_title bottom_border">表头8</td>
+							<td class="left_title bottom_border"></td>
 						</tr>
 					</table>
 				</div>
@@ -215,25 +215,24 @@
 		</el-dialog>
 
 
-		<el-dialog title="查看措施" :visible.sync="centerDialogVisible4" width="30%" center>
-			<el-tabs type="border-card" v-model="tabpanIndex">
-			  <el-tab-pane :name="i+1"  v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" :label="i+1">
-					<div style="width: 70%;margin: auto;">
-						<span>故障名称:</span>
-						<el-input :disabled="true" style="width: 250px;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
+		<el-dialog title="查看措施" :visible.sync="centerDialogVisible4" width="60%" center>
+			<el-tabs style="height:450px;" type="border-card" v-model="tabpanIndex">
+			  <el-tab-pane :name="i+1"  v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" :label="'原因'+(i+1)">
+					<div style="width: 70%;margin: auto;height: 80px;margin-top: 30px;">
+						<span style="display: inline-block;line-height: 40px;">故障名称:</span>
+						<el-input :disabled="true" style="width: 68%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
 						</el-input>
 					</div>
-					<div style="width: 70%;margin: auto;">
+					<div style="width: 70%;margin: auto;height: 80px;">
 						<span>故障原因:</span>
-						<el-input :disabled="true" :value="item.reason" style="width: 250px;margin-left: 20px;"
+						<el-input :disabled="true" :value="item.reason" style="width: 68%;margin-left: 20px;"
 							placeholder="请输入内容">
 						</el-input>
 					</div>
-					<div style="width: 70%;margin: auto;">
-						<span>故障措施：</span>
-						<el-table ref="multipleTable" :data="item.measuresVOList" style="width: 100%">
-							<el-table-column prop="measures">
-							</el-table-column>
+					<div style="width: 70%;margin: auto;height: 200px;">
+						<span style="position: relative;top: -15px;">故障措施：</span>
+						<el-table :show-header = "false" ref="multipleTable" :data="item.measuresVOList" style="width: 68%;display: inline-block;margin-left: 20px;">
+							<el-table-column prop="measures"></el-table-column>
 						</el-table>
 					</div>
 					<span slot="footer" class="dialog-footer">
@@ -248,13 +247,13 @@
 
 <!-- 处理结果dialog -->
 		<el-dialog :visible.sync="centerDialogVisible5" width="40%" center>
-			<div style="width: 100%;margin: auto;">
+			<div style="width: 100%;margin: auto;margin-top: 50px;">
 				<span>故障名称:</span>
 				<el-input :disabled="true" type="text" style="width: 75%;margin-left: 20px;" v-model="input" placeholder="请输入内容">
 					</el-input>
 			</div>
-			<div style="width: 100%;margin: auto;display: flex;margin-top: 15px;">
-				<div style="flex: 1;">选择故障原因：</div>
+			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
+				<div style="flex: 0.5;">选择故障原因：</div>
 					<div style="flex: 1;">
 						<el-checkbox-group v-model="checkList1">
 						  <el-checkbox label="电机过载"></el-checkbox>
@@ -272,13 +271,16 @@
 					</div>
 			</div>
 			
-			<div style="width: 100%;margin: auto;display: flex;margin-top: 15px;">
-				<div style="flex: 1;line-height: 70px;">选择故障措施：</div>
+			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
+				<div style="flex: 0.5;line-height: 70px;">选择故障措施：</div>
 					<div style="flex: 1;">
 						<el-checkbox-group v-model="checkList1">
 						  <el-checkbox label="电机保护开关"></el-checkbox>
+							<br />
 						  <el-checkbox label="电机检查"></el-checkbox>
+							<br />
 						  <el-checkbox label="液压泵检查"></el-checkbox>
+							<br />
 							<el-checkbox label="电缆检查"></el-checkbox>
 						</el-checkbox-group>
 					</div>
@@ -293,7 +295,7 @@
 						</el-checkbox-group>
 					</div>
 			</div>
-			<div style="width: 100%;margin: auto;margin-top: 15px;" class="clearfix">
+			<div style="width: 100%;margin: auto;margin-top: 70px;" class="clearfix">
 				<div style="float: left; line-height: 40px;">备注：</div>
 				<el-input type="textarea" v-model="resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="2" placeholder="请输入内容">
 				</el-input>
@@ -309,6 +311,7 @@
 			  <el-table
 			    :data="historyData"
 			    border
+					height="400"
 			    style="width: 100%">
 			    <el-table-column
 			      prop="reason"
@@ -705,6 +708,17 @@
 			height: 70px;
 			top: 30px;
 			left: 30px;
+		}
+		.el-dialog--center{
+			width: 60%!important;
+			height: 70%;
+			// background-image: url(../assets/img/bg.png);
+		}
+		td{
+			height: 45px;
+		}
+		.el-dialog .el-table, .el-table__expanded-cell{
+			background-color: white!important;
 		}
 
 	}
