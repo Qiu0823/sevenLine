@@ -4,7 +4,7 @@
       <div class="area-name">测量区</div>
       <div class="doorOne">
         <!-- <img src="@/assets/img/door.png" alt="" /> -->
-            <i class="iconfont icon-mendoor13"></i>
+        <i class="iconfont icon-mendoor13"></i>
       </div>
       <div class="detect1">
         <div class="detect1-top">
@@ -14,7 +14,7 @@
           <oneCell :device="dec2"></oneCell>
         </div>
       </div>
-      <div class="detect2" @click="link(33)">
+      <div class="detect2" @click="linkDetail1(33,'测量点')">
         <div class="detect2-onecell" v-for="item in decArr" :key="item.id">
           <span class="dv-title">{{ item.title }}</span>
           <div class="LEDbtn greenBtn"></div>
@@ -22,9 +22,9 @@
       </div>
     </div>
     <div class="chufei">抽检台架</div>
-		<div class="load1">
-			<span class="iconfont icon-lu1"></span>
-		</div>
+    <div class="load1">
+      <span class="iconfont icon-lu1"></span>
+    </div>
     <div class="house">
       <div class="house-top">2#电气室</div>
       <div class="house-bottom">集控室</div>
@@ -92,11 +92,18 @@ export default {
       ],
     };
   },
-	methods:{
-		link(id){
-			this.$emit('linkDetail',id)
-		}
-	}
+  methods: {
+    link(id) {
+      this.$emit("linkDetail", id);
+    },
+    linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
+  },
 };
 </script>
 
@@ -178,7 +185,7 @@ export default {
   }
 }
 .detect2 {
-	cursor:pointer;
+  cursor: pointer;
   height: 100%;
   flex: 1;
   display: flex;
@@ -211,17 +218,17 @@ export default {
   width: 60%;
   height: 50%;
 }
-.load1{
-	display: inline-block;
-	position: relative;
-	top: 3vh;
-	left: 14vh;
-	transform: scaleX(20);
-	width: 30%;
-		.iconfont{
-			font-size: 36px;
-			color: grey;
-		}
+.load1 {
+  display: inline-block;
+  position: relative;
+  top: 3vh;
+  left: 14vh;
+  transform: scaleX(20);
+  width: 30%;
+  .iconfont {
+    font-size: 36px;
+    color: grey;
+  }
 }
 .chufei {
   // flex: 1;

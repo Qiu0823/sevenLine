@@ -3,16 +3,16 @@
     <div class="gnl1">
       <oneCell :device="gnl1"></oneCell>
     </div>
-    <div class="gnl2" @click="link(21)">
+    <div class="gnl2" @click="linkDetail1(21,'1#抛丸机')">
       <oneCell :device="gnl2" ></oneCell>
     </div>
-			<div class="gnl3" @click="link(23)">
+			<div class="gnl3" @click="linkDetail1(23,'1#三角标')">
 			  <oneCell :device="gnl3"></oneCell>
 			</div>
     <div class="gnl5">
       <oneCell :device="gnl5"></oneCell>
     </div>
-    <div class="gnl4" @click="link(25)">
+    <div class="gnl4" @click="linkDetail1(25,'外保拧接')">
       <oneCell :device="gnl4"></oneCell>
     </div>
   </div>
@@ -51,7 +51,14 @@ export default {
 	methods:{
 		link(id){
 			this.$emit('linkDetail',id)
-		}
+		},
+      linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
 	}
 };
 </script>

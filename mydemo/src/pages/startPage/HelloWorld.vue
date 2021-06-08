@@ -77,7 +77,7 @@
         <!-- 管拧区 -->
         <div class="third-container-right areaBorderStyle arrowBottom3">
           <div class="area-name">管拧区域</div>
-					<div class="square" @click="linkDetail(29)" >分钢仪</div>
+					<div class="square" @click="linkDetail1(29,'分钢仪')" >分钢仪</div>
           <div class="tcr-left">
             <gnleft @linkDetail="linkDetail"></gnleft>
           </div>
@@ -110,7 +110,7 @@
           <div class="square">出废区</div>
           <div class="area-name">打包区</div>
           <div class="da-container-left">成型区</div>
-          <div class="da-container-center" @click="linkDetail(34)">
+          <div class="da-container-center" @click="linkDetail1(34,'打捆机')" style="cursor:pointer">
             <div class="dv-title">打捆机</div>
             <div
               class="LEDbtn greenBtn"
@@ -180,6 +180,14 @@ export default {
 				query:{'id':id}
 			})
 		},
+     linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
+    
     showSideNavMeth() {
       this.showSideNav = !this.showSideNav;
     },
