@@ -1,7 +1,7 @@
 <template>
   <div class="oneCell">
     <div class="dv-title">{{device.title}}</div>
-    <div class="LEDbtn greenBtn"></div>
+    <div v-show="device.title !== '1#通径机'" class="LEDbtn greenBtn"></div>
   </div>
 </template>
 <script>
@@ -18,7 +18,6 @@ export default {
 .oneCell {
   height: 100%;
   width: 100%;
-    // width: 6vw;
     padding-right: 0;
   display: flex;
   box-sizing: border-box;
@@ -36,6 +35,5 @@ export default {
       // height: 2vh;
       line-height: 2.5vh;
   }
-
 }
 </style>
