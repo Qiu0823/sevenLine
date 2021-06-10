@@ -391,7 +391,7 @@
 				srowindex: 0, //保存每一行的index
 				srowi: 0, //保存每一行的i
 				checkList1: [],
-				resultNote: '', //查看结果备注
+				resultNote: '', //查看结果备注			
 				pendingError:'',//待处理故障信息
 				handledError:'',//已处理故障信息
 				frmMessage:'', //查询措施信息
@@ -606,7 +606,6 @@
 		this.devName = this.$route.query.name;
 		
 		// alert(this.pendingError)
-
 	}
 	}
 </script>

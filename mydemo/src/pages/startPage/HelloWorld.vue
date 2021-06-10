@@ -108,7 +108,7 @@
         <!-- <area-one-com :deviceListName="deviceList8Name"> </area-one-com> -->
         <div class="da-container">
           <div class="square">出废区</div>
-          <div class="area-name">打包区</div>
+          <div class="area-name">打包区域</div>
           <div class="da-container-left">成型区</div>
           <div class="da-container-center" @click="linkDetail1(34,'打捆机')" style="cursor:pointer">
             <div class="dv-title">打捆机</div>
