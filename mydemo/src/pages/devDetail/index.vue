@@ -433,9 +433,9 @@
 				
 				
 				
-				pendingError:'',//待处理故障信息
-				handledError:'',//已处理故障信息
-				frmMessage:'', //查询措施信息
+				pendingError:[],//待处理故障信息
+				handledError:[],//已处理故障信息
+				frmMessage:[], //查询措施信息
 				tabpanIndex: 1 //默认选中的tabpan
 			}
 		},
