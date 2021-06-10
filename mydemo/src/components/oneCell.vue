@@ -1,7 +1,7 @@
 <template>
   <div class="oneCell">
     <div class="dv-title">{{device.title}}</div>
-    <div class="LEDbtn greenBtn"></div>
+    <div class="LEDbtn greenBtn" :style="{backgroundColor:color}"></div>
   </div>
 </template>
 <script>
@@ -11,7 +11,7 @@ export default {
             
         }
     },
-    props:['device']
+    props:['device','color']
 }
 </script>
 <style scoped lang='less'>

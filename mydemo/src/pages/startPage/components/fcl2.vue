@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="fcl21" @click="linkDetail1(3, '3#收口机')">
-      <oneCell :device="fcl21"></oneCell>
+      <oneCell :device="fcl21" :color="this.$store.state.WebsocketMessage.Equipment3_FaultStatus"></oneCell>
     </div>
     <div class="fcl22" @click="linkDetail1(7, '3#车丝机')">
-      <oneCell :device="fcl22"></oneCell>
+      <oneCell :device="fcl22" :color="this.$store.state.WebsocketMessage.Equipment7_FaultStatus"></oneCell>
     </div>
     <div class="fcl23" @click="linkDetail1(17, '3#修扣黑皮扣')">
-      <oneCell :device="fcl23"></oneCell>
+      <oneCell :device="fcl23" :color="this.$store.state.WebsocketMessage.Equipment17_FaultStatus"></oneCell>
     </div>
     <div class="fcl24" @click="linkDetail1(17, '3#吹水黑皮扣')">
-      <oneCell :device="fcl24"></oneCell>
+      <oneCell :device="fcl24" :color="this.$store.state.WebsocketMessage.Equipment17_FaultStatus"></oneCell>
     </div>
   </div>
 </template>

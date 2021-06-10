@@ -9,8 +9,11 @@ import VueThermometer from 'vuejs-thermometer'
 import '@/assets/less/index.less'
 import '@/assets/iconfont/iconfont.css'
 import '@/assets/less/myElementStyle.css'
+import store from './store/index.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import * as echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 // window.jQuery = $;
 // window.$ = $;
 
@@ -26,5 +29,7 @@ Vue.directive('title', {
 Vue.use(less).use(dataV).use(ElementUI).use(VueThermometer).use(VueAxios,axios)
 new Vue({
   render: h => h(App),
-  router
+  router,
+	store,
+	echarts
 }).$mount('#app')

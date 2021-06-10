@@ -4,16 +4,16 @@
       <oneCell :device="gnl1"></oneCell>
     </div>
     <div class="gnl2" @click="linkDetail1(21,'1#抛丸机')">
-      <oneCell :device="gnl2" ></oneCell>
+      <oneCell :device="gnl2" :color="this.$store.state.WebsocketMessage.Equipment21_FaultStatus"></oneCell>
     </div>
 			<div class="gnl3" @click="linkDetail1(23,'1#三角标')">
-			  <oneCell :device="gnl3"></oneCell>
+			  <oneCell :device="gnl3" :color="this.$store.state.WebsocketMessage.Equipment23_FaultStatus"></oneCell>
 			</div>
     <div class="gnl5">
       <oneCell :device="gnl5"></oneCell>
     </div>
     <div class="gnl4" @click="linkDetail1(25,'外保拧接')">
-      <oneCell :device="gnl4"></oneCell>
+      <oneCell :device="gnl4" :color="this.$store.state.WebsocketMessage.Equipment25_FaultStatus"></oneCell>
     </div>
   </div>
 </template>

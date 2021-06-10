@@ -42,7 +42,7 @@
 										<br />
 										<el-button @click="showDialog4(scope.row,scope.$index)" type="text" size="small">查看措施</el-button>
 										<br />
-										<el-button @click="showDialog6" type="text" size="small">查看历史故障</el-button>
+										<el-button @click="showDialog6(scope.$index)" type="text" size="small">查看历史故障</el-button>
 										</template>
 									</el-table-column>
 								</el-table>
@@ -182,7 +182,7 @@
 				<div style="width:50%;text-align: center">
 					<table width="100%" border="1" class="tb2">
 						<tr>
-							<td class="black_title">液压泵电机</td>
+							<td class="black_title"></td>
 						</tr>
 						<tr>
 							<td class="left_title bottom_border"></td>
@@ -301,9 +301,9 @@
 		<!-- 查看历史故障dialog -->
 		<el-dialog :visible.sync="centerDialogVisible6" width="40%" center>
 			  <el-table
-			    :data="historyData"
+			    :data="ErrorMessage"
 			    border
-					height="400"
+					height="190"
 			    style="width: 100%">
 			    <el-table-column
 			      prop="reason"
@@ -311,7 +311,7 @@
 			      width="180">
 			    </el-table-column>
 			    <el-table-column
-			      prop="measure"
+			      prop="measures"
 			      label="处理措施"
 			      width="180">
 			    </el-table-column>
@@ -320,12 +320,12 @@
 			      label="备注">
 			    </el-table-column>
 					<el-table-column
-					  prop="time"
+					  prop="solveTime"
 					  label="故障处理时间">
 					</el-table-column>
 			  </el-table>
-				<div style="margin-top: 20px;">故障统计:</div>
-				<div style="width: 100%;border: 1px gray solid;height: 100px;"></div>
+				<div style="margin-top: 10px;">故障统计:</div>
+				<div style="width: 100%;border: 1px gray solid;height: 400px;" id="ErrorStasticChart"></div>
 			<span slot="footer" class="dialog-footer">
 				<el-button type="primary" @click="centerDialogVisible6 = false;">确定</el-button>
 			</span>
@@ -338,7 +338,7 @@
 	import topHeader from './components/topHeader1.vue'
 	import BottomCharts from './components/BottomCharts.vue'
 	import deviceInfo from './components/deviceInfo.vue'
-	import {pending,handled,frm} from '@/api/detail.js'
+	import {pending,handled,frm,ErrorMessageChart,ErrorMessageHistory} from '@/api/detail.js'
 	// import {getnews} from '../../api/test.js'
 
 	export default {
@@ -351,42 +351,6 @@
 		data() {
 			return {
 				devName:'',
-				historyData:[
-					{
-						reason:'电机过载',
-						measure:'电机检查',
-						note:'',
-						time:'2020-1-10 13:00:00'
-					},
-					{
-						reason:'油温异常',
-						measure:'检查油温',
-						note:'',
-						time:'2020-1-10 13:00:00'
-					},
-					{
-						reason:'电机过载',
-						measure:'电机检查',
-						note:'',
-						time:'2020-1-10 13:00:00'
-					}
-				],
-				tableData: [{
-					date: '充电机伸缩机构伺服故障',
-					level: '重故障'
-				}, {
-					date: '充电机故障硬件故障',
-					level: '轻故障'
-				}, {
-					date: '充电机故障温度过高保护',
-					level: '轻故障'
-				}, {
-					date: '充电机通讯接收超时（5秒）',
-					level: '重故障'
-				}, {
-					date: '小车电量严重不足',
-					level: '重故障'
-				}],
 				tableData1: null,
 				centerDialogVisible: false,
 				centerDialogVisible1: false,
@@ -428,18 +392,32 @@
 				srowi: 0, //保存每一行的i
 				checkList1: [],
 				resultNote: '', //查看结果备注
-				
-				
-				
-				
-				
 				pendingError:'',//待处理故障信息
 				handledError:'',//已处理故障信息
 				frmMessage:'', //查询措施信息
-				tabpanIndex: 1 //默认选中的tabpan
+				tabpanIndex: 1, //默认选中的tabpan
+				chartMessage:{},//故障信息图表信息
+				ErrorMessage:[]
 			}
 		},
 		methods: {
+			//绘图故障信息统计
+			drawLine(option){
+			        // 基于准备好的dom，初始化echarts实例
+			        let myChart = this.$echarts.init(document.getElementById('ErrorStasticChart'))
+			        // 绘制图表
+			        myChart.setOption(option);
+			    },
+			//查询历史故障信息
+			async ErrorMessageHistory(deviceId,faultId){
+				let data = {
+					deviceId:deviceId,
+					faultId:faultId
+				}
+				await ErrorMessageHistory(data).then(res =>{
+					this.ErrorMessage = res.data.result
+				})
+			},
 			//查询待处理故障
 			async queryPendingError(id){
 				let data ={
@@ -472,10 +450,42 @@
 					}
 				})
 			},
+			//查询故障信息图表
+			async getErrorChartMessage(deviceId,faultId){
+				let data = {
+					deviceId:deviceId,
+					faultId:faultId
+				}
+				await ErrorMessageChart(data).then(res =>{
+					if(res.data.state ===true){
+						console.log(res.data.result)
+						this.chartMessage = {
+							xAxis: {
+									type: 'category',
+									data: res.data.result.reason
+							},
+							yAxis: {
+									type: 'value'
+							},
+							series: [{
+									data: res.data.result.value,
+									type: 'bar',
+									showBackground: true,
+									backgroundStyle: {
+											color: 'rgba(180, 180, 180, 0.2)'
+									}
+							}]
+						}
+					this.drawLine(this.chartMessage)
+					}
+				})
+			},
 			
 			
 			//显示查看历史故障
-			showDialog6(){
+			showDialog6(index){
+				this.ErrorMessageHistory(this.$route.query.id,this.pendingError[index].faultId)
+				this.getErrorChartMessage(this.$route.query.id,this.pendingError[index].faultId)
 				this.centerDialogVisible6 = true
 			},
 			//显示查看电机信息表
@@ -594,7 +604,6 @@
 		this.queryPendingError(this.$route.query.id)
 		this.queryHandledError(this.$route.query.id)
 		this.devName = this.$route.query.name;
-		console.log(this.devName)
 		
 		// alert(this.pendingError)
 
@@ -683,16 +692,10 @@
 					}
 				}
 			}
-		}
-		
+		}		
 		.el-input.is-disabled .el-input__inner{
 			text-align: center;
 		}
-
-
-
-
-
 		.rmc-bottom-container {
 			height: 25%;
 		}

@@ -2,9 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HelloWorld from '@/pages/startPage/HelloWorld'
 import Datail from '@/pages/detail'
+import test1 from '@/pages/test/test1'
 // import Index from '@/pages/index'
 import Index from '../pages/devDetail/index'
 import RollCar from '@/components/rollCar'
+
 
 Vue.use(VueRouter)
 
@@ -27,5 +29,9 @@ export default new VueRouter({
         path:'/rollCar',
         component:RollCar
     },
+		{
+			path:'/test1',
+			component:test1
+		}
 ]
 })

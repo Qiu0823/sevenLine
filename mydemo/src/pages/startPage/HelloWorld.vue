@@ -72,7 +72,7 @@
       </div>
       <div class="third-container">
         <div class="third-container-left">
-          <ScrollBar></ScrollBar>
+          <ScrollBar :scrollBarMessage="scrollBarMessage"></ScrollBar>
         </div>
         <!-- 管拧区 -->
         <div class="third-container-right areaBorderStyle arrowBottom3">
@@ -113,8 +113,8 @@
           <div class="da-container-center" @click="linkDetail1(34,'打捆机')" style="cursor:pointer">
             <div class="dv-title">打捆机</div>
             <div
-              class="LEDbtn greenBtn"
-              style="position: relative; right: -20vh; top: -2vh"
+              class="LEDbtn greenBtn packPosition"
+              :style="{backgroundColor:this.$store.state.WebsocketMessage.Equipment34_FaultStatus}"
             ></div>
           </div>
           <div class="da-container-right">成捆移送</div>
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import store from '@/store/index.js'
 import TopHeader from "@/components/topHeader";
 import AreaOneCom from "./components/AreaOneCom";
 import lineDevice from "@/components/lineDevice";
@@ -147,11 +148,11 @@ import areabottom from "./components/areabottom";
 import detect from "./components/detect";
 import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
+import {indexScrollBar} from '@/api/detail.js'
 
 export default {
   name: "HelloWorld",
   props: {
-    msg: String,
   },
   data() {
     return {
@@ -160,33 +161,31 @@ export default {
       deviceList1Name: "上料区域",
       deviceList8Name: "打包区域",
       deviceList9Name: "返修区域",
-      deviceList1: [
-        {
-          title: "1#收口机",
-          status: "nomal",
-        },
-        {
-          title: "2#收口机",
-          status: "nomal",
-        },
-      ],
+			scrollBarMessage:[]
     };
   },
   methods: {
 		//点击跳转传参
-		linkDetail(id){
-			this.$router.push({
-				path:'/index',
-				query:{'id':id}
-			})
+		linkDetail(id) {
+		  this.$router.push({
+		    path: "/index",
+		    query: { id: id},
+		  });
 		},
      linkDetail1(id, name) {
-      console.log(name);
       this.$router.push({
         path: "/index",
         query: { id: id, name: name },
       });
     },
+		//首页滚动条获取数据
+		async indexScrollBar(){
+			await indexScrollBar().then(res =>{
+				if(res.data.status ===true){
+					this.scrollBarMessage = res.data.result
+				}
+			})
+		},
     
     showSideNavMeth() {
       this.showSideNav = !this.showSideNav;
@@ -213,17 +212,13 @@ export default {
     detect,
     // oneCell
   },
-  mounted() {
-    //   clearInterval(this.timer)
-    //   this.timer = setInterval(()=>{
-    //   this.$router.push({
-    //    path:'/detail'
-    //  })
-    // },1000*120)
-  },
+
   beforeDestroy() {
     // clearInterval(this.timer)
   },
+	created() {
+		this.indexScrollBar()
+	}
 };
 </script>
 
@@ -480,7 +475,6 @@ export default {
     height: 16%;
     margin-left: 28.5vh;
     position: relative;
-    // border: 1px solid yellow;
   }
   .lineDevice {
     width: 90%;
@@ -551,5 +545,8 @@ export default {
     width: 100%;
     margin-top: -3vh;
   }
+}
+.packPosition{
+	position: relative; right: -20vh; top: -2vh;
 }
 </style>
