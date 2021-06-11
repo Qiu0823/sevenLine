@@ -122,9 +122,25 @@
       </div>
     </div>
     <div class="tableCon">
-      <div class="fir-container">
-      </div>
-      <div class="sec-container"></div>
+			<div class="rightBox"></div>
+			<div class="rightBox"></div>
+			<div class="rightBox"></div>
+			<div class="rightBox"></div>
+			<div class="rightBox">
+				<p>1#RGV小车电量</p>
+				<dv-percent-pond :config="config"
+					style="width:200px;height:100px;margin: auto;" />
+			</div>
+			<div class="rightBox">
+				<p>2#RGV小车电量</p>
+				<dv-percent-pond :config="config1"
+					style="width:200px;height:100px;margin: auto;" />
+			</div>
+			<div class="rightBox">
+				<p>3#RGV小车电量</p>
+				<dv-percent-pond :config="config2"
+					style="width:200px;height:100px;margin: auto;" />
+			</div>
     </div>
   </dv-full-screen-container>
 </template>
@@ -161,7 +177,16 @@ export default {
       deviceList1Name: "上料区域",
       deviceList8Name: "打包区域",
       deviceList9Name: "返修区域",
-			scrollBarMessage:[]
+			scrollBarMessage:[],
+			config:{
+					value: 66
+			},
+			config1:{
+					value: 43
+			},
+			config2:{
+					value: 91
+			}
     };
   },
   methods: {
@@ -239,7 +264,7 @@ export default {
       height: 50%;
       left: 50%;
       transform: translateX(-40%);
-      top: -4vh;
+      top: -2vh;
       position: absolute;
 			z-index: 2;
       border: 1px solid #203456;
@@ -531,20 +556,14 @@ export default {
 .tableCon {
   width: 17%;
   height: 100%;
-  // border: 1px solid red;
   position: absolute;
   top: 0;
   right: 0;
-  .fir-container {
-    height: 25%;
-    width: 100%;
-    margin-top: 17vh;
-  }
-  .sec-container {
-    height: 25%;
-    width: 100%;
-    margin-top: -3vh;
-  }
+	display: flex;
+	flex-direction: column;
+	.rightBox{
+		flex: 1;
+	}
 }
 .packPosition{
 	position: relative; right: -20vh; top: -2vh;
