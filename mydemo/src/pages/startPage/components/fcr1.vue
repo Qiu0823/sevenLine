@@ -36,7 +36,7 @@ export default {
         status: "nomal",
       },
       fcr14: {
-        title: "2#修扣黑皮扣",
+        title: "2#修磨黑皮扣",
         status: "nomal",
       },
     };

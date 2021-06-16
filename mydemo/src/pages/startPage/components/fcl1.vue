@@ -39,7 +39,7 @@ export default {
         status: "nomal",
       },
       fcl14: {
-        title: "4#修扣黑皮扣",
+        title: "4#修磨黑皮扣",
         status: "nomal",
       },
       fcl15: {

@@ -17,7 +17,7 @@
 
 <script>
 import oneCell from "@/components/oneCell";
-import{linkDetail} from '@/util/util.js'
+import { linkDetail } from "@/util/util.js";
 export default {
   components: {
     oneCell,
@@ -33,7 +33,7 @@ export default {
         status: "nomal",
       },
       fcr23: {
-        title: "1#修扣黑皮扣",
+        title: "1#修磨黑皮扣",
         status: "nomal",
       },
       fcr24: {
@@ -42,11 +42,11 @@ export default {
       },
     };
   },
-	methods:{
-		link(id){
-			this.$emit('linkDetail',id)
-		},
-     linkDetail1(id, name) {
+  methods: {
+    link(id) {
+      this.$emit("linkDetail", id);
+    },
+    linkDetail1(id, name) {
       console.log(name);
       this.$router.push({
         path: "/index",
@@ -55,7 +55,7 @@ export default {
     },
 	},
 	mounted() {
-		console.log(this.$store.state.WebsocketMessage)
+		// console.log(this.$store.state.WebsocketMessage)
 	}
 };
 </script>
@@ -68,19 +68,21 @@ div {
 .fcr21 {
   height: 10%;
   margin-top: 7%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcr22 {
   height: 10%;
   margin-top: 15%;
-	cursor:pointer;
+  cursor: pointer;
+  /* background: url("~@/assets/img/chesi.svg") no-repeat bottom right;
+  background-size: contain; */
 }
 .fcr23 {
   height: 10%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcr24 {
   height: 10%;
-	cursor:pointer;
+  cursor: pointer;
 }
 </style>

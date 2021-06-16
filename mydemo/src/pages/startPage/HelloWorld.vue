@@ -181,7 +181,7 @@ import detect from "./components/detect";
 import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
 import {indexScrollBar} from '@/api/detail.js'
-
+import carTest from "@/components/carTest"
 export default {
   name: "HelloWorld",
   props: {
