@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <div class="fcr21" @click="linkDetail1(1, '1#收口机')">
-      <oneCell :device="fcr21"></oneCell>
+    <div class="fcr21" @click="linkDetail1(1,'1#收口机')">
+      <oneCell :device="fcr21" :color="this.$store.state.WebsocketMessage.Equipment1_FaultStatus"></oneCell>
     </div>
-    <div class="fcr22" @click="linkDetail1(5, '1#车丝机')">
-      <oneCell :device="fcr22"></oneCell>
+    <div class="fcr22" @click="linkDetail1(5,'1#车丝机')">
+      <oneCell :device="fcr22" :color="this.$store.state.WebsocketMessage.Equipment5_FaultStatus"></oneCell>
     </div>
-    <div class="fcr23" @click="linkDetail1(15, '1#修磨黑皮扣')">
-      <oneCell :device="fcr23"></oneCell>
+    <div class="fcr23" @click="linkDetail1(15,'1#修扣黑皮扣')">
+      <oneCell :device="fcr23" :color="this.$store.state.WebsocketMessage.Equipment15_FaultStatus"></oneCell>
     </div>
-    <div class="fcr24" @click="linkDetail1(15, '1#吹水黑皮扣')">
-      <oneCell :device="fcr24"></oneCell>
+    <div class="fcr24" @click="linkDetail1(15,'1#吹水黑皮扣')">
+      <oneCell :device="fcr24" :color="this.$store.state.WebsocketMessage.Equipment15_FaultStatus"></oneCell>
     </div>
   </div>
 </template>
@@ -53,7 +53,10 @@ export default {
         query: { id: id, name: name },
       });
     },
-  },
+	},
+	mounted() {
+		// console.log(this.$store.state.WebsocketMessage)
+	}
 };
 </script>
 

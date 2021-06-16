@@ -29,3 +29,29 @@ export function frm(data){
 		params:data
 	})
 }
+
+export function ErrorMessageChart(data){
+	return request({
+		url:'/fault/count/reason',
+		method:'get',
+		params:data
+	})
+}
+
+
+export function ErrorMessageHistory(data){
+	return request({
+		url:'/fault/query/history',
+		method:'get',
+		params:data
+	})
+}
+
+
+export function indexScrollBar(data){
+	return request({
+		url:'/fault/roll/bar',
+		method:'get',
+		params:data
+	})
+}

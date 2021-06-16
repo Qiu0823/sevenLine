@@ -16,14 +16,14 @@
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
         <div class="shaoliao-right-left" style="cursor:pointer;" @click="linkDetail1(35,'1#喷码机')">
-          <one-cell :device="shang03"></one-cell>
+          <one-cell :device="shang03" :color="this.$store.state.WebsocketMessage.Equipment35_FaultStatus"></one-cell>
         </div>
         <div class="shangliao-right-center">
           <one-cell :device="shang04"></one-cell>
           <one-cell :device="shang05"></one-cell>
         </div>
         <div class="shangliao-right-right"  @click="linkDetail1(36,'2#喷码机')">
-          <one-cell :device="shang06"></one-cell>
+          <one-cell :device="shang06" :color="this.$store.state.WebsocketMessage.Equipment36_FaultStatus"></one-cell>
         </div>
       </div>
     </div>
@@ -53,10 +53,10 @@
             <i class="iconfont icon-mendoor13"></i>
         </div>
         <div class="returnFix-top" @click="linkDetail1(20,'2#带锯')">
-          <one-cell :device="returnFix01"></one-cell>
+          <one-cell :device="returnFix01" :color="this.$store.state.WebsocketMessage.Equipment20_FaultStatus"></one-cell>
         </div>
         <div class="returnFix-center" @click="linkDetail1(19,'1#带锯')">
-          <one-cell :device="returnFix02"></one-cell>
+          <one-cell :device="returnFix02" :color="this.$store.state.WebsocketMessage.Equipment19_FaultStatus"></one-cell>
         </div>
         <div class="returnFix-bottom">
           <one-cell :device="returnFix03"></one-cell>

@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="gnr1" @click="linkDetail1(22,'2#抛丸机')">
-      <oneCell :device="gnr1"></oneCell>
+      <oneCell :device="gnr1" :color="this.$store.state.WebsocketMessage.Equipment22_FaultStatus"></oneCell>
     </div>
     <div class="gnr2" @click="linkDetail1(24,'2#三角标')">
-      <oneCell :device="gnr2"></oneCell>
+      <oneCell :device="gnr2" :color="this.$store.state.WebsocketMessage.Equipment24_FaultStatus"></oneCell>
     </div>
     <div class="gnr3" @click="linkDetail1(26,'接箍上下料')">
-      <oneCell :device="gnr3"></oneCell>
+      <oneCell :device="gnr3" :color="this.$store.state.WebsocketMessage.Equipment26_FaultStatus"></oneCell>
     </div>
     <div class="gnr4" @click="linkDetail1(27,'管拧机')">
-      <oneCell :device="gnr4"></oneCell>
+      <oneCell :device="gnr4" :color="this.$store.state.WebsocketMessage.Equipment27_FaultStatus"></oneCell>
     </div>
     <div class="gnr5">
       <oneCell :device="gnr5"></oneCell>
@@ -19,7 +19,7 @@
       <oneCell :device="gnr7"></oneCell>
     </div>
     <div class="gnr6" @click="linkDetail1(28,'内保拧接')">
-      <oneCell :device="gnr6"></oneCell>
+      <oneCell :device="gnr6" :color="this.$store.state.WebsocketMessage.Equipment28_FaultStatus"></oneCell>
     </div>
   </div>
 </template>

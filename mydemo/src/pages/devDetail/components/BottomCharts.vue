@@ -1,14 +1,14 @@
 <template>
 	<div class="bottom-charts">
 		<div class="bc-chart-item">
-			<div class="bcci-header">小车实际剩余电量</div>
+			<div class="bcci-header">实际剩余电量</div>
 			<dv-percent-pond :config="config"
 				style="width:200px;height:100px;margin: auto; margin-top: 45px!important;" />
 		</div>
 		<dv-decoration-2 class="decoration-1" :reverse="true" style="width:5px;margin-top: 20px;" />
 
 		<div class="bc-chart-item">
-			<div class="bcci-header">小车电池温度</div>
+			<div class="bcci-header">电池温度</div>
 			<dv-charts style="margin: auto; margin-top: -30px!important; width: 250px;height: 250px;"
 				:option="option" />
 		</div>
@@ -40,7 +40,7 @@
 		</div>
 		<dv-decoration-2 class="decoration-3" :reverse="true" style="width:5px;margin-top: 20px;" />
 		<div class="bc-chart-item">
-			<div class="bcci-header">小车距离</div>
+			<div class="bcci-header">距离</div>
 			<dv-charts style="margin: auto; margin-top: -30px!important; width: 250px;height: 250px;"
 				:option="option5" />
 		</div>

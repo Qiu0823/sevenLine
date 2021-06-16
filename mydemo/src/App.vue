@@ -8,17 +8,28 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-
+import store from '@/store/index.js'
 export default {
   name: 'App',
   // components: {
   //   HelloWorld
   // }
+	mounted() {
+		//websocket接收各组件的状态信息
+		let s = this.$store
+		var ws = new WebSocket(socketURL)
+		ws.onmessage = function(event) {
+			console.log(event.data)
+			s.commit("setWebsocketMessage",JSON.parse(event.data))
+		};
+	},
 }
 </script>
 
 <style>
 #app {
+	width: 100%;
+	height: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

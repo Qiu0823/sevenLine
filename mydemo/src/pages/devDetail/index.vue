@@ -42,7 +42,7 @@
 										<br />
 										<el-button @click="showDialog4(scope.row,scope.$index)" type="text" size="small">查看措施</el-button>
 										<br />
-										<el-button @click="showDialog6" type="text" size="small">查看历史故障</el-button>
+										<el-button @click="showDialog6(scope.$index)" type="text" size="small">查看历史故障</el-button>
 										</template>
 									</el-table-column>
 								</el-table>
@@ -77,8 +77,10 @@
 									<el-table-column prop="solveTime" align="center" label="故障处理时间">
 									</el-table-column>
 									<el-table-column align="center" label="操作">
-										<el-button @click="showDialog5" type="text" size="small">处理结果
-										</el-button>
+										<template slot-scope="scope">
+											<el-button @click="showDialog5(scope.$index)" type="text" size="small">处理结果
+											</el-button>
+										</template>
 									</el-table-column>
 								</el-table>
 							</div>
@@ -180,7 +182,7 @@
 				<div style="width:50%;text-align: center">
 					<table width="100%" border="1" class="tb2">
 						<tr>
-							<td class="black_title">液压泵电机</td>
+							<td class="black_title"></td>
 						</tr>
 						<tr>
 							<td class="left_title bottom_border"></td>
@@ -217,7 +219,7 @@
 
 		<el-dialog title="查看措施" :visible.sync="centerDialogVisible4" width="60%" center>
 			<el-tabs style="height:450px;" type="border-card" v-model="tabpanIndex">
-			  <el-tab-pane :name="i+1"  v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" :label="'原因'+(i+1)">
+			  <el-tab-pane :name="(i+1)+''"  v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" :label="'原因'+(i+1)">
 					<div style="width: 70%;margin: auto;height: 80px;margin-top: 30px;">
 						<span style="display: inline-block;line-height: 40px;">故障名称:</span>
 						<el-input :disabled="true" style="width: 68%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
@@ -247,61 +249,46 @@
 
 <!-- 处理结果dialog -->
 		<el-dialog :visible.sync="centerDialogVisible5" width="40%" center>
-			<div style="width: 100%;margin: auto;margin-top: 50px;">
+			<div style="width: 80%;margin: auto;margin-top: 50px;">
 				<span>故障名称:</span>
-				<el-input :disabled="true" type="text" style="width: 75%;margin-left: 20px;" v-model="input" placeholder="请输入内容">
+				<el-input :disabled= true type="text" style="width: 75%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
 					</el-input>
 			</div>
-			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
+<!-- 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
 				<div style="flex: 0.5;">选择故障原因：</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="电机过载"></el-checkbox>
-						</el-checkbox-group>
-					</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="油位异常"></el-checkbox>
-						</el-checkbox-group>
-					</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="油温异常"></el-checkbox>
-						</el-checkbox-group>
+					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
+						  <el-checkbox :label="item.reason"></el-checkbox>
 					</div>
 			</div>
 			
 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
 				<div style="flex: 0.5;line-height: 70px;">选择故障措施：</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="电机保护开关"></el-checkbox>
-							<br />
-						  <el-checkbox label="电机检查"></el-checkbox>
-							<br />
-						  <el-checkbox label="液压泵检查"></el-checkbox>
-							<br />
-							<el-checkbox label="电缆检查"></el-checkbox>
-						</el-checkbox-group>
+					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
+						  <el-checkbox v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :label="item1.measures"></el-checkbox>
 					</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="检查油位"></el-checkbox>
-						</el-checkbox-group>
+			</div> -->
+			<div style="width: 80%;margin: auto;display: flex;margin-top: 70px;">
+				<div class="buttonGroupLeft">
+					<p>选择故障原因：</p>
+					<p>选择故障措施：</p>
+				</div>
+				<div class="buttonGroupRight">
+					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" class="buttonGroupRightDIV">
+						  <el-checkbox @change="changeStatus1(i)" :title="item.reason">{{item.reason |ellipsis}}</el-checkbox>
+							<hr />
+							<el-checkbox-group :disabled="changeStatus[i]" v-model="checkboxGroup1" size="small">
+								<el-checkbox class="eshover" v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :title="item1.measures" >{{item1.measures |ellipsis}}</el-checkbox>			
+							</el-checkbox-group>
 					</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="检查油温"></el-checkbox>
-						</el-checkbox-group>
-					</div>
+				</div>				
 			</div>
-			<div style="width: 100%;margin: auto;margin-top: 70px;" class="clearfix">
+			<div style="width: 80%;margin: auto;margin-top: 70px;" class="clearfix">
 				<div style="float: left; line-height: 40px;">备注：</div>
-				<el-input type="textarea" v-model="resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="2" placeholder="请输入内容">
+				<el-input type="textarea" v-model="resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="5" placeholder="请输入内容">
 				</el-input>
 			</div>
 			<div style="width: 100%;margin: auto;">
-				<el-button style="margin: auto;display: block;margin-top: 15px;position: relative;left: -80px;" type="primary"  @click="centerDialogVisible5=false;">提交处理结果</el-button>
+				<el-button style="margin: auto;display: block;margin-top: 40px;position: relative;left: -80px;" type="primary"  @click="centerDialogVisible5=false;">提交处理结果</el-button>
 			</div>
 		</el-dialog>
 		
@@ -309,9 +296,9 @@
 		<!-- 查看历史故障dialog -->
 		<el-dialog :visible.sync="centerDialogVisible6" width="40%" center>
 			  <el-table
-			    :data="historyData"
+			    :data="ErrorMessage"
 			    border
-					height="400"
+					height="190"
 			    style="width: 100%">
 			    <el-table-column
 			      prop="reason"
@@ -319,7 +306,7 @@
 			      width="180">
 			    </el-table-column>
 			    <el-table-column
-			      prop="measure"
+			      prop="measures"
 			      label="处理措施"
 			      width="180">
 			    </el-table-column>
@@ -328,15 +315,15 @@
 			      label="备注">
 			    </el-table-column>
 					<el-table-column
-					  prop="time"
+					  prop="solveTime"
 					  label="故障处理时间">
 					</el-table-column>
 			  </el-table>
-				<div style="margin-top: 20px;">故障统计:</div>
-				<div style="width: 100%;border: 1px gray solid;height: 100px;"></div>
+				<div style="margin-top: 10px;">故障统计:</div>
+				<div style="width: 100%;border: 1px gray solid;height: 400px;" id="ErrorStasticChart"></div>
 			<span slot="footer" class="dialog-footer">
 				<el-button type="primary" @click="centerDialogVisible6 = false;">确定</el-button>
-			</span>
+			</span> 
 		</el-dialog>
 
 	</div>
@@ -346,7 +333,7 @@
 	import topHeader from './components/topHeader1.vue'
 	import BottomCharts from './components/BottomCharts.vue'
 	import deviceInfo from './components/deviceInfo.vue'
-	import {pending,handled,frm} from '@/api/detail.js'
+	import {pending,handled,frm,ErrorMessageChart,ErrorMessageHistory} from '@/api/detail.js'
 	// import {getnews} from '../../api/test.js'
 
 	export default {
@@ -356,45 +343,18 @@
 			BottomCharts,
 			deviceInfo
 		},
+		filters:{
+			ellipsis (value) {
+			      if (!value) return ''
+			      if (value.length > 12) {
+			        return value.slice(0,12) + '...'
+			      }
+			      return value
+			    }
+		},
 		data() {
 			return {
 				devName:'',
-				historyData:[
-					{
-						reason:'电机过载',
-						measure:'电机检查',
-						note:'',
-						time:'2020-1-10 13:00:00'
-					},
-					{
-						reason:'油温异常',
-						measure:'检查油温',
-						note:'',
-						time:'2020-1-10 13:00:00'
-					},
-					{
-						reason:'电机过载',
-						measure:'电机检查',
-						note:'',
-						time:'2020-1-10 13:00:00'
-					}
-				],
-				tableData: [{
-					date: '充电机伸缩机构伺服故障',
-					level: '重故障'
-				}, {
-					date: '充电机故障硬件故障',
-					level: '轻故障'
-				}, {
-					date: '充电机故障温度过高保护',
-					level: '轻故障'
-				}, {
-					date: '充电机通讯接收超时（5秒）',
-					level: '重故障'
-				}, {
-					date: '小车电量严重不足',
-					level: '重故障'
-				}],
 				tableData1: null,
 				centerDialogVisible: false,
 				centerDialogVisible1: false,
@@ -435,19 +395,41 @@
 				srowindex: 0, //保存每一行的index
 				srowi: 0, //保存每一行的i
 				checkList1: [],
-				resultNote: '', //查看结果备注
-				
-				
-				
-				
-				
+				resultNote: '', //查看结果备注			
 				pendingError:[],//待处理故障信息
 				handledError:[],//已处理故障信息
-				frmMessage:[], //查询措施信息
-				tabpanIndex: 1 //默认选中的tabpan
+				frmMessage:'', //查询措施信息
+				tabpanIndex: '1', //默认选中的tabpan
+				chartMessage:{},//故障信息图表信息
+				ErrorMessage:[],
+				checkboxGroup1:[],
+				changeStatus:[]
 			}
 		},
 		methods: {
+			//修改changeStatus数组
+			changeStatus1(i){
+				this.changeStatus[i] = !this.changeStatus[i]
+				this.changeStatus.push({ events: [], name: '' })
+				this.changeStatus.splice(this.changeStatus.length - 1, 1)
+			},
+			//绘图故障信息统计
+			drawLine(option){
+			        // 基于准备好的dom，初始化echarts实例
+			        let myChart = this.$echarts.init(document.getElementById('ErrorStasticChart'))
+			        // 绘制图表
+			        myChart.setOption(option);
+			    },
+			//查询历史故障信息
+			async ErrorMessageHistory(deviceId,faultId){
+				let data = {
+					deviceId:deviceId,
+					faultId:faultId
+				}
+				await ErrorMessageHistory(data).then(res =>{
+					this.ErrorMessage = res.data.result
+				})
+			},
 			//查询待处理故障
 			async queryPendingError(id){
 				let data ={
@@ -474,16 +456,54 @@
 				}
 				await frm(data).then(res =>{
 					if(res.data.state === true){
-						this.frmMessage = res.data.result[0]
-						console.log(this.faultreason)
-						console.log(this.frmMessage)
+						if(res.data.result.length!=0){
+							this.frmMessage = res.data.result[0]
+						}
+					}else{
+						this.$message({
+							message: res.data.message,
+							type: 'warning',
+							center: true
+						});
+					}
+				})
+			},
+			//查询故障信息图表
+			async getErrorChartMessage(deviceId,faultId){
+				let data = {
+					deviceId:deviceId,
+					faultId:faultId
+				}
+				await ErrorMessageChart(data).then(res =>{
+					if(res.data.state ===true){
+						console.log(res.data.result)
+						this.chartMessage = {
+							xAxis: {
+									type: 'category',
+									data: res.data.result.reason
+							},
+							yAxis: {
+									type: 'value'
+							},
+							series: [{
+									data: res.data.result.value,
+									type: 'bar',
+									showBackground: true,
+									backgroundStyle: {
+											color: 'rgba(180, 180, 180, 0.2)'
+									}
+							}]
+						}
+					this.drawLine(this.chartMessage)
 					}
 				})
 			},
 			
 			
 			//显示查看历史故障
-			showDialog6(){
+			showDialog6(index){
+				this.ErrorMessageHistory(this.$route.query.id,this.pendingError[index].faultId)
+				this.getErrorChartMessage(this.$route.query.id,this.pendingError[index].faultId)
 				this.centerDialogVisible6 = true
 			},
 			//显示查看电机信息表
@@ -492,13 +512,36 @@
 			},
 			//显示查看措施信息表
 			showDialog4(row, index) {
-				this.queryFrm(this.pendingError[index].faultId)
-				this.tabpanIndex= 1
-				this.centerDialogVisible4 = true
+				// console.log("1111111"+this.pendingError[index].faultId)
+				this.queryFrm(this.pendingError[index].faultId).then(() =>{
+					if(this.frmMessage.reasonVOList.length!=0){
+						this.tabpanIndex= '1'
+						this.centerDialogVisible4 = true
+					}else{
+						this.$message({
+							message: '暂无可查看措施',
+							type: 'warning',
+							center: true
+						});
+					}
+				})
 			},
 			//显示处理结果的dialog
-			showDialog5() {
-				this.centerDialogVisible5 = true
+			showDialog5(index) {
+				this.queryFrm(this.handledError[index].faultId).then(() =>{
+					if(this.frmMessage.reasonVOList.length!=0){
+					for(var i=0;i<this.frmMessage.reasonVOList.length;i++){
+						this.changeStatus[i] = true
+					}
+					this.centerDialogVisible5 = true
+					}else{
+						this.$message({
+							message: '暂无可查看结果',
+							type: 'warning',
+							center: true
+						});
+					}
+				})
 			},
 			//设置表格奇数行和偶数行的背景色
 			TableRowStyle({
@@ -549,7 +592,6 @@
 				// this.textarea1 = ''
 				// this.textarea2 = ''
 				// this.centerDialogVisible = false
-				console.log(this.scout)
 				this.reason[this.scout].push(this.textarea1)
 				this.measures[this.scout].push([])
 				this.textarea1 = ''
@@ -581,7 +623,6 @@
 		this.queryPendingError(this.$route.query.id)
 		this.queryHandledError(this.$route.query.id)
 		this.devName = this.$route.query.name;
-		console.log(this.devName)
 		
 		// alert(this.pendingError)
 	}
@@ -669,16 +710,10 @@
 					}
 				}
 			}
-		}
-		
+		}		
 		.el-input.is-disabled .el-input__inner{
 			text-align: center;
 		}
-
-
-
-
-
 		.rmc-bottom-container {
 			height: 25%;
 		}
@@ -723,6 +758,24 @@
 		.el-dialog .el-table, .el-table__expanded-cell{
 			background-color: white!important;
 		}
+		
+		.buttonGroupLeft{
+			width: 100px;
+			float: left;
+		}
+		.buttonGroupRight{
+			width: 70%;
+			float: left;
+			display: flex;
+		}
+		.buttonGroupRightDIV{
+			flex: 1;
+			border: 1px solid black;
+			margin-left: 20px;
+		}
+		// .eshover:hover{
+		// 	background-color:yellow
+		// }
 
 	}
 </style>
