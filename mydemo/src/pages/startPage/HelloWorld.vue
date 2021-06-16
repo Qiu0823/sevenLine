@@ -157,7 +157,6 @@ import areabottom from "./components/areabottom";
 import detect from "./components/detect";
 import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
-import carTest from "@/components/carTest";
 
 export default {
   name: "HelloWorld",
@@ -224,7 +223,6 @@ export default {
     gnright,
     fc1,
     ScrollBar,
-    carTest,
     AreaOneCom,
     SidebarNav,
     areabottom,
