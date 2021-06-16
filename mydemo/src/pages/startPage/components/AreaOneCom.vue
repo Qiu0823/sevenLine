@@ -9,7 +9,10 @@
 					 <one-cell :device="shang02"></one-cell>
 				</div>
       </div>
-      <div class="shangliao-center">1#电气室</div>
+      <div class="shangliao-center">
+        <p>1#电气室</p>
+        <img src="~@/assets/img/dianHouse3.png" alt="">
+      </div>
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
         <div class="shaoliao-right-left" style="cursor:pointer;" @click="linkDetail1(35,'1#喷码机')">
@@ -170,6 +173,22 @@ export default {
       line-height: 5vh;
       border: 1px solid royalblue;
       margin-right: 1.5vh;
+      position: relative;
+      p{
+        position: absolute;
+        left: 0;
+        top: -3vh;
+      }
+      img{
+        width: 200px;
+        height: 100px;
+        position: absolute;
+        top: -3vh;
+        right: 0;
+        }
+      // background: url('~@/assets/img/dianHouse.png') no-repeat;
+      // background-size: 100% 100%;
+      // background-position: top left;
     }
     .shangliao-right {
       width:43%;

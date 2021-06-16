@@ -9,8 +9,13 @@
     <div class="fcr13" @click="linkDetail1(16,'2#吹水黑皮扣')">
       <oneCell :device="fcr13" :color="this.$store.state.WebsocketMessage.Equipment16_FaultStatus"></oneCell>
     </div>
+<<<<<<< HEAD
     <div class="fcr14" @click="linkDetail1(16,'2#修扣黑皮扣')">
       <oneCell :device="fcr14" :color="this.$store.state.WebsocketMessage.Equipment16_FaultStatus"></oneCell>
+=======
+    <div class="fcr14" @click="linkDetail1(16,'2#修磨黑皮扣')">
+      <oneCell :device="fcr14"></oneCell>
+>>>>>>> cqy1
     </div>
   </div>
 </template>
@@ -36,7 +41,7 @@ export default {
         status: "nomal",
       },
       fcr14: {
-        title: "2#修扣黑皮扣",
+        title: "2#修磨黑皮扣",
         status: "nomal",
       },
     };

@@ -26,11 +26,16 @@
       <span class="iconfont icon-lu1"></span>
     </div> -->
     <div class="load2">
-					<span class="iconfont icon-lu" v-for="item in 40" :key="item"></span>
+					<span class="iconfont icon-lu" v-for="item in 37" :key="item"></span>
 				</div>
     <div class="house">
-      <div class="house-top">2#电气室</div>
-      <div class="house-bottom">集控室</div>
+      <div class="house-top">
+        <p>2#电气室</p>
+        <img src="~@/assets/img/dianHouse3.png" alt="">
+      </div>
+      <div class="house-bottom">
+        <p>集控室</p>
+      </div>
     </div>
   </div>
 </template>
@@ -156,6 +161,18 @@ export default {
     border-bottom-color: transparent;
     text-align: center;
     line-height: 3vh;
+   p{
+        position: absolute;
+        left: 0;
+        top: -2vh;
+      }
+      img{
+        width: 220px;
+        height: 90px;
+        position: absolute;
+        top: -3vh;
+        right: 5vh;
+        }
   }
   .house-bottom {
     height: 70%;
@@ -163,6 +180,15 @@ export default {
     text-align: center;
     line-height: 8vh;
     border: 1px solid royalblue;
+    background: url('~@/assets/img/dianHouse2.png') no-repeat;
+    background-size: 95% 100%;
+    background-position: top right;
+    position: relative;
+    p{
+      position: absolute;
+      left: 0;
+      top: -4vh;
+    }
   }
 }
 .detect1 {
@@ -240,7 +266,7 @@ export default {
 		// height: 100%;
     height: 20vh;
 		display: inline-block;
-		right: -25vh;
+		right: -20vh;
 		top:0vh;
     transform: rotate(90deg);
 		.iconfont{

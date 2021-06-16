@@ -11,29 +11,34 @@
         <div class="tda-left">
           <div class="table-info">
             <div class="table-one" style="font-size: 12px">产线信息</div>
-            <div class="table-two">
-              <div style="margin-right: 1vw">时间：</div>
-              <div style="margin-right: 1vw">合同号：</div>
-              <div>班次：</div>
+            <div class="table-two" >
+              <div style="width:35%">日期：</div>
+              <div style="width:25%">班次：</div>
+              <div style="width:40%">合同号：</div>
             </div>
             <div class="table-three">
-              <div style="margin-right: 1vw">规格：</div>
-              <div style="margin-right: 1vw">钢级：</div>
-              <div>厚度：</div>
+              <div style="width:35%">规格：</div>
+              <div style="width:25%">壁厚：</div>
+              <div style="width:40%">钢级：</div>
             </div>
           </div>
         </div>
         <div class="tda-right">
           <!-- 上料区 -->
           <div class="shagnLiaoArea arrowBottom1">
-            <area-one-com :deviceListName="deviceList1Name"/>
+            <area-one-com :deviceListName="deviceList1Name" />
           </div>
         </div>
       </div>
       <div class="lineDevice">
         <line-device :lineNum="1"></line-device>
         <div class="carCom">
-          <roll-car :carNum="1" :left="1200"></roll-car>
+          <!-- <car-test :right='200' :width='500' :top='0'></car-test> -->
+          <div
+            id="carCon"
+            :style="{ right: right + 'px', top: 0 + 'px' }"
+          ></div>
+          <!-- <roll-car :carNum="1" :left="1200"></roll-car> -->
         </div>
       </div>
       <div class="second-container">
@@ -68,6 +73,7 @@
         <line-device :lineNum="2"></line-device>
         <div class="carCom">
           <roll-car :carNum="2" :left="1200"></roll-car>
+          <!-- <car-test :right='200' :width='500' :top='0'></car-test> -->
         </div>
       </div>
       <div class="third-container">
@@ -77,7 +83,7 @@
         <!-- 管拧区 -->
         <div class="third-container-right areaBorderStyle arrowBottom3">
           <div class="area-name">管拧区域</div>
-					<div class="square" @click="linkDetail1(29,'分钢仪')" >分钢仪</div>
+          <div class="square" @click="linkDetail1(29, '分钢仪')">分钢仪</div>
           <div class="tcr-left">
             <gnleft @linkDetail="linkDetail"></gnleft>
           </div>
@@ -101,6 +107,7 @@
         <line-device :lineNum="3"></line-device>
         <div class="carCom last">
           <roll-car :carNum="3" :left="400"></roll-car>
+          <!-- <car-test :right='100' :width='750' :top='0'></car-test> -->
         </div>
       </div>
       <!-- 打包区 -->
@@ -110,7 +117,11 @@
           <div class="square">出废区</div>
           <div class="area-name">打包区域</div>
           <div class="da-container-left">成型区</div>
-          <div class="da-container-center" @click="linkDetail1(34,'打捆机')" style="cursor:pointer">
+          <div
+            class="da-container-center"
+            @click="linkDetail1(34, '打捆机')"
+            style="cursor: pointer"
+          >
             <div class="dv-title">打捆机</div>
             <div
               class="LEDbtn greenBtn packPosition"
@@ -122,6 +133,7 @@
       </div>
     </div>
     <div class="tableCon">
+<<<<<<< HEAD
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
@@ -141,6 +153,10 @@
 				<dv-percent-pond :config="config2"
 					style="width:200px;height:100px;margin: auto;" />
 			</div>
+=======
+      <div class="fir-container"></div>
+      <div class="sec-container"></div>
+>>>>>>> cqy1
     </div>
   </dv-full-screen-container>
 </template>
@@ -164,7 +180,11 @@ import areabottom from "./components/areabottom";
 import detect from "./components/detect";
 import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
+<<<<<<< HEAD
 import {indexScrollBar} from '@/api/detail.js'
+=======
+import carTest from "@/components/carTest";
+>>>>>>> cqy1
 
 export default {
   name: "HelloWorld",
@@ -172,11 +192,15 @@ export default {
   },
   data() {
     return {
+      right: 200,
+      width:400,
+      changeWIdth: 1200,
       showSideNav: false,
       timer: null,
       deviceList1Name: "上料区域",
       deviceList8Name: "打包区域",
       deviceList9Name: "返修区域",
+<<<<<<< HEAD
 			scrollBarMessage:[],
 			config:{
 					value: 66
@@ -198,11 +222,37 @@ export default {
 		  });
 		},
      linkDetail1(id, name) {
+=======
+      deviceList1: [
+        {
+          title: "1#收口机",
+          status: "nomal",
+        },
+        {
+          title: "2#收口机",
+          status: "nomal",
+        },
+      ],
+      comWidth: 200,
+    };
+  },
+  methods: {
+    //点击跳转传参
+    linkDetail(id) {
+      this.$router.push({
+        path: "/index",
+        query: { id: id },
+      });
+    },
+    linkDetail1(id, name) {
+      console.log(name);
+>>>>>>> cqy1
       this.$router.push({
         path: "/index",
         query: { id: id, name: name },
       });
     },
+<<<<<<< HEAD
 		//首页滚动条获取数据
 		async indexScrollBar(){
 			await indexScrollBar().then(res =>{
@@ -212,9 +262,15 @@ export default {
 			})
 		},
     
+=======
+
+>>>>>>> cqy1
     showSideNavMeth() {
       this.showSideNav = !this.showSideNav;
     },
+    autoMove(){
+      this.right += this.comWidth;
+    }
   },
   components: {
     TopHeader,
@@ -230,16 +286,26 @@ export default {
     gnright,
     fc1,
     ScrollBar,
-    // ScrollBar,
+    carTest,
     AreaOneCom,
     SidebarNav,
     areabottom,
     detect,
     // oneCell
   },
+<<<<<<< HEAD
 
   beforeDestroy() {
     // clearInterval(this.timer)
+=======
+  mounted() {
+    setInterval(() => {
+      this.autoMove()
+      // this.comWidth += 100;x=-200 ,y=200
+      this.comWidth = Math.round(Math.random()*400-200)
+    }, 1000);
+    this.autoMove()
+>>>>>>> cqy1
   },
 	created() {
 		this.indexScrollBar()
@@ -266,9 +332,8 @@ export default {
       transform: translateX(-40%);
       top: -2vh;
       position: absolute;
-			z-index: 2;
+      z-index: 2;
       border: 1px solid #203456;
-
     }
     .da-container-left,
     .da-container-right {
@@ -335,7 +400,6 @@ export default {
         font-size: 12px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         .table-one {
           background-color: cornflowerblue;
           width: 100%;
@@ -344,7 +408,7 @@ export default {
         }
         div {
           display: flex;
-          justify-content: space-around;
+          // justify-content: space-around;
         }
       }
     }
@@ -452,8 +516,8 @@ export default {
         right: 0;
         bottom: -3vh;
         line-height: 3vh;
-				z-index: 2;
-				cursor:pointer;
+        z-index: 2;
+        cursor: pointer;
       }
       .area-name {
         position: absolute;
@@ -567,5 +631,24 @@ export default {
 }
 .packPosition{
 	position: relative; right: -20vh; top: -2vh;
+}
+.table-two{
+  display: flex;
+  text-align: left!important;
+  padding: 2px;
+}
+.table-three{
+    display: flex;
+  text-align: left!important;
+  padding: 2px;
+}
+#carCon {
+  width: 90px;
+  height: 25px;
+  position: absolute;
+  background: url("~@/assets/img/car.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transition: 1s;
 }
 </style>
