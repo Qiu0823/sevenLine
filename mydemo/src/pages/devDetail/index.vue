@@ -219,7 +219,7 @@
 
 		<el-dialog title="查看措施" :visible.sync="centerDialogVisible4" width="60%" center>
 			<el-tabs style="height:450px;" type="border-card" v-model="tabpanIndex">
-			  <el-tab-pane :name="i+1"  v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" :label="'原因'+(i+1)">
+			  <el-tab-pane :name="(i+1)+''"  v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" :label="'原因'+(i+1)">
 					<div style="width: 70%;margin: auto;height: 80px;margin-top: 30px;">
 						<span style="display: inline-block;line-height: 40px;">故障名称:</span>
 						<el-input :disabled="true" style="width: 68%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
@@ -249,26 +249,16 @@
 
 <!-- 处理结果dialog -->
 		<el-dialog :visible.sync="centerDialogVisible5" width="40%" center>
-			<div style="width: 100%;margin: auto;margin-top: 50px;">
+			<div style="width: 80%;margin: auto;margin-top: 50px;">
 				<span>故障名称:</span>
-				<el-input :disabled="true" type="text" style="width: 75%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
+				<el-input :disabled= true type="text" style="width: 75%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
 					</el-input>
 			</div>
-			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
+<!-- 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
 				<div style="flex: 0.5;">选择故障原因：</div>
 					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
 						  <el-checkbox :label="item.reason"></el-checkbox>
 					</div>
-<!-- 					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="油位异常"></el-checkbox>
-						</el-checkbox-group>
-					</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="油温异常"></el-checkbox>
-						</el-checkbox-group>
-					</div> -->
 			</div>
 			
 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
@@ -276,24 +266,29 @@
 					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
 						  <el-checkbox v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :label="item1.measures"></el-checkbox>
 					</div>
-<!-- 					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="检查油位"></el-checkbox>
-						</el-checkbox-group>
+			</div> -->
+			<div style="width: 80%;margin: auto;display: flex;margin-top: 70px;">
+				<div class="buttonGroupLeft">
+					<p>选择故障原因：</p>
+					<p>选择故障措施：</p>
+				</div>
+				<div class="buttonGroupRight">
+					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" class="buttonGroupRightDIV">
+						  <el-checkbox @change="changeStatus1(i)" :title="item.reason">{{item.reason |ellipsis}}</el-checkbox>
+							<hr />
+							<el-checkbox-group :disabled="changeStatus[i]" v-model="checkboxGroup1" size="small">
+								<el-checkbox class="eshover" v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :title="item1.measures" >{{item1.measures |ellipsis}}</el-checkbox>			
+							</el-checkbox-group>
 					</div>
-					<div style="flex: 1;">
-						<el-checkbox-group v-model="checkList1">
-						  <el-checkbox label="检查油温"></el-checkbox>
-						</el-checkbox-group>
-					</div> -->
+				</div>				
 			</div>
-			<div style="width: 100%;margin: auto;margin-top: 70px;" class="clearfix">
+			<div style="width: 80%;margin: auto;margin-top: 70px;" class="clearfix">
 				<div style="float: left; line-height: 40px;">备注：</div>
-				<el-input type="textarea" v-model="resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="2" placeholder="请输入内容">
+				<el-input type="textarea" v-model="resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="5" placeholder="请输入内容">
 				</el-input>
 			</div>
 			<div style="width: 100%;margin: auto;">
-				<el-button style="margin: auto;display: block;margin-top: 15px;position: relative;left: -80px;" type="primary"  @click="centerDialogVisible5=false;">提交处理结果</el-button>
+				<el-button style="margin: auto;display: block;margin-top: 40px;position: relative;left: -80px;" type="primary"  @click="centerDialogVisible5=false;">提交处理结果</el-button>
 			</div>
 		</el-dialog>
 		
@@ -328,7 +323,7 @@
 				<div style="width: 100%;border: 1px gray solid;height: 400px;" id="ErrorStasticChart"></div>
 			<span slot="footer" class="dialog-footer">
 				<el-button type="primary" @click="centerDialogVisible6 = false;">确定</el-button>
-			</span>
+			</span> 
 		</el-dialog>
 
 	</div>
@@ -347,6 +342,15 @@
 			topHeader,
 			BottomCharts,
 			deviceInfo
+		},
+		filters:{
+			ellipsis (value) {
+			      if (!value) return ''
+			      if (value.length > 12) {
+			        return value.slice(0,12) + '...'
+			      }
+			      return value
+			    }
 		},
 		data() {
 			return {
@@ -392,15 +396,23 @@
 				srowi: 0, //保存每一行的i
 				checkList1: [],
 				resultNote: '', //查看结果备注			
-				pendingError:'',//待处理故障信息
-				handledError:'',//已处理故障信息
+				pendingError:[],//待处理故障信息
+				handledError:[],//已处理故障信息
 				frmMessage:'', //查询措施信息
-				tabpanIndex: 1, //默认选中的tabpan
+				tabpanIndex: '1', //默认选中的tabpan
 				chartMessage:{},//故障信息图表信息
-				ErrorMessage:[]
+				ErrorMessage:[],
+				checkboxGroup1:[],
+				changeStatus:[]
 			}
 		},
 		methods: {
+			//修改changeStatus数组
+			changeStatus1(i){
+				this.changeStatus[i] = !this.changeStatus[i]
+				this.changeStatus.push({ events: [], name: '' })
+				this.changeStatus.splice(this.changeStatus.length - 1, 1)
+			},
 			//绘图故障信息统计
 			drawLine(option){
 			        // 基于准备好的dom，初始化echarts实例
@@ -447,6 +459,12 @@
 						if(res.data.result.length!=0){
 							this.frmMessage = res.data.result[0]
 						}
+					}else{
+						this.$message({
+							message: res.data.message,
+							type: 'warning',
+							center: true
+						});
 					}
 				})
 			},
@@ -495,33 +513,35 @@
 			//显示查看措施信息表
 			showDialog4(row, index) {
 				// console.log("1111111"+this.pendingError[index].faultId)
-				this.queryFrm(this.pendingError[index].faultId)
-				if(this.frmMessage.length!=0){
-					this.tabpanIndex= 1
-					this.centerDialogVisible4 = true
-				}else{
-					this.$message({
-						message: '暂无可查看措施',
-						type: 'warning',
-						center: true
-					});
-				}
-
+				this.queryFrm(this.pendingError[index].faultId).then(() =>{
+					if(this.frmMessage.reasonVOList.length!=0){
+						this.tabpanIndex= '1'
+						this.centerDialogVisible4 = true
+					}else{
+						this.$message({
+							message: '暂无可查看措施',
+							type: 'warning',
+							center: true
+						});
+					}
+				})
 			},
 			//显示处理结果的dialog
 			showDialog5(index) {
-				this.queryFrm(this.handledError[index].faultId)
-				// this.queryFrm(1)
-				if(this.frmMessage.length!=0){
-				this.centerDialogVisible5 = true
-				}else{
-					this.$message({
-						message: '暂无可查看结果',
-						type: 'warning',
-						center: true
-					});
-				}
-
+				this.queryFrm(this.handledError[index].faultId).then(() =>{
+					if(this.frmMessage.reasonVOList.length!=0){
+					for(var i=0;i<this.frmMessage.reasonVOList.length;i++){
+						this.changeStatus[i] = true
+					}
+					this.centerDialogVisible5 = true
+					}else{
+						this.$message({
+							message: '暂无可查看结果',
+							type: 'warning',
+							center: true
+						});
+					}
+				})
 			},
 			//设置表格奇数行和偶数行的背景色
 			TableRowStyle({
@@ -572,7 +592,6 @@
 				// this.textarea1 = ''
 				// this.textarea2 = ''
 				// this.centerDialogVisible = false
-				console.log(this.scout)
 				this.reason[this.scout].push(this.textarea1)
 				this.measures[this.scout].push([])
 				this.textarea1 = ''
@@ -739,6 +758,24 @@
 		.el-dialog .el-table, .el-table__expanded-cell{
 			background-color: white!important;
 		}
+		
+		.buttonGroupLeft{
+			width: 100px;
+			float: left;
+		}
+		.buttonGroupRight{
+			width: 70%;
+			float: left;
+			display: flex;
+		}
+		.buttonGroupRightDIV{
+			flex: 1;
+			border: 1px solid black;
+			margin-left: 20px;
+		}
+		// .eshover:hover{
+		// 	background-color:yellow
+		// }
 
 	}
 </style>

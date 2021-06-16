@@ -72,7 +72,7 @@
       </div>
       <div class="third-container">
         <div class="third-container-left">
-          <ScrollBar :scrollBarMessage="scrollBarMessage"></ScrollBar>
+          <ScrollBar v-if="scrollChange" :scrollBarMessage="scrollBarMessage"></ScrollBar>
         </div>
         <!-- 管拧区 -->
         <div class="third-container-right areaBorderStyle arrowBottom3">
@@ -121,12 +121,28 @@
         </div>
       </div>
     </div>
+		
+		<div style="position: relative;top: -560px;left: -600px;">
+			<p>1#RGV小车电量</p>
+			<dv-percent-pond :config="config"
+				style="width:200px;height:100px;margin: auto;" />
+		</div>
+		<div style="position: relative;top: -560px;left: -600px;">
+			<p>2#RGV小车电量</p>
+			<dv-percent-pond :config="config1"
+				style="width:200px;height:100px;margin: auto;" />
+		</div>
+		<div style="position: relative;top: -560px;left: -600px;">
+			<p>3#RGV小车电量</p>
+			<dv-percent-pond :config="config2"
+				style="width:200px;height:100px;margin: auto;" />
+		</div>
     <div class="tableCon">
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
-			<div class="rightBox">
+<!-- 			<div class="rightBox">
 				<p>1#RGV小车电量</p>
 				<dv-percent-pond :config="config"
 					style="width:200px;height:100px;margin: auto;" />
@@ -140,7 +156,7 @@
 				<p>3#RGV小车电量</p>
 				<dv-percent-pond :config="config2"
 					style="width:200px;height:100px;margin: auto;" />
-			</div>
+			</div> -->
     </div>
   </dv-full-screen-container>
 </template>
@@ -179,14 +195,15 @@ export default {
       deviceList9Name: "返修区域",
 			scrollBarMessage:[],
 			config:{
-					value: 66
+					value: this.$store.state.WebsocketMessage.Equipment12_DumpEnergy
 			},
 			config1:{
-					value: 43
+					value: this.$store.state.WebsocketMessage.Equipment13_DumpEnergy
 			},
 			config2:{
-					value: 91
-			}
+					value: this.$store.state.WebsocketMessage.Equipment14_DumpEnergy
+			},
+			scrollChange:true
     };
   },
   methods: {
@@ -206,9 +223,15 @@ export default {
 		//首页滚动条获取数据
 		async indexScrollBar(){
 			await indexScrollBar().then(res =>{
+				this.scrollChange = false
 				if(res.data.status ===true){
 					this.scrollBarMessage = res.data.result
+				}else{
+					this.scrollBarMessage[0] = ['','',res.data.message]
 				}
+				this.$nextTick(()=>{
+				this.scrollChange = true
+				})
 			})
 		},
     
