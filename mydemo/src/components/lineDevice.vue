@@ -11,6 +11,9 @@
     <div class="center">
     <dv-decoration-6 style="width:70vw;height:10px;" />
     </div>
+    <div class="one-cell-bottom">
+      <one-cell :device="dvCar1"></one-cell>
+    </div>
   </div>
   <div class="line-container" v-else-if="lineNum==2">
      <div class="top">
@@ -23,6 +26,9 @@
     </div>
     <div class="center">
     <dv-decoration-6 style="width:70vw;height:10px;" />
+    </div>
+      <div class="one-cell-bottom">
+      <one-cell :device="dvCar2"></one-cell>
     </div>
   </div>
   <div class="line-container" v-else-if="lineNum==3">
@@ -37,6 +43,9 @@
     <div class="center last">
     <dv-decoration-6 style="width:40vw;height:10px;" />
     </div>
+      <div class="one-cell-bottom last">
+      <one-cell :device="dvCar3"></one-cell>
+    </div>
   </div>
 </template>
 
@@ -49,6 +58,18 @@ export default {
   props:['lineNum'],
   data() {
     return {
+      dvCar1:{
+           title: "1#RGV",
+        status: "nomal",
+      },
+        dvCar2:{
+           title: "2#RGV",
+        status: "nomal",
+      },
+        dvCar3:{
+           title: "3#RGV",
+        status: "nomal",
+      },
       dv1: {
         title: "3#桁架",
         status: "nomal",
@@ -135,6 +156,16 @@ export default {
       position: absolute;
       left: -30vw;
       top: 0;
+    }
+  }
+  .one-cell-bottom{
+    width: 15vh;
+    position: absolute;
+    bottom: 0;
+    right: -3vh;
+    &.last{
+      right: 54vh;
+      bottom: -1vh;
     }
   }
   .bottom{

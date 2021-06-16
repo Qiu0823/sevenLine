@@ -9,7 +9,7 @@
     <div class="fcr13" @click="linkDetail1(16,'2#吹水黑皮扣')">
       <oneCell :device="fcr13"></oneCell>
     </div>
-    <div class="fcr14" @click="linkDetail1(16,'2#修扣黑皮扣')">
+    <div class="fcr14" @click="linkDetail1(16,'2#修磨黑皮扣')">
       <oneCell :device="fcr14"></oneCell>
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
         status: "nomal",
       },
       fcr14: {
-        title: "2#修扣黑皮扣",
+        title: "2#修磨黑皮扣",
         status: "nomal",
       },
     };

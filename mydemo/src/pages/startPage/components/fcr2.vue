@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <div class="fcr21" @click="linkDetail1(1,'1#收口机')">
+    <div class="fcr21" @click="linkDetail1(1, '1#收口机')">
       <oneCell :device="fcr21"></oneCell>
     </div>
-    <div class="fcr22" @click="linkDetail1(5,'1#车丝机')">
+    <div class="fcr22" @click="linkDetail1(5, '1#车丝机')">
       <oneCell :device="fcr22"></oneCell>
     </div>
-    <div class="fcr23" @click="linkDetail1(15,'1#修扣黑皮扣')">
+    <div class="fcr23" @click="linkDetail1(15, '1#修磨黑皮扣')">
       <oneCell :device="fcr23"></oneCell>
     </div>
-    <div class="fcr24" @click="linkDetail1(15,'1#吹水黑皮扣')">
+    <div class="fcr24" @click="linkDetail1(15, '1#吹水黑皮扣')">
       <oneCell :device="fcr24"></oneCell>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 import oneCell from "@/components/oneCell";
-import{linkDetail} from '@/util/util.js'
+import { linkDetail } from "@/util/util.js";
 export default {
   components: {
     oneCell,
@@ -33,7 +33,7 @@ export default {
         status: "nomal",
       },
       fcr23: {
-        title: "1#修扣黑皮扣",
+        title: "1#修磨黑皮扣",
         status: "nomal",
       },
       fcr24: {
@@ -42,18 +42,18 @@ export default {
       },
     };
   },
-	methods:{
-		link(id){
-			this.$emit('linkDetail',id)
-		},
-     linkDetail1(id, name) {
+  methods: {
+    link(id) {
+      this.$emit("linkDetail", id);
+    },
+    linkDetail1(id, name) {
       console.log(name);
       this.$router.push({
         path: "/index",
         query: { id: id, name: name },
       });
     },
-	}
+  },
 };
 </script>
 
@@ -65,19 +65,21 @@ div {
 .fcr21 {
   height: 10%;
   margin-top: 7%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcr22 {
   height: 10%;
   margin-top: 15%;
-	cursor:pointer;
+  cursor: pointer;
+  /* background: url("~@/assets/img/chesi.svg") no-repeat bottom right;
+  background-size: contain; */
 }
 .fcr23 {
   height: 10%;
-	cursor:pointer;
+  cursor: pointer;
 }
 .fcr24 {
   height: 10%;
-	cursor:pointer;
+  cursor: pointer;
 }
 </style>

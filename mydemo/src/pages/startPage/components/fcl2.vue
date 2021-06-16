@@ -6,7 +6,7 @@
     <div class="fcl22" @click="linkDetail1(7, '3#车丝机')">
       <oneCell :device="fcl22"></oneCell>
     </div>
-    <div class="fcl23" @click="linkDetail1(17, '3#修扣黑皮扣')">
+    <div class="fcl23" @click="linkDetail1(17, '3#修磨黑皮扣')">
       <oneCell :device="fcl23"></oneCell>
     </div>
     <div class="fcl24" @click="linkDetail1(17, '3#吹水黑皮扣')">
@@ -32,7 +32,7 @@ export default {
         status: "nomal",
       },
       fcl23: {
-        title: "3#修扣黑皮扣",
+        title: "3#修磨黑皮扣",
         status: "nomal",
       },
       fcl24: {

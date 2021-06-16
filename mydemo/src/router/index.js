@@ -4,7 +4,7 @@ import HelloWorld from '@/pages/startPage/HelloWorld'
 import Datail from '@/pages/detail'
 // import Index from '@/pages/index'
 import Index from '../pages/devDetail/index'
-import RollCar from '@/components/rollCar'
+// import carTest from '@/components/carTest'
 
 Vue.use(VueRouter)
 
@@ -23,9 +23,9 @@ export default new VueRouter({
         path:'/index',
         component:Index
     },
-    {
-        path:'/rollCar',
-        component:RollCar
-    },
+    // {
+    //     path:'/rollCar',
+    //     component:carTest
+    // },
 ]
 })
