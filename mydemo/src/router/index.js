@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HelloWorld from '@/pages/startPage/HelloWorld'
-import Datail from '@/pages/detail'
 import test1 from '@/pages/test/test1'
 // import Index from '@/pages/index'
 import Index from '../pages/devDetail/index'
@@ -17,13 +16,14 @@ export default new VueRouter({
         meta:{
             title:'七号线'
         }
-    },{
-        path:'/detail',
-        component:Datail
     },
     {
         path:'/index',
-        component:Index
+        component:Index,
+				meta:{
+					title: '文件上传',
+					hasint:false
+				}
     },
 		{
 			path:'/test1',

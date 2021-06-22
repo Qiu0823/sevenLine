@@ -55,3 +55,11 @@ export function indexScrollBar(data){
 		params:data
 	})
 }
+
+export function getHandleResult(data){
+	return request({
+		url:'/fault/query/result',
+		method:'get',
+		params:data
+	})
+}

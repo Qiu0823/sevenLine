@@ -1,33 +1,33 @@
 <template>
   <div class="line-container" v-if="lineNum==1">
     <div class="top">
-      <div style="width:15vh">
+      <div style="width:15vh;margin-top: 5px;">
       <one-cell :device="dv1" ></one-cell>
       </div>
-      <div style="margin-left:400px;width:15vh" >
+      <div style="margin-left:400px;width:15vh;margin-top: 5px;" >
       <one-cell :device="dv2"></one-cell>
       </div>
     </div>
     <div class="center">
     <dv-decoration-6 style="width:70vw;height:10px;" />
     </div>
-    <div class="one-cell-bottom">
+    <div class="one-cell-bottom" @click="linkDetail1(12,'1#RGV')">
       <one-cell :device="dvCar1"></one-cell>
     </div>
   </div>
   <div class="line-container" v-else-if="lineNum==2">
      <div class="top">
-      <div style="width:15vh">
+      <div style="width:15vh;margin-top: 5px;">
       <one-cell :device="dv5" ></one-cell>
       </div>
-      <div style="margin-left:400px;width:15vh" >
+      <div style="margin-left:400px;width:15vh;margin-top: 5px;" >
       <one-cell :device="dv6"></one-cell>
       </div>
     </div>
     <div class="center">
     <dv-decoration-6 style="width:70vw;height:10px;" />
     </div>
-      <div class="one-cell-bottom">
+      <div class="one-cell-bottom" @click="linkDetail1(13,'2#RGV')">
       <one-cell :device="dvCar2"></one-cell>
     </div>
   </div>
@@ -43,7 +43,7 @@
     <div class="center last">
     <dv-decoration-6 style="width:40vw;height:10px;" />
     </div>
-      <div class="one-cell-bottom last">
+      <div class="one-cell-bottom last" @click="linkDetail1(14,'3#RGV')">
       <one-cell :device="dvCar3"></one-cell>
     </div>
   </div>
@@ -112,6 +112,15 @@ export default {
       },
     };
   },
+	methods:{
+		linkDetail1(id, name) {
+		  console.log(name);
+		  this.$router.push({
+		    path: "/index",
+		    query: { id: id, name: name },
+		  });
+		},
+	}
 };
 </script>
 
@@ -161,8 +170,9 @@ export default {
   .one-cell-bottom{
     width: 15vh;
     position: absolute;
-    bottom: 0;
-    right: -3vh;
+    bottom: -1vh;
+    right: -6vh;
+		cursor: pointer;
     &.last{
       right: 54vh;
       bottom: -1vh;

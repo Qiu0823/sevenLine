@@ -15,10 +15,31 @@
         </div>
       </div>
       <div class="detect2" @click="linkDetail1(33,'测量点')">
-        <div class="detect2-onecell" v-for="item in decArr" :key="item.id">
-          <span class="dv-title">{{ item.title }}</span>
-          <div class="LEDbtn greenBtn"></div>
+        <div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+          <span class="dv-title">{{ decArr[0].title }}</span>
         </div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[1].title }}</span>
+				</div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[2].title }}</span>
+				</div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[3].title }}</span>
+				</div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[4].title }}</span>
+				  <div class="LEDbtn greenBtn" :style="{backgroundColor:this.$store.state.WebsocketMessage.Equipment33_FaultStatus}"></div>
+				</div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[5].title }}</span>
+				</div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[6].title }}</span>
+				</div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
+				  <span class="dv-title">{{ decArr[7].title }}</span>
+				</div>
       </div>
     </div>
     <div class="chufei">抽检台架</div>
@@ -31,10 +52,11 @@
     <div class="house">
       <div class="house-top">
         <p>2#电气室</p>
-        <img src="~@/assets/img/dianHouse3.png" alt="">
+        <img style="position: relative;left: -20px;" src="~@/assets/img/electHouse.png" alt="">
       </div>
       <div class="house-bottom">
         <p>集控室</p>
+				<img style="position: relative;left: -20px;display: inline-flex;width: 300px;height: 100px;transform: rotateX(50deg);" src="~@/assets/img/dianHouse2.png" alt="">
       </div>
     </div>
   </div>
@@ -155,9 +177,8 @@ export default {
   display: flex;
   flex-direction: column;
   .house-top {
-    height: 30%;
-    // background-color: thistle;
-    border: 1px solid royalblue;
+    height: 40%;
+   border: 1px solid royalblue;
     border-bottom-color: transparent;
     text-align: center;
     line-height: 3vh;
@@ -168,19 +189,18 @@ export default {
       }
       img{
         width: 220px;
-        height: 90px;
+        height: 80px;
         position: absolute;
-        top: -3vh;
+        top: -2vh;
         right: 5vh;
         }
   }
   .house-bottom {
-    height: 70%;
-    // background-color: rgb(223, 15, 223);
+    height: 60%;
     text-align: center;
     line-height: 8vh;
-    border: 1px solid royalblue;
-    background: url('~@/assets/img/dianHouse2.png') no-repeat;
+   border: 1px solid royalblue;
+/*    background: url('~@/assets/img/dianHouse2.png') no-repeat; */
     background-size: 95% 100%;
     background-position: top right;
     position: relative;
@@ -222,8 +242,10 @@ export default {
   font-size: 12px !important;
   justify-content: space-between;
   .detect2-onecell {
+		cursor: pointer;
     box-sizing: border-box;
     border-bottom: 1px solid #203456;
+		flex: 1;
     display: flex;
     .LEDbtn {
       width: 13px !important;
@@ -232,7 +254,6 @@ export default {
     .dv-title {
       width: 40%;
       text-align: right;
-      // border: 1px solid red;
       padding-right: 2vh;
       padding-left: 4vh;
     }
@@ -247,18 +268,6 @@ export default {
   width: 60%;
   height: 50%;
 }
-// .load1 {
-//   display: inline-block;
-//   position: relative;
-//   top: 3vh;
-//   left: 14vh;
-//   transform: scaleX(20);
-//   width: 30%;
-//   .iconfont {
-//     font-size: 36px;
-//     color: grey;
-//   }
-// }
 	.load2{
     display: flex;
     position: absolute;

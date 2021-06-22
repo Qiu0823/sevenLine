@@ -72,7 +72,7 @@
       </div>
       <div class="third-container">
         <div class="third-container-left">
-          <ScrollBar v-if="scrollChange" :scrollBarMessage="scrollBarMessage"></ScrollBar>
+          <ScrollBar></ScrollBar>
         </div>
         <!-- 管拧区 -->
         <div class="third-container-right areaBorderStyle arrowBottom3">
@@ -122,41 +122,26 @@
       </div>
     </div>
 		
-		<div style="position: relative;top: -560px;left: -600px;">
+		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
 			<p>1#RGV小车电量</p>
 			<dv-percent-pond :config="config"
-				style="width:200px;height:100px;margin: auto;" />
+				style="width:160px;height:80px;margin: auto;" />
 		</div>
-		<div style="position: relative;top: -560px;left: -600px;">
+		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
 			<p>2#RGV小车电量</p>
 			<dv-percent-pond :config="config1"
-				style="width:200px;height:100px;margin: auto;" />
+				style="width:160px;height:80px;margin: auto;" />
 		</div>
-		<div style="position: relative;top: -560px;left: -600px;">
+		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
 			<p>3#RGV小车电量</p>
 			<dv-percent-pond :config="config2"
-				style="width:200px;height:100px;margin: auto;" />
+				style="width:160px;height:80px;margin: auto;" />
 		</div>
     <div class="tableCon">
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
-<!-- 			<div class="rightBox">
-				<p>1#RGV小车电量</p>
-				<dv-percent-pond :config="config"
-					style="width:200px;height:100px;margin: auto;" />
-			</div>
-			<div class="rightBox">
-				<p>2#RGV小车电量</p>
-				<dv-percent-pond :config="config1"
-					style="width:200px;height:100px;margin: auto;" />
-			</div>
-			<div class="rightBox">
-				<p>3#RGV小车电量</p>
-				<dv-percent-pond :config="config2"
-					style="width:200px;height:100px;margin: auto;" />
-			</div> -->
     </div>
   </dv-full-screen-container>
 </template>
@@ -186,6 +171,23 @@ export default {
   name: "HelloWorld",
   props: {
   },
+	watch:{
+		'$store.state.WebsocketMessage'(newVal,oldVal){
+			console.log("111111ssss")
+			const { config } = this
+			this.config.value = newVal.Equipment12_DumpEnergy
+			
+			this.config = { ...this.config }
+
+			const { config1 } = this
+			this.config1.value = newVal.Equipment13_DumpEnergy
+			this.config1 = { ...this.config1 }
+			
+			const { config2 } = this
+			this.config2.value = newVal.Equipment14_DumpEnergy
+			this.config2 = { ...this.config2 }
+		}
+	},
   data() {
     return {
       showSideNav: false,
@@ -203,7 +205,8 @@ export default {
 			config2:{
 					value: this.$store.state.WebsocketMessage.Equipment14_DumpEnergy
 			},
-			scrollChange:true
+			scrollChange:true,
+			batteryChange:true
     };
   },
   methods: {
@@ -265,7 +268,8 @@ export default {
     // clearInterval(this.timer)
   },
 	created() {
-		this.indexScrollBar()
+	},
+	mounted() {
 	}
 };
 </script>
@@ -445,10 +449,10 @@ export default {
   }
   .third-container {
     height: 18%;
-    width: 88%;
-    margin-left: 25vh;
+    width: 100%;
+		margin-left: 6.5vh;
     .third-container-left {
-      width: 57%;
+      width: 62%;
       height: 100%;
       float: left;
       display: flex;
@@ -461,8 +465,8 @@ export default {
       }
     }
     .third-container-right {
-      float: left;
-      width: 42%;
+      float: right;
+      width: 37%;
       height: 100%;
       display: flex;
       padding-top: 1vh;

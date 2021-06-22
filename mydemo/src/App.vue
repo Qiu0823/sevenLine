@@ -14,13 +14,14 @@ export default {
   // components: {
   //   HelloWorld
   // }
-	mounted() {
+	created() {
 		//websocket接收各组件的状态信息
 		let s = this.$store
 		var ws = new WebSocket(socketURL)
 		ws.onmessage = function(event) {
 			console.log(event.data)
-			s.commit("setWebsocketMessage",JSON.parse(event.data))
+			// s.commit("setWebsocketMessage",JSON.parse(event.data))
+			s.state.WebsocketMessage = JSON.parse(event.data)
 		};
 	},
 }

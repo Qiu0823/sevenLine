@@ -11,7 +11,7 @@
       </div>
       <div class="shangliao-center">
         <p>1#电气室</p>
-        <img src="~@/assets/img/dianHouse3.png" alt="">
+        <img class="img1" src="~@/assets/img/electHouse.png" alt="">
       </div>
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
@@ -171,7 +171,7 @@ export default {
       height: 100%;
       text-align: center;
       line-height: 5vh;
-      border: 1px solid royalblue;
+     border: 1px solid royalblue;
       margin-right: 1.5vh;
       position: relative;
       p{
@@ -181,14 +181,11 @@ export default {
       }
       img{
         width: 200px;
-        height: 100px;
+        height: 80px;
         position: absolute;
-        top: -3vh;
+        top: -2vh;
         right: 0;
         }
-      // background: url('~@/assets/img/dianHouse.png') no-repeat;
-      // background-size: 100% 100%;
-      // background-position: top left;
     }
     .shangliao-right {
       width:43%;
@@ -312,13 +309,13 @@ export default {
     }
     .square{
       width: 99%;
-      height: 3vh;
+      height: 2vh;
       border: 1px solid #203456;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      bottom: -3vh;
-      line-height: 3vh;
+      bottom: -2vh;
+      line-height: 2vh;
     }
     .returnFix-top{
         width: 100%;

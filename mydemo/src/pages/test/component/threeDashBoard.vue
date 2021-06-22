@@ -17,7 +17,7 @@
 						type: 'gauge',
 						data: [{
 								name: 'X轴振动',
-								value: 32,
+								value: 77,
 								radius: '80%'
 							},
 							{
@@ -65,7 +65,21 @@
 				text:'无线红外温度检测器1'
 			}
 		},
-	
+		watch:{
+		'$store.state.app.dataData'(newValue,oldValue){
+			console.log("ds3")
+		  const { option } = this
+		  this.option.series[0].data[0].value = this.MDX.value
+		  this.option.series[0].data[1].value = this.MDY.value
+			this.option.series[0].data[2].value = this.MDZ.value
+		  console.log(this.option)
+		  this.option = { ...this.option }
+		}
+		},	
+		props:['MDX','MDY','MDZ'],
+		mounted() {
+		}
+
 	}
 </script>
 

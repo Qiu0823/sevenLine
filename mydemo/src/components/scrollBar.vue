@@ -1,6 +1,6 @@
 <template>
   <div class="scroll-bar">
-    <dv-scroll-board :config="config" style="width: 22vw; height: 18vh" />
+    <dv-scroll-board :config="config" />
   </div>
 </template>
 <script>
@@ -9,9 +9,9 @@ export default {
     return {
       config: {
         header: ['时间',"设备", "重故障"],
-        data: this.scrollBarMessage,
+        data: this.$store.state.WebsocketMessage.EquipmentFaultRollDatas,
         // index: true,
-        columnWidth: [160,80, 200],
+        columnWidth: [160,250, 220],
         align: ["center"],
         headerBGC: "#213454",
         oddRowBGC: "#266090",
@@ -21,7 +21,13 @@ export default {
 			test:[]
     };
   },
-	props:['scrollBarMessage'],
+	watch:{
+		'$store.state.WebsocketMessage'(newVal,oldVal){
+			const { config } = this
+			this.config.data = newVal.EquipmentFaultRollDatas
+			this.config = { ...this.config }
+		}
+	},
 	mounted() {
 	}
 };
@@ -29,13 +35,13 @@ export default {
 <style scoped lang='less'>
 .dv-scroll-board {
   height: 18.5vh !important;
-  width: 28vw !important;
+  width: 100vh !important;
 }
 .scroll-bar {
   width: 100%;
   padding: 0 1vw;
   height: 100%;
-  margin-left: 10.5vw;
+  margin-left: 6.6vw;
   overflow: hidden;
   box-sizing: border-box;
 }

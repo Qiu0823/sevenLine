@@ -3,7 +3,7 @@
     <div class="b1">
       <div class="dv-title">烘干区域</div>
       <div class="b11">
-        <one-cell :device="arb6"></one-cell>
+        <one-cell style="position: relative;left: -80px;" :device="arb6"></one-cell>
       </div>
       <div class="dryMachine areaBorderStyle">
         <one-cell :device="arb7"></one-cell>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="b21">
-        <one-cell :device="arb3"></one-cell>
+        <one-cell style="position: relative;left: -150px;" :device="arb3"></one-cell>
         <div class="b21-bottom"></div>
       </div>
     </div>
@@ -20,7 +20,6 @@
       <div class="b22 areaBorderStyle" @click="linkDetail1(31,'涂层')">
         <div class="dv-title">涂层区域</div>
         <one-cell :device="arb4" :color="this.$store.state.WebsocketMessage.Equipment31_FaultStatus"></one-cell>
-
       </div>
       <div class="b23">
         <one-cell :device="arb2"></one-cell>
@@ -107,7 +106,7 @@ export default {
   }
 }
 .b1 {
-  width: 36.5vh;
+  width: 37vh;
   float: left;
   height: 80%;
   margin-top: 3.5vh;
@@ -164,9 +163,9 @@ export default {
   .b21-bottom::before {
     content: "";
     position: absolute;
-    left: -7vh;
+    left: -27vh;
     top: -16px;
-    width: 100%;
+    width: 210%;
     height: 1em;
     background: linear-gradient(
         135deg,

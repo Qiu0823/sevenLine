@@ -18,13 +18,13 @@
 
 
 				<div class="right-main-container">
-					<div class="rmc-top-container">
+					<div class="rmc-top-container" ref="rmcTop">
 						<dv-border-box-3 class="rmctc-left-container">
 							<div class="rmctc-left-table1">
 								<div style="width: 100%;height: 25px;text-align: center;">待处理故障</div>
 								<el-table :data="pendingError" :row-style="TableRowStyle"
 									:header-cell-style="{'background-color':'#003B51','color':'white','text-align':'center'}"
-									height="320" style="width: 100%;height: 100%;" class="customer-no-border-table">
+									:height="table_height" style="width: 100%;height: 90%;" class="customer-no-border-table">
 									<el-table-column prop="fault" label="故障名称" align="center">
 									</el-table-column>
 									<el-table-column label="故障原因" width="180">
@@ -52,7 +52,7 @@
 
 								<el-table :data="handledError" :row-style="TableRowStyle"
 									:header-cell-style="{'background-color':'#003B51','color':'white','text-align':'center'}"
-									height="320" style="width: 100%;height: 100%;" class="customer-no-border-table">
+									:height="table_height" style="width: 100%;height: 90%;" class="customer-no-border-table">
 									<el-table-column prop="fault" label="故障名称" align="center">
 									</el-table-column>
 									
@@ -88,7 +88,7 @@
 						</dv-border-box-3>
 					</div>
 
-					<dv-border-box-4 class="rmc-bottom-container">
+					<dv-border-box-4 v-if="this.$route.meta.hasint" class="rmc-bottom-container">
 						   <Bottom-Charts />
 					</dv-border-box-4>
 				</div>
@@ -251,45 +251,37 @@
 		<el-dialog :visible.sync="centerDialogVisible5" width="40%" center>
 			<div style="width: 80%;margin: auto;margin-top: 50px;">
 				<span>故障名称:</span>
-				<el-input :disabled= true type="text" style="width: 75%;margin-left: 20px;" v-model="frmMessage.fault" placeholder="请输入内容">
+				<el-input :disabled= true type="text" style="width: 75%;margin-left: 20px;" v-model="resultMessage.fault" placeholder="请输入内容">
 					</el-input>
 			</div>
-<!-- 			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
-				<div style="flex: 0.5;">选择故障原因：</div>
-					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
-						  <el-checkbox :label="item.reason"></el-checkbox>
-					</div>
-			</div>
-			
-			<div style="width: 100%;margin: auto;display: flex;margin-top: 70px;">
-				<div style="flex: 0.5;line-height: 70px;">选择故障措施：</div>
-					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" style="flex: 1;">
-						  <el-checkbox v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :label="item1.measures"></el-checkbox>
-					</div>
-			</div> -->
+			<el-form ref="form" :model="form" label-width="80px" size="mini">
+
 			<div style="width: 80%;margin: auto;display: flex;margin-top: 70px;">
 				<div class="buttonGroupLeft">
 					<p>选择故障原因：</p>
 					<p>选择故障措施：</p>
 				</div>
 				<div class="buttonGroupRight">
-					<div v-for="(item,i) in frmMessage.reasonVOList" v-bind:key="i" class="buttonGroupRightDIV">
-						  <el-checkbox @change="changeStatus1(i)" :title="item.reason">{{item.reason |ellipsis}}</el-checkbox>
+					<div v-for="(item,i) in resultMessage.resultVOList" v-bind:key="i" class="buttonGroupRightDIV">
+							<el-checkbox v-model="form.reasons[i]" :true-label="item.reasonId" @change="changeStatus1(i)" :title="item.reason" :checked="item.checked">{{item.reason | ellipsis}}</el-checkbox>
 							<hr />
-							<el-checkbox-group :disabled="changeStatus[i]" v-model="checkboxGroup1" size="small">
-								<el-checkbox class="eshover" v-for="(item1,j) in item.measuresVOList" v-bind:key="j" :title="item1.measures" >{{item1.measures |ellipsis}}</el-checkbox>			
+							<el-checkbox-group :disabled="changeStatus[i]" v-model="form.checkboxGroup1[i]" size="small">
+								<el-checkbox v-for="(item1,j) in item.measuresResultVOList" v-bind:key="j" :label="item1.measuresId" :title="item1.measures" :checked="item1.checked">{{item1.measures |ellipsis}}</el-checkbox>
 							</el-checkbox-group>
 					</div>
-				</div>				
+				</div>
 			</div>
 			<div style="width: 80%;margin: auto;margin-top: 70px;" class="clearfix">
 				<div style="float: left; line-height: 40px;">备注：</div>
-				<el-input type="textarea" v-model="resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="5" placeholder="请输入内容">
+				<el-form-item>
+				<el-input type="textarea" v-model="form.resultNote"  style="width: 75%;;margin-left: 35px; float: left;" :rows="5" placeholder="请输入内容">
 				</el-input>
+				</el-form-item>
 			</div>
 			<div style="width: 100%;margin: auto;">
-				<el-button style="margin: auto;display: block;margin-top: 40px;position: relative;left: -80px;" type="primary"  @click="centerDialogVisible5=false;">提交处理结果</el-button>
+				<el-button style="margin: auto;display: block;margin-top: 40px;position: relative;left: -80px;" type="submit"  @click="closeDialog5">提交处理结果</el-button>
 			</div>
+		</el-form>
 		</el-dialog>
 		
 		
@@ -333,7 +325,7 @@
 	import topHeader from './components/topHeader1.vue'
 	import BottomCharts from './components/BottomCharts.vue'
 	import deviceInfo from './components/deviceInfo.vue'
-	import {pending,handled,frm,ErrorMessageChart,ErrorMessageHistory} from '@/api/detail.js'
+	import {pending,handled,frm,ErrorMessageChart,ErrorMessageHistory,getHandleResult} from '@/api/detail.js'
 	// import {getnews} from '../../api/test.js'
 
 	export default {
@@ -354,6 +346,11 @@
 		},
 		data() {
 			return {
+				form:{
+					reasons:[],
+					checkboxGroup1:[],
+					resultNote:''
+				},
 				devName:'',
 				tableData1: null,
 				centerDialogVisible: false,
@@ -368,45 +365,43 @@
 				textarea2: '',
 				textarea3: '',
 				scout: null,
-				reason: [
-					['充电机伸缩机构堵转或卡死导致伺服电机报故障','dajdsads'],
-					['充电机本身硬件错误'],
-					['充电机故障输出电压错误'],
-					['当充电机开始接收到一次PLC报文后5秒内没有收到下一条报文则报通讯故障'],
-					['小车剩余电量不足30%时则报电量严重不足']
-				], //保存原因			
-				measures: [
-					[
-						['通过HMI上的伺服复位按钮来重启伸缩机构伺服电机']
-					],
-					[
-						['重启操作柜', '联系设备供应商']
-					],
-					[
-						['重启操作柜']
-					],
-					[
-						['检查操作柜内的CAN发送模块是否亮红灯', '重启操作柜']
-					],
-					[
-						['给小车更换备用电池']
-					]
-				],
 				srowindex: 0, //保存每一行的index
 				srowi: 0, //保存每一行的i
 				checkList1: [],
 				resultNote: '', //查看结果备注			
 				pendingError:[],//待处理故障信息
 				handledError:[],//已处理故障信息
-				frmMessage:'', //查询措施信息
+				frmMessage:{}, //查询措施信息
 				tabpanIndex: '1', //默认选中的tabpan
 				chartMessage:{},//故障信息图表信息
-				ErrorMessage:[],
-				checkboxGroup1:[],
-				changeStatus:[]
+				ErrorMessage:[], //历史故障信息
+				changeStatus:[],
+				table_height:0, //控制表格的高度自适应
+				faultRecordid:0,
+				resultMessage:{} //处理结果返回的信息
 			}
 		},
 		methods: {
+			//查询处理结果的接口
+			async getHandleResult(id){
+				let data = {
+					faultRecordId:id
+				}
+				await getHandleResult(data).then(res =>{
+					let{state,message,result} = res.data
+					if(state === true){
+						this.resultMessage = result
+					}else{
+						this.$message({
+							message: message,
+							type: 'warning',
+							center: true
+						});
+					}
+				})			
+			},
+			
+			
 			//修改changeStatus数组
 			changeStatus1(i){
 				this.changeStatus[i] = !this.changeStatus[i]
@@ -445,8 +440,7 @@
 					deviceId:id
 				}
 				await handled(data).then(res =>{
-					this.handledError = res.data.result
-					
+					this.handledError = res.data.result					
 				})
 			},
 			//查询措施信息
@@ -499,9 +493,33 @@
 				})
 			},
 			
-			
+			closeDialog5(){
+				let reas = []
+				for(let i =0;i<this.form.reasons.length;i++){
+					if(this.form.reasons[i] != undefined){
+						let data = {
+							reasonid:this.form.reasons[i],
+							measures:this.form.checkboxGroup1[i]
+						}
+						reas.push(data)
+					}
+					this.form.reasons[i] = false
+					this.form.checkboxGroup1[i] = false
+				}			
+				let sdata = {
+					faultRecordid:this.faultRecordid,
+					reasons:reas
+				}
+				this.centerDialogVisible5 = false
+				// this.form = {
+				// 	reasons:[],
+				// 	checkboxGroup1:[],
+				// 	resultNote:''
+				// }
+			},
 			//显示查看历史故障
 			showDialog6(index){
+				this.faultRecordid =this.pendingError[index].faultId
 				this.ErrorMessageHistory(this.$route.query.id,this.pendingError[index].faultId)
 				this.getErrorChartMessage(this.$route.query.id,this.pendingError[index].faultId)
 				this.centerDialogVisible6 = true
@@ -528,9 +546,12 @@
 			},
 			//显示处理结果的dialog
 			showDialog5(index) {
-				this.queryFrm(this.handledError[index].faultId).then(() =>{
-					if(this.frmMessage.reasonVOList.length!=0){
-					for(var i=0;i<this.frmMessage.reasonVOList.length;i++){
+				console.log(this.handledError[index].recordId)
+				this.getHandleResult(this.handledError[index].recordId).then(() =>{
+					console.log(this.resultMessage.resultVOList)
+					if(this.resultMessage.resultVOList.length!=0){
+					for(var i=0;i<this.resultMessage.resultVOList.length;i++){
+						this.form.checkboxGroup1.push([])
 						this.changeStatus[i] = true
 					}
 					this.centerDialogVisible5 = true
@@ -623,7 +644,9 @@
 		this.queryPendingError(this.$route.query.id)
 		this.queryHandledError(this.$route.query.id)
 		this.devName = this.$route.query.name;
-		
+		setTimeout(() => {
+				this.table_height = this.$refs.rmcTop.offsetHeight/2 - 50;
+		},100)
 		// alert(this.pendingError)
 	}
 	}
@@ -686,11 +709,11 @@
 				flex: 4;
 				padding-left: 5px;
 				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
 
 				.rmc-top-container {
-					width: 100%;
-					height: 75%;
-
+					flex: 3;
 					.rmctc-left-container {
 						.border-box-content{
 							display: flex;
@@ -715,7 +738,7 @@
 			text-align: center;
 		}
 		.rmc-bottom-container {
-			height: 25%;
+			flex: 1;
 		}
 
 		.rmctc-chart-1,
@@ -770,12 +793,15 @@
 		}
 		.buttonGroupRightDIV{
 			flex: 1;
-			border: 1px solid black;
 			margin-left: 20px;
 		}
 		// .eshover:hover{
 		// 	background-color:yellow
 		// }
+		
+		.dv-border-box-4{
+			height: 0;
+		}
 
 	}
 </style>
