@@ -18,8 +18,7 @@
       <div class="shangliao-center">
         <p>1#电气室</p>
 
-        <img class="img1" src="~@/assets/img/electHouse.png" alt="">
-
+        <img class="img1" src="~@/assets/img/electHouse.png" alt="" />
       </div>
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
@@ -206,13 +205,10 @@ export default {
         position: absolute;
         top: -2vh;
         right: 0;
-
         }
 
       }
-
-    }
-    .shangliao-right {
+        .shangliao-right {
       width: 43%;
       height: 100%;
       display: flex;
@@ -240,7 +236,8 @@ export default {
         }
       }
     }
-  }
+    }
+  
   .flex-container {
     display: flex;
     flex-wrap: wrap;
