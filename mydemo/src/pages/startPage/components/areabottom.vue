@@ -1,37 +1,42 @@
 <template>
   <div class="container">
-    <div class="b1">
-      <div class="dv-title">烘干区域</div>
-      <div class="b11">
-        <one-cell style="position: relative;left: -80px;" :device="arb6"></one-cell>
+    <div class="area-line">
+      <div class="al-one">
+        <one-cell :device="arb1"></one-cell>
+        <div class="al-one-bottom"></div>
       </div>
-      <div class="dryMachine areaBorderStyle">
+      <div class="al-two areaBorderStyle">
+        <div class="dv-title">涂层区域</div>
+
+        <one-cell
+          class="tuceng"
+          :device="arb4"
+          :color="this.$store.state.WebsocketMessage.Equipment31_FaultStatus"
+        ></one-cell>
+      </div>
+      <div class="al-three">
+        <one-cell :device="arb2"></one-cell>
+        <div class="al-three-bottom"></div>
+      </div>
+      <div class="al-four areaBorderStyle">
+        <div class="dv-title">退磁区域</div>
+        <one-cell
+          class="tuici"
+          :device="arb5"
+          :color="this.$store.state.WebsocketMessage.Equipment30_FaultStatus"
+        ></one-cell>
+      </div>
+      <div class="al-five">
+        <one-cell :device="arb3"></one-cell>
+        <div class="al-five-bottom"></div>
+      </div>
+    </div>
+    <div class="area-dry">
+       <div class="dryMachine areaBorderStyle">
         <one-cell :device="arb7"></one-cell>
         <div @click="linkDetail1(32,'烘干机')" style="cursor: pointer">
           <one-cell :device="arb8" :color="this.$store.state.WebsocketMessage.Equipment32_FaultStatus" class="dry-two"></one-cell>
         </div>
-      </div>
-      <div class="b21">
-        <one-cell style="position: relative;left: -150px;" :device="arb3"></one-cell>
-        <div class="b21-bottom"></div>
-      </div>
-    </div>
-    <div class="b2">
-      <div class="b22 areaBorderStyle" @click="linkDetail1(31,'涂层')">
-        <div class="dv-title">涂层区域</div>
-        <one-cell :device="arb4" :color="this.$store.state.WebsocketMessage.Equipment31_FaultStatus"></one-cell>
-      </div>
-      <div class="b23">
-        <one-cell :device="arb2"></one-cell>
-        <div class="b23-bottom"></div>
-      </div>
-      <div class="b24 areaBorderStyle" @click="linkDetail1(30,'退磁')">
-        <div class="dv-title">退磁区域</div>
-        <one-cell :device="arb5" :color="this.$store.state.WebsocketMessage.Equipment30_FaultStatus"></one-cell>
-      </div>
-      <div class="b25">
-        <one-cell :device="arb1"></one-cell>
-        <div class="b25-bottom">管拧出废台架</div>
       </div>
     </div>
   </div>
@@ -98,11 +103,141 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  .b2 {
-    width: 66.5vh;
-    float: right;
-    box-sizing: border-box;
-    height: 53%;
+  // border: 1px solid red;
+  .area-line {
+    width: 100%;
+    height: 40%;
+    // border: 1px solid red;
+    display: flex;
+    .al-one {
+      width: 35%;
+      height: 100%;
+      position: relative;
+      .al-one-bottom::before {
+        content: "";
+        position: absolute;
+        left: 0vh;
+        top: 40%;
+        width: 100%;
+        height: 1em;
+        background: linear-gradient(
+            135deg,
+            transparent,
+            transparent 45%,
+            #6591e2,
+            transparent 55%,
+            transparent 100%
+          ),
+          linear-gradient(
+            45deg,
+            transparent,
+            transparent 45%,
+            #7964e0,
+            transparent 55%,
+            transparent 100%
+          );
+        background-size: 1em 1em;
+        background-repeat: repeat-x, repeat-x;
+      }
+    }
+    .al-two {
+      width: 12.5%;
+      position: relative;
+      .dv-title {
+        position: absolute;
+        left: 0;
+        top: 0vh;
+        color: #1b5ccc;
+      }
+      .tuceng {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -50%;
+      }
+    }
+    .al-three {
+      width: 18%;
+      height: 100%;
+      position: relative;
+      .al-three-bottom::before {
+        content: "";
+        position: absolute;
+        left: 0vh;
+        top: 40%;
+        width: 100%;
+        height: 1em;
+        background: linear-gradient(
+            135deg,
+            transparent,
+            transparent 45%,
+            #6591e2,
+            transparent 55%,
+            transparent 100%
+          ),
+          linear-gradient(
+            45deg,
+            transparent,
+            transparent 45%,
+            #7964e0,
+            transparent 55%,
+            transparent 100%
+          );
+        background-size: 1em 1em;
+        background-repeat: repeat-x, repeat-x;
+      }
+    }
+    .al-four {
+      width: 12%;
+      position: relative;
+      .dv-title {
+        position: absolute;
+        left: 0;
+        top: 0vh;
+        color: #1b5ccc;
+      }
+      .tuici {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -50%;
+      }
+    }
+        .al-five {
+      width: 18%;
+      height: 100%;
+      position: relative;
+      .al-five-bottom::before {
+        content: "";
+        position: absolute;
+        left: 0vh;
+        top: 40%;
+        width: 100%;
+        height: 1em;
+        background: linear-gradient(
+            135deg,
+            transparent,
+            transparent 45%,
+            #6591e2,
+            transparent 55%,
+            transparent 100%
+          ),
+          linear-gradient(
+            45deg,
+            transparent,
+            transparent 45%,
+            #7964e0,
+            transparent 55%,
+            transparent 100%
+          );
+        background-size: 1em 1em;
+        background-repeat: repeat-x, repeat-x;
+      }
+    }
+  }
+  .area-dry{
+    width: 35.5%;
+    height: 59%;
   }
 }
 .b1 {
