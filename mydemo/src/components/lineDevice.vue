@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="center">
-    <dv-decoration-6 style="width:70vw;height:10px;" />
+    <dv-decoration-6 style="width:65vw;height:10px;" />
     </div>
     <div class="one-cell-bottom">
       <one-cell :device="dvCar1"></one-cell>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="center">
-    <dv-decoration-6 style="width:70vw;height:10px;" />
+    <dv-decoration-6 style="width:65vw;height:10px;" />
     </div>
       <div class="one-cell-bottom">
       <one-cell :device="dvCar2"></one-cell>

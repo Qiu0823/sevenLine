@@ -2,67 +2,86 @@
   <div class="area-container">
     <div v-if="deviceListName == '上料区域'" class="shangliao">
       <div class="shangliao-left">
-				<div style="flex: 1;cursor:pointer;" @click="linkDetail1(10,'乳化液')">
-					<one-cell :device="shang01"></one-cell>
-				</div>
-				<div style="flex: 1;cursor:pointer;" @click="linkDetail1(11,'液压油')">
-					 <one-cell :device="shang02"></one-cell>
-				</div>
+        <div
+          style="flex: 1; cursor: pointer"
+          @click="linkDetail1(10, '乳化液')"
+        >
+          <one-cell :device="shang01"></one-cell>
+        </div>
+        <div
+          style="flex: 1; cursor: pointer"
+          @click="linkDetail1(11, '液压油')"
+        >
+          <one-cell :device="shang02"></one-cell>
+        </div>
       </div>
       <div class="shangliao-center">
         <p>1#电气室</p>
-        <img src="~@/assets/img/dianHouse3.png" alt="">
+        <img src="~@/assets/img/dianHouse3.png" alt="" />
       </div>
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
-        <div class="shaoliao-right-left" style="cursor:pointer;" @click="linkDetail1(35,'1#喷码机')">
-          <one-cell :device="shang03" :color="this.$store.state.WebsocketMessage.Equipment35_FaultStatus"></one-cell>
+        <div
+          class="shaoliao-right-left"
+          style="cursor: pointer"
+          @click="linkDetail1(35, '1#喷码机')"
+        >
+          <one-cell
+            :device="shang03"
+            :color="this.$store.state.WebsocketMessage.Equipment35_FaultStatus"
+          ></one-cell>
         </div>
         <div class="shangliao-right-center">
           <one-cell :device="shang04"></one-cell>
           <one-cell :device="shang05"></one-cell>
         </div>
-        <div class="shangliao-right-right"  @click="linkDetail1(36,'2#喷码机')">
-          <one-cell :device="shang06" :color="this.$store.state.WebsocketMessage.Equipment36_FaultStatus"></one-cell>
+        <div class="shangliao-right-right" @click="linkDetail1(36, '2#喷码机')">
+          <one-cell
+            :device="shang06"
+            :color="this.$store.state.WebsocketMessage.Equipment36_FaultStatus"
+          ></one-cell>
         </div>
       </div>
     </div>
     <template v-else-if="deviceListName == '返修区域'">
-
       <div class="area-name">{{ deviceListName }}</div>
       <div class="returnFix">
-				<div class="load2">
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-					<span class="iconfont icon-lu"></span>
-				</div>
-        <div class="square">
-          返修台架
+        <div class="load2">
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
+          <span class="iconfont icon-lu"></span>
         </div>
+        <div class="square">返修台架</div>
         <div class="doorOne">
           <!-- <img src="@/assets/img/door.png" alt=""> -->
-            <i class="iconfont icon-mendoor13"></i>
+          <i class="iconfont icon-mendoor13"></i>
         </div>
         <div class="doorTwo">
           <!-- <img src="@/assets/img/door.png" alt=""> -->
-            <i class="iconfont icon-mendoor13"></i>
+          <i class="iconfont icon-mendoor13"></i>
         </div>
-        <div class="returnFix-top" @click="linkDetail1(20,'2#带锯')">
-          <one-cell :device="returnFix01" :color="this.$store.state.WebsocketMessage.Equipment20_FaultStatus"></one-cell>
+        <div class="returnFix-top" @click="linkDetail1(20, '2#带锯')">
+          <one-cell
+            :device="returnFix01"
+            :color="this.$store.state.WebsocketMessage.Equipment20_FaultStatus"
+          ></one-cell>
         </div>
-        <div class="returnFix-center" @click="linkDetail1(19,'1#带锯')">
-          <one-cell :device="returnFix02" :color="this.$store.state.WebsocketMessage.Equipment19_FaultStatus"></one-cell>
+        <div class="returnFix-center" @click="linkDetail1(19, '1#带锯')">
+          <one-cell
+            :device="returnFix02"
+            :color="this.$store.state.WebsocketMessage.Equipment19_FaultStatus"
+          ></one-cell>
         </div>
         <div class="returnFix-bottom">
           <one-cell :device="returnFix03"></one-cell>
         </div>
         <div class="lineFive">
-       <dv-decoration-6 style="width:13vw;height:10px;" />
+          <dv-decoration-6 style="width: 13vw; height: 10px" />
         </div>
       </div>
     </template>
@@ -76,8 +95,8 @@ export default {
   },
   data() {
     return {
-      dvv:{
-        title:'成型区',
+      dvv: {
+        title: "成型区",
         status: "nomal",
       },
       shang01: {
@@ -122,21 +141,21 @@ export default {
       },
     };
   },
-	methods:{
-		linkDetail(id){
-			this.$router.push({
-				path:'/index',
-				query:{'id':id}
-			})
-		},
-    	linkDetail1(id,name){
-        console.log(name)
-			this.$router.push({
-				path:'/index',
-				query:{'id':id,'name': name}
-			})
-		},
-	},
+  methods: {
+    linkDetail(id) {
+      this.$router.push({
+        path: "/index",
+        query: { id: id },
+      });
+    },
+    linkDetail1(id, name) {
+      console.log(name);
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
+  },
   props: ["deviceListName"],
 };
 </script>
@@ -166,7 +185,7 @@ export default {
       display: flex;
       margin-top: 2vh;
     }
-    .shangliao-center{
+    .shangliao-center {
       width: 27%;
       height: 100%;
       text-align: center;
@@ -174,34 +193,34 @@ export default {
       border: 1px solid royalblue;
       margin-right: 1.5vh;
       position: relative;
-      p{
+      p {
         position: absolute;
         left: 0;
         top: -3vh;
       }
-      img{
+      img {
         width: 200px;
         height: 100px;
         position: absolute;
         top: -3vh;
         right: 0;
-        }
+      }
       // background: url('~@/assets/img/dianHouse.png') no-repeat;
       // background-size: 100% 100%;
       // background-position: top left;
     }
     .shangliao-right {
-      width:43%;
+      width: 43%;
       height: 100%;
       display: flex;
       position: relative;
-      .area-name{
+      .area-name {
         text-align: right;
         position: absolute;
         right: 0;
       }
       .shangliao-right-right {
-				cursor:pointer;
+        cursor: pointer;
         margin-top: 1vw;
       }
       div {
@@ -265,20 +284,7 @@ export default {
     left: 0;
     top: 0;
   }
-	.load2{
-		width: 3vh;
-		height: 100%;
-		display: inline-block;
-		position: relative;
-		right: -22.5vh;
-		top:-2vh;
-		.iconfont{
-			font-size: 16px;
-			display: inline-block;
-			color: grey;
-			transform: scaleY(3)translateY(50%);
-		}
-	}
+
   .returnFix {
     padding-top: 2vh;
     width: 100%;
@@ -288,29 +294,43 @@ export default {
     justify-content: space-between;
     height: 100%;
     position: relative;
-    .doorOne{
+    .load2 {
+      width: 3vh;
+      height: 100%;
+      display: inline-block;
+      position: absolute;
+      right: 0vh;
+      top: 0vh;
+      .iconfont {
+        font-size: 16px;
+        display: inline-block;
+        color: grey;
+        transform: scaleY(3) translateY(50%);
+      }
+    }
+    .doorOne {
       position: absolute;
       right: 15px;
       top: -1vh;
       width: 2vw;
       height: 1.5vw;
-      img{
+      img {
         width: 100%;
         height: 100%;
       }
     }
-    .doorTwo{
+    .doorTwo {
       position: absolute;
       right: 15px;
-      bottom: .5vh;
+      bottom: 0.5vh;
       width: 2vw;
       height: 1.5vw;
-       img{
+      img {
         width: 100%;
         height: 100%;
       }
     }
-    .square{
+    .square {
       width: 99%;
       height: 3vh;
       border: 1px solid #203456;
@@ -320,30 +340,29 @@ export default {
       bottom: -3vh;
       line-height: 3vh;
     }
-    .returnFix-top{
-        width: 100%;
+    .returnFix-top {
+      width: 100%;
       position: absolute;
       right: 0;
       top: 4vh;
-			cursor:pointer;
-    
+      cursor: pointer;
     }
-      .returnFix-center{
-        width: 100%;
-          position: absolute;
-          top: 8vh;
-          left: -11vh;
-          width: 100%;
-					cursor:pointer;
+    .returnFix-center {
+      width: 100%;
+      position: absolute;
+      top: 8vh;
+      left: -11vh;
+      width: 100%;
+      cursor: pointer;
     }
-      .returnFix-bottom{
-        width: 100%;
-        position: absolute;
-        bottom: 4vh;
-        right: 0;
-        width: 100%;
+    .returnFix-bottom {
+      width: 100%;
+      position: absolute;
+      bottom: 4vh;
+      right: 0;
+      width: 100%;
     }
-    .lineFive{
+    .lineFive {
       position: absolute;
       bottom: 3vh;
       left: 0vh;
