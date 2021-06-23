@@ -14,7 +14,7 @@
           <oneCell :device="dec2"></oneCell>
         </div>
       </div>
-      <div class="detect2" @click="linkDetail1(33,'测量点')">
+      <div class="detect2">
         <div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
           <span class="dv-title">{{ decArr[0].title }}</span>
         </div>
@@ -126,7 +126,11 @@ export default {
     link(id) {
       this.$emit("linkDetail", id);
     },
+    func(){
+      console.log('func')
+    },
     linkDetail1(id, name) {
+      console.log(130)
       console.log(name);
       this.$router.push({
         path: "/index",
@@ -241,6 +245,7 @@ export default {
   flex-direction: column;
   font-size: 12px !important;
   justify-content: space-between;
+  z-index: 999;
   .detect2-onecell {
 		cursor: pointer;
     box-sizing: border-box;
