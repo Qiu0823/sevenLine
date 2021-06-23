@@ -63,3 +63,20 @@ export function getHandleResult(data){
 		params:data
 	})
 }
+
+//获取所有区域
+export function getAllArea(){
+	return request({
+		url:'/device/query/area',
+		method:'get'
+	})
+}
+
+//获取某个区域内设备
+export function getAllAreaDevice(data){
+	return request({
+		url:'/device/query/device/area',
+		method:'get',
+		params:data
+	})
+}

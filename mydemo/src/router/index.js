@@ -4,6 +4,7 @@ import HelloWorld from '@/pages/startPage/HelloWorld'
 import test1 from '@/pages/test/test1'
 // import Index from '@/pages/index'
 import Index from '../pages/devDetail/index'
+import index from '../pages/reasonConfig/index'
 // import carTest from '@/components/carTest'
 
 
@@ -28,7 +29,12 @@ export default new VueRouter({
 		{
 			path:'/test1',
 			component:test1
-		}
+		},
+		{
+			path:'/reasonConfig',
+			component:index
+		},
+		
     // {
     //     path:'/rollCar',
     //     component:carTest

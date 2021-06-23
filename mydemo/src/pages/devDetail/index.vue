@@ -5,7 +5,7 @@
         <div class="mh-middle">设备故障诊断系统</div>
       </div> -->
 			<top-header></top-header>
-			<router-link to="/">
+			<router-link to="/reasonConfig">
 				<img src="~@/assets/img/home.png" class="img1" />
 			</router-link>
 
