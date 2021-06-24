@@ -620,6 +620,7 @@
 				this.input = s.date //故障名称
 				this.errorreason = this.reason[this.scout][i]
 			},
+			
 
 			//查看措施触发的事件
 			look(index, i) {

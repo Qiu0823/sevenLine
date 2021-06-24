@@ -5,6 +5,7 @@ import test1 from '@/pages/test/test1'
 import Index from '../pages/devDetail/index'
 
 import thirdDetail from '../pages/thirdDetail/index'
+import loginCom from '../pages/loginCom/index'
 // import thirdDetail1 from '../pages/thirdDetail/index1'
 
 
@@ -35,6 +36,10 @@ export default new VueRouter({
         {
             path: '/thirdDetail',
             component: thirdDetail
+        },
+        {
+            path: '/loginCom',
+            component: loginCom
         },
         // {
         //     path: '/thirdDetail1',

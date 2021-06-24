@@ -35,11 +35,6 @@
                 padding: '0',
                 background:'#203456'
               }" :cell-style="{ textAlign: 'center', height: '50px' }">
-							<!-- <el-table-column label="库区" width="100" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.ReservoirArea }}
-        </template>
-      </el-table-column> -->
 							<el-table-column prop="fault" label="故障名称">
 							</el-table-column>
 
@@ -79,6 +74,9 @@
 						</div>
 					</div>
 				</el-form-item>
+				<el-form-item style="margin: 0 auto!important;">
+					<el-button type="primary" @click="onSubmit">提交原因和措施</el-button>
+				</el-form-item>
 			</el-form>
 		</el-dialog>
 
@@ -98,13 +96,14 @@
 				</el-form-item>
 				<el-form-item label="故障措施" style="width: 100%">
 					<div style="width: 100%">
-						<div v-for="(item, i) in updateForm.measuresList" v-bind:key="i" style="width: 90%; float: left">
+						<div v-for="(item, i) in updateForm.measuresList" v-bind:key="i"
+							style="width: 90%; float: left">
 							<el-input style="display: inline-block" v-model="item.measures" placeholder="请输入内容">
 							</el-input>
 						</div>
 					</div>
 				</el-form-item>
-				<el-form-item >
+				<el-form-item>
 					<el-button @click="submitUpdate">提交</el-button>
 				</el-form-item>
 			</el-form>
@@ -118,11 +117,15 @@
 		getAllDevReason,
 		getAllErrReason,
 		getAllErrReasonMeasure,
-		postUpdateReason
+		postUpdateReason,
+		addReaAndMea
 	} from "../../api/detail.js";
 	export default {
 		data() {
 			return {
+				faultId: "", //table里每个故障问题对应的id
+				reason: "", //dialog故障原因下拉框里选中后的原因
+				reasonId: 0, //dialog故障原因下拉框里每个原因的id
 				areasDevice: [],
 				areas: [], //区域选择框数据
 				value: "", //区域下拉框绑定的数据
@@ -132,7 +135,6 @@
 					'设备急停'
 				], //表格table信息
 				addDialog: false, //控制新增dialog的显示
-
 				addForm: {
 					faultReason: "", //新增dialog下拉框选择的原因
 					input: [""], //输入框的值
@@ -140,21 +142,58 @@
 				reasonSelect: [], //新增dialog下拉列表
 				updateDialog: false, //控制修改dialog的显示
 				updateForm: {
-					reasonId:null,
-					reason:'',
-					measuresList:[]
+					reasonId: null,
+					reason: '',
+					measuresList: []
 				}, //控制更新表格的提交数据
-				
+
 			};
 		},
 
 		methods: {
+			//新增原因和措施
+			onSubmit() {
+				this.addReaAndMeaWrapper();
+				this.addDialog = false
+			},
+			async addReaAndMeaWrapper() {
+				let data = {
+					faultId: this.faultId,
+					reasonId: this.reasonId,
+					reason: this.reason,
+					measures: this.addForm.input,
+				};
+				await addReaAndMea(data).then((res) => {
+					console.log(res);
+					let {
+						state,
+						message,
+						result
+					} = res.data;
+					// if (state == true) {
+					// 	this.$message({
+					// 		message,
+					// 	})
+					// }
+				});
+			},
+			//故障原因下拉框改变事件
+			getReasonNum(val) {
+				this.reason = val;
+				this.reasonId = 0;
+				this.reasonSelect.forEach((item) => {
+					if (item.reasonId == val) {
+						this.reasonId = item.reasonId; //保存选中后的故障原因及其id
+						this.reason = item.reason;
+					}
+				});
+			},
 			tableRowClassName({
 				row,
 				rowIndex
 			}) {
 				if (rowIndex !== -1) {
-					return "success-row"; 
+					return "success-row";
 				}
 			},
 			//点击修改
@@ -191,15 +230,19 @@
 				});
 			},
 			//获取单个原因所有的措施
-			async getAllErrReasonMeasure(id){
-				let data ={
-					reasonId:id
+			async getAllErrReasonMeasure(id) {
+				let data = {
+					reasonId: id
 				}
-				await getAllErrReasonMeasure(data).then(res =>{
-					let {state,message,result} = res.data
-					if(state ===true){
+				await getAllErrReasonMeasure(data).then(res => {
+					let {
+						state,
+						message,
+						result
+					} = res.data
+					if (state === true) {
 						this.updateForm.measuresList = result
-					}else{
+					} else {
 						this.$message({
 							message: message,
 							type: "warning",
@@ -209,7 +252,7 @@
 				})
 			},
 			//修改措施点击提交
-			submitUpdate(){
+			submitUpdate() {
 				console.log(this.updateForm)
 				postUpdateReason(this.updateForm)
 				this.updateDialog = false
@@ -362,8 +405,35 @@
 							}
 						}
 
-						.el-table--border {
-							border: none;
+						.conntainContext {
+							flex: 4;
+							// border: 1px brown solid;
+							font-size: 22px;
+
+							.el-table__row {
+								&.success-row {
+									background: rgb(18, 104, 141);
+									// background-color: #606266;
+								}
+							}
+
+							.el-table {
+								color: #fff;
+
+								.warning-row {
+									background-color: #429118;
+								}
+							}
+
+							.el-table--border {
+								td {
+									border: 1px solid #666;
+								}
+							}
+
+							.el-table--border {
+								border: none;
+							}
 						}
 					}
 				}
