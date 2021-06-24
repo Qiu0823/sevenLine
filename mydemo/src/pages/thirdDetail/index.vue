@@ -24,14 +24,16 @@
             </div>
             <div class="ch">
               <span>设备：</span>
-              <el-select v-model="value1" placeholder="请选择"
-              @change="getDevNum">
+              <el-select
+                v-model="value1"
+                placeholder="请选择"
+                @change="getDevNum"
+              >
                 <el-option
                   v-for="item in areasDevice"
                   :key="item.deviceId"
                   :label="item.device"
                   :value="item.deviceId"
-
                 >
                 </el-option>
               </el-select>
@@ -51,7 +53,7 @@
                 fontSize: '26px',
                 height: '80px',
                 padding: '0',
-                background:'#203456'
+                background: '#203456',
               }"
               :cell-style="{ textAlign: 'center', height: '50px' }"
             >
@@ -60,23 +62,25 @@
           {{ scope.row.ReservoirArea }}
         </template>
       </el-table-column> -->
-              <el-table-column prop="fault" label="故障名称">
-              </el-table-column>
+              <el-table-column prop="fault" label="故障名称"> </el-table-column>
 
               <el-table-column label="操作原因措施">
-                <template  slot-scope="scope" >
-               <el-button @click="showAddDialog(scope.$index)" type="text" size="nomal"
-                  >新增</el-button
-                >
-                <el-button type="text" size="nomal">修改</el-button>
+                <template slot-scope="scope">
+                  <el-button
+                    @click="showAddDialog(scope.$index)"
+                    type="text"
+                    size="nomal"
+                    >新增</el-button
+                  >
+                  <el-button type="text" size="nomal">修改</el-button>
                 </template>
-
               </el-table-column>
             </el-table>
           </div>
         </div>
       </div>
     </div>
+
     <!-- 新增弹出的dialog框 -->
     <el-dialog title="提示" :visible.sync="addDialog" width="30%">
       <el-form ref="addForm" :model="addForm" label-width="80px">
@@ -88,12 +92,13 @@
             allow-create
             default-first-option
             placeholder="请选择"
+            @change="getReasonNum"
           >
             <el-option
               v-for="item in reasonSelect"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.reasonId"
+              :label="item.reason"
+              :value="item.reasonId"
             >
             </el-option>
           </el-select>
@@ -116,51 +121,40 @@
             </div>
           </div>
         </el-form-item>
+        <el-form-item style="margin: 0 auto !important">
+          <el-button type="primary" @click="onSubmit">提交原因和措施</el-button>
+        </el-form-item>
       </el-form>
     </el-dialog>
   </div>
 </template>
 <script>
-import { getAllArea, getAllAreaDevice,getAllDevReason,getAllErrReason } from "../../api/detail.js";
+import {
+  getAllArea,
+  getAllAreaDevice,
+  getAllDevReason,
+  getAllErrReason,
+  addReaAndMea,
+} from "../../api/detail.js";
 export default {
   data() {
     return {
       areasDevice: [],
+      faultId: "", //table里每个故障问题对应的id
+      reason: "", //dialog故障原因下拉框里选中后的原因
+      reasonId: 0, //dialog故障原因下拉框里每个原因的id
       areas: [], //区域选择框数据
       value: "", //区域下拉框绑定的数据
       value1: "", //设备下拉框绑定的数据
-      devNum:'',
-      tableData: [
-        '设备急停'
-      ], //表格table信息
+      devNum: "",
+      tableData: ["设备急停"], //表格table信息
       addDialog: false, //控制新增dialog的显示
 
       addForm: {
         faultReason: "", //新增dialog下拉框选择的原因
         input: [""], //输入框的值
       }, //新增Dialog表单数据
-      reasonSelect: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ], //新增dialog下拉列表
+      reasonSelect: [], //新增dialog下拉列表
     };
   },
 
@@ -170,46 +164,78 @@ export default {
         return "success-row";
       }
     },
-    //点击新增
+    //点击新增按钮
     showAddDialog(tableIndex) {
-      console.log(tableIndex)
       var item = this.tableData[tableIndex];
-      console.log(item);
       this.addDialog = true;
       var data = {
-        faultId:item.id
-      }
-      getAllErrReason(data).then(res=>{
-        let {state,message,result} = res.data;
-        if(state == true){
-          this.reasonSelect = result
+        faultId: item.faultId,
+      };
+      this.faultId = item.faultId;
+      this.getNewDevReason(data);
+    },
+    //获取设备故障所有原因
+    async getNewDevReason(data) {
+      await getAllErrReason(data).then((res) => {
+        let { state, message, result } = res.data;
+        if (state == true) {
+          this.reasonSelect = result;
         }
-        console.log(res)
-      })
+      });
     },
     addInput() {
       this.addForm.input.push("");
     },
     //查看故障
-    async  searchAllReason(){
-      console.log(111)
+    async searchAllReason() {
+      console.log(111);
       let data = {
-        deviceId:this.devNum,
-      }
-      await getAllDevReason(data).then(res=>{
-        console.log(res,'查看故障')
+        deviceId: this.devNum,
+      };
+      await getAllDevReason(data).then((res) => {
+        console.log(res, "查看故障");
         let { state, message, result } = res.data;
-        if(state == true){
-          this.tableData = result
+        if (state == true) {
+          this.tableData = result;
         }
-
-      })
+      });
     },
     //选择设备后
-    getDevNum(val){
-      this.devNum = val;
-      console.log("sssss",this.devNum)
-
+    getDevNum(val) {
+      this.devNum = val; //保存设备id
+    },
+    //新增原因和措施
+    onSubmit() {
+      this.addReaAndMeaWrapper();
+    },
+    async addReaAndMeaWrapper() {
+      let data = {
+        faultId: this.faultId,
+        reasonId: this.reasonId,
+        reason: this.reason,
+        measures: this.addForm.input,
+      };
+      console.log(data);
+      await addReaAndMea(data).then((res) => {
+        console.log(res);
+        let { state, message, result } = res.data;
+        // if(state == true){
+        //   this.$message({
+        //     message,
+        //   })
+        // }
+      });
+    },
+    //故障原因下拉框改变事件
+    getReasonNum(val) {
+      this.reason = val;
+      this.reasonId = 0;
+      this.reasonSelect.forEach((item) => {
+        if (item.reasonId == val) {
+          this.reasonId = item.reasonId; //保存选中后的故障原因及其id
+          this.reason = item.reason;
+        }
+      });
     },
     //接口获取全部区域
     async getAllArea() {
@@ -226,9 +252,8 @@ export default {
         }
       });
     },
-    click1(){
-      this.searchAllReason()
-
+    click1() {
+      this.searchAllReason();
     },
     async getAllAreaDevice(id) {
       let data = {
@@ -257,6 +282,18 @@ export default {
 .page-box {
   width: 100%;
   height: 100%;
+  .transition-box {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 100px;
+    border-radius: 4px;
+    background-color: #409eff;
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
+  }
   .page-header {
     width: 100%;
     height: 20%;
@@ -267,6 +304,9 @@ export default {
     width: 100%;
     height: 80%;
     display: flex;
+    .el-form-item__content {
+      margin-left: 0px !important;
+    }
     .body-sidebar {
       height: 100%;
       width: 20%;
@@ -302,7 +342,8 @@ export default {
           font-size: 22px;
           .el-table__row {
             &.success-row {
-              background: rgb(4, 62, 87);
+              background: rgb(18, 104, 141);
+              // background-color: #606266;
             }
           }
           .el-table {
@@ -316,7 +357,7 @@ export default {
               border: 1px solid #666;
             }
           }
-          .el-table--border{
+          .el-table--border {
             border: none;
           }
         }

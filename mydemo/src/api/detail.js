@@ -96,3 +96,14 @@ export function getAllErrReason(data) {
 		params: data
 	})
 }
+
+//新增原因和措施
+//http://172.20.10.3:8181/fault/add/reason/measures
+export function addReaAndMea(data) {
+	return request({
+	  url: '/fault/add/reason/measures',
+	  method: 'post',
+	  data
+	})
+  }
+  
