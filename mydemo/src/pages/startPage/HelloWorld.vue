@@ -93,6 +93,7 @@
         <div class="area-bottom">
           <areabottom @linkDetail="linkDetail"></areabottom>
         </div>
+          <!-- <areabottom @linkDetail="linkDetail"></areabottom> -->
       </div>
       <div class="detect">
         <detect @linkDetail="linkDetail"></detect>
@@ -167,6 +168,7 @@ import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
 import {indexScrollBar} from '@/api/detail.js'
 import carTest from "@/components/carTest"
+
 export default {
   name: "HelloWorld",
   props: {
@@ -256,7 +258,6 @@ export default {
     gnright,
     fc1,
     ScrollBar,
-    // ScrollBar,
     AreaOneCom,
     SidebarNav,
     areabottom,
@@ -502,25 +503,28 @@ export default {
   .area-com-container {
     margin-top: 1vh;
     width: 100%;
-    height: 17%;
-    margin-left: 3.5vw;
     position: relative;
-    // margin-bottom: 8vh;
-    // float: right;
-    // border: 1px solid #203456;
-    ::after {
-      content: "";
-      display: block;
-      height: 0;
-      clear: both;
-      visibility: hidden;
-    }
+    height: 16%;
+    // border: 1px solid red;
+   height: 18%;
+    width: 89%;
+    margin-left: 22.5vh;
     .area-bottom {
       height: 100%;
-      width: 73%;
-      float: right;
-      // border: 1px solid #203456;
+      width: 80%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      // float: right;
+      // margin-left: 20%;
     }
+     ::after{
+     content: "";
+        display: block;
+        height: 0;
+        clear:both;
+        visibility: hidden;
+  }
   }
   .detect {
     width: 65%;

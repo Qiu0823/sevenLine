@@ -5,7 +5,7 @@
         <div class="mh-middle">设备故障诊断系统</div>
       </div> -->
 			<top-header></top-header>
-			<router-link to="/reasonConfig">
+			<router-link to="/">
 				<img src="~@/assets/img/home.png" class="img1" />
 			</router-link>
 
@@ -262,11 +262,11 @@
 					<p>选择故障措施：</p>
 				</div>
 				<div class="buttonGroupRight">
-					<div v-for="(item,i) in resultMessage.resultVOList" v-bind:key="i" class="buttonGroupRightDIV">
-							<el-checkbox v-model="form.reasons[i]" :true-label="item.reasonId" @change="changeStatus1(i)" :title="item.reason" :checked="item.checked">{{item.reason | ellipsis}}</el-checkbox>
+					<div v-for="(item,i) in resultMessage.resultVOList" @change="changeStatus1(i)" v-bind:key="i" class="buttonGroupRightDIV">
+							<el-checkbox v-model="form.reasons[i]" :true-label="item.reasonId" :title="item.reason" :checked="item.checked">{{item.reason | ellipsis}}</el-checkbox>
 							<hr />
-							<el-checkbox-group :disabled="changeStatus[i]" v-model="form.checkboxGroup1[i]" size="small">
-								<el-checkbox v-for="(item1,j) in item.measuresResultVOList" v-bind:key="j" :label="item1.measuresId" :title="item1.measures" :checked="item1.checked">{{item1.measures |ellipsis}}</el-checkbox>
+							<el-checkbox-group :disabled="!form.reasons[i]" v-model="form.checkboxGroup1[i]" size="small">
+									<el-checkbox v-for="(item1,j) in item.measuresResultVOList" v-bind:key="j" :label="item1.measuresId" :title="item1.measures">{{item1.measures |ellipsis}}</el-checkbox>
 							</el-checkbox-group>
 					</div>
 				</div>
@@ -325,7 +325,7 @@
 	import topHeader from './components/topHeader1.vue'
 	import BottomCharts from './components/BottomCharts.vue'
 	import deviceInfo from './components/deviceInfo.vue'
-	import {pending,handled,frm,ErrorMessageChart,ErrorMessageHistory,getHandleResult} from '@/api/detail.js'
+	import {pending,handled,frm,ErrorMessageChart,ErrorMessageHistory,getHandleResult,postUpdateResult} from '@/api/detail.js'
 	// import {getnews} from '../../api/test.js'
 
 	export default {
@@ -387,10 +387,39 @@
 				let data = {
 					faultRecordId:id
 				}
+				this.form.reasons = []
+				this.form.checkboxGroup1 = []
 				await getHandleResult(data).then(res =>{
 					let{state,message,result} = res.data
 					if(state === true){
+						// this.centerDialogVisible5= false
 						this.resultMessage = result
+						console.log("ssssss",this.resultMessage)
+						this.form.checkboxGroup1 = []
+						if(this.resultMessage.resultVOList.length!=0){
+						for(var i=0;i<this.resultMessage.resultVOList.length;i++){
+							this.form.reasons.push(this.resultMessage.resultVOList[i].checked)
+							this.form.checkboxGroup1.push([])
+							for(var j = 0;j<this.resultMessage.resultVOList[i].measuresResultVOList.length;j++){
+								console.log(11111)
+								if(this.resultMessage.resultVOList[i].measuresResultVOList[j].checked ===true){
+
+									this.form.checkboxGroup1[i].push(this.resultMessage.resultVOList[i].measuresResultVOList[j].measuresId)
+								}
+							}
+							// this.changeStatus[i] = !this.resultMessage.resultVOList[i].checked
+
+						}
+						console.log("changeStatus",this.changeStatus)
+						}else{
+						this.$message({
+							message: '暂无可查看结果',
+							type: 'warning',
+							center: true
+						});
+					}					
+						console.log("end")
+						console.log('reason',this.form.reasons)
 					}else{
 						this.$message({
 							message: message,
@@ -404,9 +433,27 @@
 			
 			//修改changeStatus数组
 			changeStatus1(i){
-				this.changeStatus[i] = !this.changeStatus[i]
-				this.changeStatus.push({ events: [], name: '' })
-				this.changeStatus.splice(this.changeStatus.length - 1, 1)
+				console.log("reasons",this.form.reasons)
+				// console.log("sssss",this.form.reasons[i])
+				// console.log("i",i)
+				// console.log('resultMessage',this.resultMessage.resultVOList[i].checked)
+				if(this.resultMessage.resultVOList[i].checked === false){
+					this.resultMessage.resultVOList[i].checked = true
+				}else{
+					this.resultMessage.resultVOList[i].checked = false
+				}
+				
+				// var d = this.resultMessage.resultVOList[i].checked
+				// this.resultMessage.resultVOList[i].checked = !d
+				// if(this.resultMessage.resultVOList[i].checked){
+				// 	console.log(11111111111111)
+				// }else{
+				// 	console.log(222222222222222)
+				// }
+
+				// this.changeStatus[i] = !this.changeStatus[i]
+				// this.changeStatus.push({ events: [], name: '' })
+				// this.changeStatus.splice(this.changeStatus.length - 1, 1)
 			},
 			//绘图故障信息统计
 			drawLine(option){
@@ -495,27 +542,26 @@
 			
 			closeDialog5(){
 				let reas = []
+				console.log("22222",this.form)
 				for(let i =0;i<this.form.reasons.length;i++){
 					if(this.form.reasons[i] != undefined){
 						let data = {
-							reasonid:this.form.reasons[i],
-							measures:this.form.checkboxGroup1[i]
+							reasonId:this.form.reasons[i],
+							measuresId:this.form.checkboxGroup1[i]
 						}
 						reas.push(data)
 					}
-					this.form.reasons[i] = false
-					this.form.checkboxGroup1[i] = false
+					// this.form.checkboxGroup1[i] = []
 				}			
 				let sdata = {
-					faultRecordid:this.faultRecordid,
-					reasons:reas
+					faultRecordId:this.faultRecordid,
+					reason:reas,
+					remark: this.form.resultNote
 				}
+				postUpdateResult(sdata)
 				this.centerDialogVisible5 = false
-				// this.form = {
-				// 	reasons:[],
-				// 	checkboxGroup1:[],
-				// 	resultNote:''
-				// }
+				this.changeStatus = []
+				// this.$router.go(0)
 			},
 			//显示查看历史故障
 			showDialog6(index){
@@ -546,23 +592,9 @@
 			},
 			//显示处理结果的dialog
 			showDialog5(index) {
-				console.log(this.handledError[index].recordId)
-				this.getHandleResult(this.handledError[index].recordId).then(() =>{
-					console.log(this.resultMessage.resultVOList)
-					if(this.resultMessage.resultVOList.length!=0){
-					for(var i=0;i<this.resultMessage.resultVOList.length;i++){
-						this.form.checkboxGroup1.push([])
-						this.changeStatus[i] = true
-					}
-					this.centerDialogVisible5 = true
-					}else{
-						this.$message({
-							message: '暂无可查看结果',
-							type: 'warning',
-							center: true
-						});
-					}
-				})
+				this.getHandleResult(this.handledError[index].recordId)
+				this.faultRecordid = this.handledError[index].recordId
+				this.centerDialogVisible5 = true			
 			},
 			//设置表格奇数行和偶数行的背景色
 			TableRowStyle({
@@ -648,7 +680,7 @@
 				this.table_height = this.$refs.rmcTop.offsetHeight/2 - 50;
 		},100)
 		// alert(this.pendingError)
-	}
+	},
 	}
 </script>
 
