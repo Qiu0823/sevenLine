@@ -123,21 +123,35 @@
       </div>
     </div>
 		
-		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
-			<p>1#RGV小车电量</p>
-			<dv-percent-pond :config="config"
-				style="width:160px;height:80px;margin: auto;" />
+
+		<div style="position: relative;top: -510px;left: 190px;width: 100px;">
+			<p style="font-size: 14px;">1#RGV小车温度{{$store.state.WebsocketMessage.Equipment12_BatteryTemperature}}­°C</p>
+			<vue-thermometer :value="$store.state.WebsocketMessage.Equipment12_BatteryTemperature" :min="0" :max="100" :options="option6" />
 		</div>
-		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
-			<p>2#RGV小车电量</p>
-			<dv-percent-pond :config="config1"
-				style="width:160px;height:80px;margin: auto;" />
+		<div style="position: relative;top: -736px;left: 280px;width: 100px;">
+			<p style="font-size: 14px;">2#RGV小车温度{{$store.state.WebsocketMessage.Equipment13_BatteryTemperature}}­°C</p>
+		<vue-thermometer :value="$store.state.WebsocketMessage.Equipment13_BatteryTemperature" :min="0" :max="100" :options="option7" />
 		</div>
-		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
-			<p>3#RGV小车电量</p>
-			<dv-percent-pond :config="config2"
-				style="width:160px;height:80px;margin: auto;" />
+		<div style="position: relative;top: -963px;left: 370px;width: 100px;">
+			<p style="font-size: 14px;">3#RGV小车温度{{$store.state.WebsocketMessage.Equipment14_BatteryTemperature}}­°C</p>
+		<vue-thermometer :value="$store.state.WebsocketMessage.Equipment14_BatteryTemperature" :min="0" :max="100" :options="option8" />
 		</div>
+				<div style="position: relative;top: -970px;left: -650px;">
+					<div><span style="font-size: 14px;">1#RGV小车电量</span></div>
+					<div>
+					<dv-percent-pond :config="config"
+						style="width:200px;height:40px;margin: auto;" /></div>
+				</div>
+				<div style="position: relative;top: -970px;left: -650px;">
+					<span style="font-size: 14px;">2#RGV小车电量</span>
+					<dv-percent-pond :config="config1"
+						style="width:200px;height:40px;margin: auto;" />
+				</div>
+				<div style="position: relative;top: -970px;left: -650px;">
+					<span style="font-size: 14px;">3#RGV小车电量</span>
+					<dv-percent-pond :config="config2"
+						style="width:200px;height:40px;margin: auto;" />
+				</div>
     <div class="tableCon">
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
@@ -175,7 +189,6 @@ export default {
   },
 	watch:{
 		'$store.state.WebsocketMessage'(newVal,oldVal){
-			console.log("111111ssss")
 			const { config } = this
 			this.config.value = newVal.Equipment12_DumpEnergy
 			
@@ -208,7 +221,73 @@ export default {
 					value: this.$store.state.WebsocketMessage.Equipment14_DumpEnergy
 			},
 			scrollChange:true,
-			batteryChange:true
+			batteryChange:true,
+			option6: {
+				text: {
+					color: 'white',
+					fontSize: 8,
+					textAdjustmentY: 2,
+					fontFamily: 'Arial',
+					textEnabled: true
+				},
+				thermo: {
+					color: '#FF0000',
+					backgroundColor: '#fcf9f9',
+					frameColor: 'white',
+					ticks: 5,
+					ticksEnabled: true,
+					tickColor: 'white',
+					tickWidth: '1'
+				},
+				layout: {
+					height: 160,
+					width: 100
+				}
+			},
+			option7: {
+				text: {
+					color: 'white',
+					fontSize: 8,
+					textAdjustmentY: 2,
+					fontFamily: 'Arial',
+					textEnabled: true
+				},
+				thermo: {
+					color: '#FF0000',
+					backgroundColor: '#fcf9f9',
+					frameColor: 'white',
+					ticks: 5,
+					ticksEnabled: true,
+					tickColor: 'white',
+					tickWidth: '1'
+				},
+				layout: {
+					height: 160,
+					width: 100
+				}
+			},
+			option8: {
+				text: {
+					color: 'white',
+					fontSize: 8,
+					textAdjustmentY: 2,
+					fontFamily: 'Arial',
+					textEnabled: true
+				},
+				thermo: {
+					color: '#FF0000',
+					backgroundColor: '#fcf9f9',
+					frameColor: 'white',
+					ticks: 5,
+					ticksEnabled: true,
+					tickColor: 'white',
+					tickWidth: '1'
+				},
+				layout: {
+					height: 160,
+					width: 100
+				}
+			}
     };
   },
   methods: {
@@ -327,6 +406,7 @@ export default {
     position: absolute;
     left: 1.5vw;
     top: 9vh;
+		z-index: 10;
   }
   .my-top {
     position: relative;
@@ -511,7 +591,7 @@ export default {
     margin-left: 22.5vh;
     .area-bottom {
       height: 100%;
-      width: 80%;
+      width: 82.5%;
       position: absolute;
       top: 0;
       right: 0;

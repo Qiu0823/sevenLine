@@ -7,7 +7,6 @@
       </div>
       <div class="al-two areaBorderStyle">
         <div class="dv-title">涂层区域</div>
-
         <one-cell
           class="tuceng"
           :device="arb4"

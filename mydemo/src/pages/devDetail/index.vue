@@ -394,21 +394,17 @@
 					if(state === true){
 						// this.centerDialogVisible5= false
 						this.resultMessage = result
-						console.log("ssssss",this.resultMessage)
 						this.form.checkboxGroup1 = []
 						if(this.resultMessage.resultVOList.length!=0){
 						for(var i=0;i<this.resultMessage.resultVOList.length;i++){
 							this.form.reasons.push(this.resultMessage.resultVOList[i].checked)
 							this.form.checkboxGroup1.push([])
 							for(var j = 0;j<this.resultMessage.resultVOList[i].measuresResultVOList.length;j++){
-								console.log(11111)
 								if(this.resultMessage.resultVOList[i].measuresResultVOList[j].checked ===true){
-
 									this.form.checkboxGroup1[i].push(this.resultMessage.resultVOList[i].measuresResultVOList[j].measuresId)
 								}
 							}
 							// this.changeStatus[i] = !this.resultMessage.resultVOList[i].checked
-
 						}
 						console.log("changeStatus",this.changeStatus)
 						}else{
@@ -418,8 +414,6 @@
 							center: true
 						});
 					}					
-						console.log("end")
-						console.log('reason',this.form.reasons)
 					}else{
 						this.$message({
 							message: message,
@@ -542,25 +536,33 @@
 			
 			closeDialog5(){
 				let reas = []
-				console.log("22222",this.form)
 				for(let i =0;i<this.form.reasons.length;i++){
-					if(this.form.reasons[i] != undefined){
+					if(this.form.reasons[i] != false &&this.form.reasons[i] != undefined &&this.form.reasons[i] !=true){
 						let data = {
 							reasonId:this.form.reasons[i],
 							measuresId:this.form.checkboxGroup1[i]
 						}
 						reas.push(data)
 					}
+					if(this.form.reasons[i] === true){
+						let data1 = {
+							reasonId:this.resultMessage.resultVOList[i].reasonId,
+							measuresId:this.form.checkboxGroup1[i]
+						}
+						reas.push(data1)
+					}
 					// this.form.checkboxGroup1[i] = []
-				}			
+				}
 				let sdata = {
 					faultRecordId:this.faultRecordid,
 					reason:reas,
 					remark: this.form.resultNote
 				}
+				console.log("sdata",sdata)
 				postUpdateResult(sdata)
 				this.centerDialogVisible5 = false
 				this.changeStatus = []
+				this.queryHandledError(this.$route.query.id)
 				// this.$router.go(0)
 			},
 			//显示查看历史故障
