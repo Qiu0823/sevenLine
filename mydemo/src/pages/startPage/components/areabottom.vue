@@ -140,7 +140,7 @@ export default {
       background-repeat: repeat-x, repeat-x;
     }
     .al-one {
-      width: 35%;
+      width: 37%;
       height: 100%;
       position: relative;
       .al-line-bottom::before {
@@ -152,7 +152,7 @@ export default {
         height: 1em;
         text-align: right;
         position: absolute;
-        left: 95px;
+        left: 105px;
         background: linear-gradient(
             135deg,
             transparent,
@@ -184,7 +184,7 @@ export default {
       }
       .tuceng {
         position: absolute;
-        top: 50%;
+        top: 60%;
         left: 50%;
         margin-left: -50%;
       }
@@ -205,7 +205,7 @@ export default {
       }
       .tuici {
         position: absolute;
-        top: 50%;
+        top: 60%;
         left: 50%;
         margin-left: -50%;
       }
