@@ -168,7 +168,6 @@ export default {
         },
          {
           label: "烘干区域",
-          id:'36',
           children: [
             {
               label: "斯惠顿",

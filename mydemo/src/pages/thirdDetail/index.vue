@@ -276,7 +276,6 @@
 					if (state == true) {
 						this.tableData = result
 					}
-
 				})
 			},
 			//选择设备后
