@@ -93,10 +93,27 @@
         <div class="area-bottom">
           <areabottom @linkDetail="linkDetail"></areabottom>
         </div>
-          <!-- <areabottom @linkDetail="linkDetail"></areabottom> -->
       </div>
       <div class="detect">
+        <!-- <div class="one">
+
+        </div> -->
+         <div class="area-dry" style="width:40%;height:36.7%;margin-left:16vh">
+      <div class="dryMachine areaBorderStyle">
+        <one-cell :device="arb7"></one-cell>
+        <div @click="linkDetail1(32, '烘干机')" style="cursor: pointer">
+          <one-cell
+            :device="arb8"
+            :color="this.$store.state.WebsocketMessage.Equipment32_FaultStatus"
+            class="dry-two"
+          ></one-cell>
+        </div>
+      </div>
+    </div>
+        <div class="two" style="height:63%">
         <detect @linkDetail="linkDetail"></detect>
+        </div>
+
       </div>
       <div class="lineDevice" style="margin-left: 28vh">
         <line-device :lineNum="3"></line-device>
@@ -123,7 +140,7 @@
       </div>
     </div>
 		
-		<div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
+		<!-- <div v-if="batteryChange" style="position: relative;top: -500px;left: -625px;">
 			<p>1#RGV小车电量</p>
 			<dv-percent-pond :config="config"
 				style="width:160px;height:80px;margin: auto;" />
@@ -137,7 +154,7 @@
 			<p>3#RGV小车电量</p>
 			<dv-percent-pond :config="config2"
 				style="width:160px;height:80px;margin: auto;" />
-		</div>
+		</div> -->
     <div class="tableCon">
 			<div class="rightBox"></div>
 			<div class="rightBox"></div>
@@ -168,6 +185,8 @@ import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
 import {indexScrollBar} from '@/api/detail.js'
 import carTest from "@/components/carTest"
+import oneCell from "@/components/oneCell";
+
 
 export default {
   name: "HelloWorld",
@@ -192,6 +211,14 @@ export default {
 	},
   data() {
     return {
+        arb7: {
+        title: "烘干节距链",
+        status: "nomal",
+      },
+      arb8: {
+        title: "烘干机",
+        status: "nomal",
+      },
       showSideNav: false,
       timer: null,
       deviceList1Name: "上料区域",
@@ -262,10 +289,13 @@ export default {
     SidebarNav,
     areabottom,
     detect,
+    oneCell
+
     // oneCell
   },
 
   beforeDestroy() {
+
     // clearInterval(this.timer)
   },
 	created() {
@@ -281,6 +311,16 @@ export default {
   width: 80%;
   height: 100%;
   overflow: visible;
+  .dryMachine {
+  position: relative;
+  height: 78%;
+  padding-top: 2vh;
+  .dry-two {
+    position: absolute;
+    top: 5vh;
+    left: -16vh;
+  }
+}
   .da-container {
     display: flex;
     width: 100%;
@@ -504,11 +544,12 @@ export default {
     margin-top: 1vh;
     width: 100%;
     position: relative;
-    height: 16%;
+    // height: 16%;
+    height: 6.4%;
     // border: 1px solid red;
-   height: 18%;
+  //  height: 18%;
     width: 89%;
-    margin-left: 22.5vh;
+    margin-left: 20.5vh;
     .area-bottom {
       height: 100%;
       width: 80%;
@@ -528,7 +569,8 @@ export default {
   }
   .detect {
     width: 65%;
-    height: 16%;
+    // height: 16%;
+    height: 25.6%;
     margin-left: 28.5vh;
     position: relative;
   }

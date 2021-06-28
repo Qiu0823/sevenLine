@@ -281,7 +281,7 @@ export default {
     height: 20vh;
 		display: inline-block;
 		right: -20vh;
-		top:0vh;
+		top: 9vh;
     transform: rotate(90deg);
 		.iconfont{
 			font-size: 16px;

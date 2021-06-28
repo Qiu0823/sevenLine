@@ -219,11 +219,11 @@ export default {
       await addReaAndMea(data).then((res) => {
         console.log(res);
         let { state, message, result } = res.data;
-        // if(state == true){
-        //   this.$message({
-        //     message,
-        //   })
-        // }
+        if(state == true){
+          this.$message({
+            message,
+          })
+        }
       });
     },
     //故障原因下拉框改变事件

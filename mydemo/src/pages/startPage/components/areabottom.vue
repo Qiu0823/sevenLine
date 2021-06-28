@@ -3,11 +3,11 @@
     <div class="area-line">
       <div class="al-one">
         <one-cell :device="arb1"></one-cell>
-        <div class="al-one-bottom"></div>
+        <div class="al-line-bottom"></div>
       </div>
       <div class="al-two areaBorderStyle">
         <div class="dv-title">涂层区域</div>
-
+        <div class="al-line-bottom"></div>
         <one-cell
           class="tuceng"
           :device="arb4"
@@ -16,7 +16,7 @@
       </div>
       <div class="al-three">
         <one-cell :device="arb2"></one-cell>
-        <div class="al-three-bottom"></div>
+        <div class="al-line-bottom"></div>
       </div>
       <div class="al-four areaBorderStyle">
         <div class="dv-title">退磁区域</div>
@@ -25,20 +25,25 @@
           :device="arb5"
           :color="this.$store.state.WebsocketMessage.Equipment30_FaultStatus"
         ></one-cell>
+        <div class="al-line-bottom"></div>
       </div>
       <div class="al-five">
         <one-cell :device="arb3"></one-cell>
-        <div class="al-five-bottom"></div>
+        <div class="al-line-bottom"></div>
       </div>
     </div>
-    <div class="area-dry">
-       <div class="dryMachine areaBorderStyle">
+    <!-- <div class="area-dry">
+      <div class="dryMachine areaBorderStyle">
         <one-cell :device="arb7"></one-cell>
-        <div @click="linkDetail1(32,'烘干机')" style="cursor: pointer">
-          <one-cell :device="arb8" :color="this.$store.state.WebsocketMessage.Equipment32_FaultStatus" class="dry-two"></one-cell>
+        <div @click="linkDetail1(32, '烘干机')" style="cursor: pointer">
+          <one-cell
+            :device="arb8"
+            :color="this.$store.state.WebsocketMessage.Equipment32_FaultStatus"
+            class="dry-two"
+          ></one-cell>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -74,14 +79,14 @@ export default {
         title: "斯惠顿",
         status: "nomal",
       },
-      arb7: {
-        title: "烘干节距链",
-        status: "nomal",
-      },
-      arb8: {
-        title: "烘干机",
-        status: "nomal",
-      },
+      // arb7: {
+      //   title: "烘干节距链",
+      //   status: "nomal",
+      // },
+      // arb8: {
+      //   title: "烘干机",
+      //   status: "nomal",
+      // },
     };
   },
   methods: {
@@ -103,23 +108,51 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  // border: 1px solid red;
   .area-line {
     width: 100%;
-    height: 40%;
-    // border: 1px solid red;
+    // height: 40%;
+    height: 100%;
     display: flex;
+    .al-line-bottom::before {
+      content: "";
+      position: absolute;
+      left: 0vh;
+      top: 40%;
+      width: 100%;
+      height: 1em;
+      background: linear-gradient(
+          135deg,
+          transparent,
+          transparent 45%,
+          #6591e2,
+          transparent 55%,
+          transparent 100%
+        ),
+        linear-gradient(
+          45deg,
+          transparent,
+          transparent 45%,
+          #7964e0,
+          transparent 55%,
+          transparent 100%
+        );
+      background-size: 1em 1em;
+      background-repeat: repeat-x, repeat-x;
+    }
     .al-one {
       width: 35%;
       height: 100%;
       position: relative;
-      .al-one-bottom::before {
+      .al-line-bottom::before {
         content: "";
         position: absolute;
         left: 0vh;
         top: 40%;
-        width: 100%;
+        width: 75%;
         height: 1em;
+        text-align: right;
+        position: absolute;
+        left: 95px;
         background: linear-gradient(
             135deg,
             transparent,
@@ -141,7 +174,7 @@ export default {
       }
     }
     .al-two {
-      width: 12.5%;
+      width: 14.5%;
       position: relative;
       .dv-title {
         position: absolute;
@@ -160,32 +193,6 @@ export default {
       width: 18%;
       height: 100%;
       position: relative;
-      .al-three-bottom::before {
-        content: "";
-        position: absolute;
-        left: 0vh;
-        top: 40%;
-        width: 100%;
-        height: 1em;
-        background: linear-gradient(
-            135deg,
-            transparent,
-            transparent 45%,
-            #6591e2,
-            transparent 55%,
-            transparent 100%
-          ),
-          linear-gradient(
-            45deg,
-            transparent,
-            transparent 45%,
-            #7964e0,
-            transparent 55%,
-            transparent 100%
-          );
-        background-size: 1em 1em;
-        background-repeat: repeat-x, repeat-x;
-      }
     }
     .al-four {
       width: 12%;
@@ -203,63 +210,12 @@ export default {
         margin-left: -50%;
       }
     }
-        .al-five {
+    .al-five {
       width: 18%;
       height: 100%;
       position: relative;
-      .al-five-bottom::before {
-        content: "";
-        position: absolute;
-        left: 0vh;
-        top: 40%;
-        width: 100%;
-        height: 1em;
-        background: linear-gradient(
-            135deg,
-            transparent,
-            transparent 45%,
-            #6591e2,
-            transparent 55%,
-            transparent 100%
-          ),
-          linear-gradient(
-            45deg,
-            transparent,
-            transparent 45%,
-            #7964e0,
-            transparent 55%,
-            transparent 100%
-          );
-        background-size: 1em 1em;
-        background-repeat: repeat-x, repeat-x;
-      }
     }
   }
-  .area-dry{
-    width: 35.5%;
-    height: 59%;
-  }
-}
-.b1 {
-  width: 37vh;
-  float: left;
-  height: 80%;
-  margin-top: 3.5vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  .dv-title {
-    position: absolute;
-    left: 0;
-    top: 3vh;
-    color: #1b5ccc;
-  }
-  // padding-left: 1vh;
-}
-.b11 {
-  width: 90%;
-  height: 20%;
 }
 .dryMachine {
   position: relative;
@@ -270,167 +226,5 @@ export default {
     top: 5vh;
     left: -16vh;
   }
-}
-.b12 {
-  width: 90%;
-  height: 100%;
-  // border: #203456 1px solid;
-  position: relative;
-  top: -2vh;
-  padding-top: 3vh;
-  box-sizing: border-box;
-}
-.b13 {
-  width: 90%;
-  height: 100%;
-}
-.b21 {
-  position: absolute;
-  right: -4vh;
-  top: -3.5vh;
-  .b21-bottom {
-    position: absolute;
-    width: 18vh;
-    height: 5vh;
-    padding-top: 2vh;
-    margin-top: 1vh;
-  }
-  .b21-bottom::before {
-    content: "";
-    position: absolute;
-    left: -27vh;
-    top: -16px;
-    width: 210%;
-    height: 1em;
-    background: linear-gradient(
-        135deg,
-        transparent,
-        transparent 45%,
-        #6591e2,
-        transparent 55%,
-        transparent 100%
-      ),
-      linear-gradient(
-        45deg,
-        transparent,
-        transparent 45%,
-        #7964e0,
-        transparent 55%,
-        transparent 100%
-      );
-    background-size: 1em 1em;
-    background-repeat: repeat-x, repeat-x;
-  }
-}
-.b22 {
-  width: 20%;
-  height: 35%;
-  float: left;
-  padding-top: 3vh;
-  position: relative;
-  cursor: pointer;
-  .dv-title {
-    position: absolute;
-    top: 0vh;
-    color: #2155ad;
-  }
-}
-.b23 {
-  width: 26%;
-  height: 20%;
-  float: left;
-  position: relative;
-  .b23-bottom {
-    position: absolute;
-    width: 18vh;
-    height: 5vh;
-    padding-top: 2vh;
-    margin-top: 1vh;
-  }
-  .b23-bottom::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -10px;
-    width: 100%;
-    height: 1em;
-    background: linear-gradient(
-        135deg,
-        transparent,
-        transparent 45%,
-        #6591e2,
-        transparent 55%,
-        transparent 100%
-      ),
-      linear-gradient(
-        45deg,
-        transparent,
-        transparent 45%,
-        #7964e0,
-        transparent 55%,
-        transparent 100%
-      );
-    background-size: 1em 1em;
-    background-repeat: repeat-x, repeat-x;
-  }
-}
-.b24 {
-  width: 20%;
-  height: 35%;
-  float: left;
-  padding-top: 3vh;
-  position: relative;
-  cursor: pointer;
-  .dv-title {
-    position: absolute;
-    top: 0vh;
-    color: #2155ad;
-  }
-}
-.b25 {
-  width: 26%;
-  height: 20%;
-  float: left;
-  position: relative;
-  .b25-bottom {
-    position: absolute;
-    border: 1px solid #203456;
-    width: 18vh;
-    height: 5vh;
-    padding-top: 2vh;
-    margin-top: 1vh;
-  }
-  .b25-bottom::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -10px;
-    width: 100%;
-    height: 1em;
-    background: linear-gradient(
-        135deg,
-        transparent,
-        transparent 45%,
-        #6591e2,
-        transparent 55%,
-        transparent 100%
-      ),
-      linear-gradient(
-        45deg,
-        transparent,
-        transparent 45%,
-        #7964e0,
-        transparent 55%,
-        transparent 100%
-      );
-    background-size: 1em 1em;
-    background-repeat: repeat-x, repeat-x;
-  }
-}
-.b26 {
-  width: 30%;
-  height: 20%;
-  float: right;
-  margin-top: 1vw;
 }
 </style>
