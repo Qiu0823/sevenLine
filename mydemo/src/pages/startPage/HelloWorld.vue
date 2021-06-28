@@ -93,10 +93,27 @@
         <div class="area-bottom">
           <areabottom @linkDetail="linkDetail"></areabottom>
         </div>
-          <!-- <areabottom @linkDetail="linkDetail"></areabottom> -->
       </div>
       <div class="detect">
+        <!-- <div class="one">
+
+        </div> -->
+         <div class="area-dry" style="width:40%;height:36.7%;margin-left:16vh">
+      <div class="dryMachine areaBorderStyle">
+        <one-cell :device="arb7"></one-cell>
+        <div @click="linkDetail1(32, '烘干机')" style="cursor: pointer">
+          <one-cell
+            :device="arb8"
+            :color="this.$store.state.WebsocketMessage.Equipment32_FaultStatus"
+            class="dry-two"
+          ></one-cell>
+        </div>
+      </div>
+    </div>
+        <div class="two" style="height:63%">
         <detect @linkDetail="linkDetail"></detect>
+        </div>
+
       </div>
       <div class="lineDevice" style="margin-left: 28vh">
         <line-device :lineNum="3"></line-device>
@@ -122,8 +139,6 @@
         </div>
       </div>
     </div>
-		
-
 		<div style="position: relative;top: -510px;left: 190px;width: 100px;">
 			<p style="font-size: 14px;">1#RGV小车温度{{$store.state.WebsocketMessage.Equipment12_BatteryTemperature}}­°C</p>
 			<vue-thermometer :value="$store.state.WebsocketMessage.Equipment12_BatteryTemperature" :min="0" :max="100" :options="option6" />
@@ -182,6 +197,8 @@ import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
 import {indexScrollBar} from '@/api/detail.js'
 import carTest from "@/components/carTest"
+import oneCell from "@/components/oneCell";
+
 
 export default {
   name: "HelloWorld",
@@ -205,6 +222,14 @@ export default {
 	},
   data() {
     return {
+        arb7: {
+        title: "烘干节距链",
+        status: "nomal",
+      },
+      arb8: {
+        title: "烘干机",
+        status: "nomal",
+      },
       showSideNav: false,
       timer: null,
       deviceList1Name: "上料区域",
@@ -341,10 +366,13 @@ export default {
     SidebarNav,
     areabottom,
     detect,
+    oneCell
+
     // oneCell
   },
 
   beforeDestroy() {
+
     // clearInterval(this.timer)
   },
 	created() {
@@ -360,6 +388,16 @@ export default {
   width: 80%;
   height: 100%;
   overflow: visible;
+  .dryMachine {
+  position: relative;
+  height: 78%;
+  padding-top: 2vh;
+  .dry-two {
+    position: absolute;
+    top: 5vh;
+    left: -16vh;
+  }
+}
   .da-container {
     display: flex;
     width: 100%;
@@ -584,11 +622,12 @@ export default {
     margin-top: 1vh;
     width: 100%;
     position: relative;
-    height: 16%;
+    // height: 16%;
+    height: 6.4%;
     // border: 1px solid red;
-   height: 18%;
+  //  height: 18%;
     width: 89%;
-    margin-left: 22.5vh;
+    margin-left: 20.5vh;
     .area-bottom {
       height: 100%;
       width: 82.5%;
@@ -608,7 +647,8 @@ export default {
   }
   .detect {
     width: 65%;
-    height: 16%;
+    // height: 16%;
+    height: 25.6%;
     margin-left: 28.5vh;
     position: relative;
   }
