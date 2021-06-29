@@ -10,9 +10,7 @@
       <div class="topDeviceArea">
         <div class="tda-left">
           <div class="table-info">
-						<router-link to="/thirdDetail">
-							<div class="table-one" style="font-size: 12px">产线信息</div>
-						</router-link>
+            <div class="table-one" style="font-size: 12px; cursor: pointer;" @click="goToThird">产线信息</div>
             <div class="table-two">
               <div style="margin-right: 1vw">时间：</div>
               <div style="margin-right: 1vw">合同号：</div>
@@ -325,6 +323,11 @@ export default {
 		    query: { id: id},
 		  });
 		},
+    goToThird(){
+      this.$router.push({
+        path: '/thirdDetail'
+      })
+    },
      linkDetail1(id, name) {
       this.$router.push({
         path: "/index",
