@@ -94,7 +94,7 @@ div {
 }
 .fcl15 {
   position: relative;
-  top: 0.5vh;
+  top: -0.5vh;
   cursor: pointer;
 }
 </style>

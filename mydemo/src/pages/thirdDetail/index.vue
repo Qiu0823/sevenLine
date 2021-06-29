@@ -34,7 +34,8 @@
                 height: '80px',
                 padding: '0',
                 background:'#203456'
-              }" :cell-style="{ textAlign: 'center', height: '50px' }">
+              }" :cell-style="{ textAlign: 'center', height: '50px' }"
+							height="700">
 							<el-table-column prop="fault" label="故障名称">
 							</el-table-column>
 
@@ -53,7 +54,7 @@
 			</div>
 		</div>
 		<!-- 新增弹出的dialog框 -->
-		<el-dialog title="提示" :visible.sync="addDialog" width="30%">
+		<el-dialog title="提示" :visible.sync="addDialog" width="30%" @close="closeAddDialog">
 			<el-form ref="addForm" :model="addForm" label-width="80px">
 				<el-form-item label="故障原因">
 					<el-select style="width: 100%" v-model="addForm.faultReason" filterable allow-create
@@ -81,7 +82,8 @@
 		</el-dialog>
 
 		<!-- 修改弹出的dialog框 -->
-		<el-dialog title="修改原因措施" :visible.sync="updateDialog" width="30%">
+		<el-dialog title="修改原因措施" :visible.sync="updateDialog" width="30%"
+		@close="closeUpdateDialog">
 			<el-form ref="updateForm" :model="updateForm" label-width="80px">
 				<el-form-item label="故障原因">
 					<el-select style="width: 100%" v-model="updateForm.reasonId" filterable allow-create
@@ -151,6 +153,22 @@
 		},
 
 		methods: {
+			//关闭closeUpdateDialog的回调
+			closeUpdateDialog(){
+				this.updateForm = {
+					reasonId: null,
+					reason: '',
+					measuresList: []
+				}
+			},
+			//关闭closeAddDialog的回调
+			closeAddDialog(){
+				this.addForm =  {
+					faultReason: "", //新增dialog下拉框选择的原因
+					input: [""], //输入框的值
+				}
+			},
+			
 			//新增原因和措施
 			onSubmit() {
 				this.addReaAndMeaWrapper();
@@ -254,7 +272,21 @@
 			//修改措施点击提交
 			submitUpdate() {
 				console.log(this.updateForm)
-				postUpdateReason(this.updateForm)
+				postUpdateReason(this.updateForm).then(res =>{
+					if(res.data.state === true){
+						this.$message({
+							message: res.data.message,
+							type: "success",
+							center: true,
+						});
+					}else{
+						this.$message({
+							message: res.data.message,
+							type: "warning",
+							center: true,
+						});
+					}
+				})
 				this.updateDialog = false
 			},
 			addInput() {
@@ -275,6 +307,8 @@
 					} = res.data;
 					if (state == true) {
 						this.tableData = result
+					}else{
+						this.tableData = []
 					}
 				})
 			},
@@ -303,7 +337,6 @@
 			},
 			click1() {
 				this.searchAllReason()
-
 			},
 			async getAllAreaDevice(id) {
 				let data = {

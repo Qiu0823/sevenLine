@@ -10,7 +10,9 @@
       <div class="topDeviceArea">
         <div class="tda-left">
           <div class="table-info">
-            <div class="table-one" style="font-size: 12px">产线信息</div>
+						<router-link to="/thirdDetail">
+							<div class="table-one" style="font-size: 12px">产线信息</div>
+						</router-link>
             <div class="table-two">
               <div style="margin-right: 1vw">时间：</div>
               <div style="margin-right: 1vw">合同号：</div>
