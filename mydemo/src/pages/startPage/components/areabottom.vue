@@ -140,19 +140,18 @@ export default {
       background-repeat: repeat-x, repeat-x;
     }
     .al-one {
-      width: 37%;
+      width: 30%;
       height: 100%;
       position: relative;
       .al-line-bottom::before {
         content: "";
         position: absolute;
-        left: 0vh;
         top: 40%;
-        width: 75%;
+        width: 90%;
         height: 1em;
         text-align: right;
         position: absolute;
-        left: 105px;
+        left: 32px;
         background: linear-gradient(
             135deg,
             transparent,
@@ -174,7 +173,7 @@ export default {
       }
     }
     .al-two {
-      width: 14.5%;
+      width: 15%;
       position: relative;
       .dv-title {
         position: absolute;
@@ -190,12 +189,12 @@ export default {
       }
     }
     .al-three {
-      width: 18%;
+      width: 20%;
       height: 100%;
       position: relative;
     }
     .al-four {
-      width: 12%;
+      width: 14%;
       position: relative;
       .dv-title {
         position: absolute;
@@ -211,7 +210,7 @@ export default {
       }
     }
     .al-five {
-      width: 18%;
+      width: 23%;
       height: 100%;
       position: relative;
     }
