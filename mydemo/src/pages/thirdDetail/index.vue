@@ -1,6 +1,11 @@
 <template>
   <div class="page-box">
-    <div class="page-header">页面标题</div>
+    <div class="page-header">
+			<top-header></top-header>
+			<router-link to="/">
+				<img src="~@/assets/img/home.png" class="img1" />
+			</router-link>
+		</div>
     <div class="page-body">
       <div class="body-sidebar">侧边栏</div>
       <div class="body-context">
@@ -56,7 +61,7 @@
                 background: '#203456',
               }"
               :cell-style="{ textAlign: 'center', height: '50px' }"
-              height="800"
+              height="900"
             >
               <el-table-column prop="fault" label="故障名称"> </el-table-column>
               <el-table-column label="操作原因措施">
@@ -145,7 +150,7 @@
             allow-create
             default-first-option
             placeholder="请选择"
-            @change="getAllErrReasonMeasure"
+            @change="getAllErrReasonMeasure($event)"
           >
             <el-option
               v-for="item in reasonSelect"
@@ -195,7 +200,11 @@ import {
   postUpdateReason,
   addReaAndMea,
 } from "../../api/detail.js";
+import topHeader from './components/topHeader1.vue'
 export default {
+	components:{
+		topHeader
+	},
   data() {
     return {
       faultId: "", //table里每个故障问题对应的id
@@ -318,6 +327,11 @@ export default {
     },
     //获取单个原因所有的措施
     async getAllErrReasonMeasure(id) {
+			for(let i = 0;i<this.reasonSelect.length;i++){
+				if(id === this.reasonSelect[i].reasonId){
+					this.updateForm.reason = this.reasonSelect[i].reason
+				}
+			}
       let data = {
         reasonId: id,
       };
@@ -336,7 +350,7 @@ export default {
     },
     //修改措施点击提交
     submitUpdate() {
-      console.log(this.updateForm);
+      console.log("update",this.updateForm);
       postUpdateReason(this.updateForm).then((res) => {
         if (res.data.state === true) {
           this.$message({
@@ -423,13 +437,20 @@ export default {
 
   .page-header {
     width: 100%;
-    height: 20%;
-    border: 1px solid thistle;
+    height: 10%;
+		.img1{
+			position: absolute;
+			display: inline-block;
+			width: 70px;
+			height: 70px;
+			top: 30px;
+			left: 30px;
+		}
   }
 
   .page-body {
     width: 100%;
-    height: 80%;
+    height: 89%;
     display: flex;
 
     .body-sidebar {
@@ -441,8 +462,6 @@ export default {
     .body-context {
       height: 100%;
       width: 80%;
-
-      // border: 1px solid red;
       .contain {
         height: 80%;
         width: 80%;
@@ -465,7 +484,6 @@ export default {
 
         .conntainContext {
           flex: 4;
-          // border: 1px brown solid;
           font-size: 22px;
 
           .el-table__row {
@@ -496,7 +514,6 @@ export default {
             .el-table__row {
               &.success-row {
                 background: rgb(18, 104, 141);
-                // background-color: #606266;
               }
             }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="detect2">
-      <div class="detect2-onecell" v-for="item in decArr" :key="item.id">
+      <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title)">
         <span class="dv-title">{{ item.title }}</span>
         <div class="LEDbtn greenBtn"></div>
       </div>
@@ -42,37 +42,37 @@ export default {
         {
           title: "1#抛丸机前步进梁",
           status: "nomal",
-          id: "01",
+          id: 76,
         },
         {
           title: "1#抛丸机后步进梁",
           status: "nomal",
-          id: "02",
+          id: 81,
         },
         {
           title: "2#抛丸机后步进梁",
           status: "nomal",
-          id: "03",
+          id: 87,
         },
         {
           title: "外保步进梁",
           status: "nomal",
-          id: "04",
+          id: 90,
         },
         {
           title: "管拧机步进梁",
           status: "nomal",
-          id: "05",
+          id: 27,
         },
         {
           title: "管拧机后步进梁",
           status: "nomal",
-          id: "06",
+          id: 95,
         },
         {
           title: "内保步进梁",
           status: "nomal",
-          id: "07",
+          id: 98,
         },
       ],
       gnc1: {
@@ -105,6 +105,21 @@ export default {
       },
     };
   },
+	methods: {
+	  linkDetail(id) {
+	    this.$router.push({
+	      path: "/index",
+	      query: { id: id },
+	    });
+	  },
+	  linkDetail1(id, name) {
+	    console.log(name);
+	    this.$router.push({
+	      path: "/index",
+	      query: { id: id, name: name },
+	    });
+	  },
+	},
 };
 </script>
 

@@ -8,6 +8,7 @@
 			<router-link to="/">
 				<img src="~@/assets/img/home.png" class="img1" />
 			</router-link>
+			<el-button @click="goToThird" type="primary" style="position: absolute;top: 50px;left: 130px;">修改原因措施</el-button>
 
 			<dv-border-box-1 class="main-container">
 				<div class="left-container">
@@ -382,6 +383,12 @@
 			}
 		},
 		methods: {
+			
+			goToThird(){
+			  this.$router.push({
+			    path: '/thirdDetail'
+			  })
+			},
 			//查询处理结果的接口
 			async getHandleResult(id){
 				let data = {

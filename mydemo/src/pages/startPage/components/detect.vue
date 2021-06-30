@@ -176,7 +176,7 @@ export default {
   height: 83%;
   // background-color: tomato;
   position: relative;
-  top: -10vh;
+  top: -12vh;
   left: 16vh;
   display: flex;
   flex-direction: column;

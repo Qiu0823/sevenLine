@@ -16,7 +16,7 @@
       <oneCell :device="fcl5"></oneCell>
     </div> -->
      <div class="detect2">
-        <div class="detect2-onecell" v-for="item in decArr" :key="item.id">
+        <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title)">
         <span class="dv-title">{{item.title}}</span>
         <div class="LEDbtn greenBtn"></div>
         </div>         
@@ -35,42 +35,42 @@ export default {
         decArr:[{
         title: "3#收口步进梁",
         status: "nomal",
-        id:'01'
+        id:3
       },
        {
         title: "4#收口步进梁",
         status: "nomal",
-        id:'02'
+        id:4
       },
        {
         title: "3#车丝步进梁",
         status: "nomal",
-        id:'03'
+        id:7
       },
        {
         title: "3#车丝后步进梁",
         status: "nomal",
-        id:'04'
+        id:58
       },
        {
         title: "3#车丝检验步进梁",
         status: "nomal",
-        id:'05'
+        id:61
       },
        {
         title: "4#车丝步进梁",
         status: "nomal",
-        id:'06'
+        id:8
       },
        {
         title: "4#车丝后步进梁",
         status: "nomal",
-        id:'07'
+        id:64
       },
        {
         title: "4#车丝检验步进梁",
         status: "nomal",
-        id:'08'
+        id:67
       },],
       fcl1: {
         title: "步进梁",
@@ -94,6 +94,21 @@ export default {
       },
     };
   },
+	methods: {
+	  linkDetail(id) {
+	    this.$router.push({
+	      path: "/index",
+	      query: { id: id },
+	    });
+	  },
+	  linkDetail1(id, name) {
+	    console.log(name);
+	    this.$router.push({
+	      path: "/index",
+	      query: { id: id, name: name },
+	    });
+	  },
+	},
 };
 </script>
 

@@ -18,7 +18,7 @@
       <div class="shangliao-center">
         <p>1#电气室</p>
 
-        <img class="img1" src="~@/assets/img/electHouse.png" alt="" />
+        <img style="width: 200px;height: 70px;" src="~@/assets/img/electHouse.png" alt="" />
       </div>
       <div class="shangliao-right areaBorderStyle">
         <div class="area-name">{{ deviceListName }}</div>
