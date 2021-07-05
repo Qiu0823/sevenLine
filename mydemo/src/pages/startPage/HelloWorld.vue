@@ -4,6 +4,7 @@
 		  <div class="main-header">
 		    <top-header />
 		  </div>
+			<img src="../../assets/img/logo1.png" style="position: absolute;width: 200px;height: 250px;top: -50px;" />
 		  <div class="data-view">
 		    <div class="my-nav">
 		      <sidebar-nav />
@@ -354,7 +355,6 @@ export default {
 			config3:{
 					value: this.$store.state.WebsocketMessage.Equipment12_BatteryTemperature,
 					formatter:'{value}­°C',
-					
 			},
 			config4:{
 					value: this.$store.state.WebsocketMessage.Equipment13_BatteryTemperature,
@@ -556,27 +556,28 @@ export default {
 	created() {
 	},
 	mounted() {
-		for (var i = 0; i < 1000; i++) {
-		    this.data.push(this.randomData());
-		}
+		console.log("33333333",this.$refs.chartRing)
+		// for (var i = 0; i < 1000; i++) {
+		//     this.data.push(this.randomData());
+		// }
 		
-		this.$nextTick(()=>{		
-		    let myChart = this.$echarts.init(this.$refs.chartRing)		
-				setInterval(function () {
+		// this.$nextTick(()=>{
+		//     let myChart = this.$echarts.init(this.$refs.chartRing)		
+		// 		setInterval(function () {
 				
-				    for (var i = 0; i < 5; i++) {
-				        this.data.shift();
-				        this.data.push(this.randomData());
-				    }
-						console.log("22222",this.data)
+		// 		    for (var i = 0; i < 5; i++) {
+		// 		        this.data.shift();
+		// 		        this.data.push(this.randomData());
+		// 		    }
+		// 				console.log("22222",this.data)
 				
-				    myChart.setOption({
-				        series: [{
-				            data: this.data
-				        }]
-				    });
-				}, 1000);
-		});
+		// 		    myChart.setOption({
+		// 		        series: [{
+		// 		            data: this.data
+		// 		        }]
+		// 		    });
+		// 		}, 1000);
+		// });
 	}
 };
 </script>
@@ -654,7 +655,7 @@ export default {
 			    height: 70vh;
 			    position: absolute;
 			    left: 1.5vw;
-			    top: 9vh;
+			    top: 12vh;
 					z-index: 10;
 			  }
 			  .my-top {
