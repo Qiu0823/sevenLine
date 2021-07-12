@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld from '@/pages/startPage/HelloWorld'
+import HelloWorld from '@/pages/startPage/copy'
+import copy from '@/pages/startPage/HelloWorld'
 import test1 from '@/pages/test/test1'
 import Index from '../pages/devDetail/index'
 
 import thirdDetail from '../pages/thirdDetail/index'
 import loginCom from '../pages/loginCom/index'
-// import thirdDetail1 from '../pages/thirdDetail/index1'
 
 
 Vue.use(VueRouter)
@@ -41,9 +41,9 @@ export default new VueRouter({
             path: '/loginCom',
             component: loginCom
         },
-        // {
-        //     path: '/thirdDetail1',
-        //     component: thirdDetail1
-        // },
+        {
+            path: '/copy',
+            component: copy
+        },
     ]
 })

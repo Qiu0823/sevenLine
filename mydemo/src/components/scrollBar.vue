@@ -34,14 +34,14 @@ export default {
 </script>
 <style scoped lang='less'>
 .dv-scroll-board {
-  height: 18.5vh !important;
-  width: 100vh !important;
+  height: 18.5vh;
+  width: 100%;
 }
 .scroll-bar {
   width: 100%;
   padding: 0 1vw;
   height: 100%;
-  margin-left: 6.6vw;
+  margin-right: 1vh;
   overflow: hidden;
   box-sizing: border-box;
 }

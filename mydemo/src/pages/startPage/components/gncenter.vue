@@ -147,6 +147,7 @@ div {
     box-sizing: border-box;
     border-bottom: 1px solid #203456;
     display: flex;
+    padding-top: 1vh;
     .LEDbtn {
       width: 13px !important;
       height: 13px !important;

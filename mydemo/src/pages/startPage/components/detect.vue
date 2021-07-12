@@ -123,15 +123,7 @@ export default {
     };
   },
   methods: {
-    link(id) {
-      this.$emit("linkDetail", id);
-    },
-    func(){
-      console.log('func')
-    },
     linkDetail1(id, name) {
-      console.log(130)
-      console.log(name);
       this.$router.push({
         path: "/index",
         query: { id: id, name: name },
@@ -152,7 +144,7 @@ export default {
   height: 100%;
   float: left;
   display: flex;
-  margin-left: 16vh;
+  // margin-left: 16vh;
   position: relative;
   .doorOne {
     position: absolute;

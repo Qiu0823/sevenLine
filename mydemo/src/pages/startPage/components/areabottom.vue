@@ -16,7 +16,7 @@
           :device="arb4"
           :color="this.$store.state.WebsocketMessage.Equipment31_FaultStatus"
         ></one-cell> -->
-        <div class="tuceng">
+        <div class="tuceng" @click="linkDetail1(31,'涂层')" style="cursor:pointer;">
           <div class="dv-title">{{ arb4.title }}</div>
           <div
             class="LEDbtn greenBtn tuceng-deng"
@@ -34,7 +34,7 @@
             :device="arb5"
             :color="this.$store.state.WebsocketMessage.Equipment30_FaultStatus"
           ></one-cell> -->
-          <div class="tuici">
+          <div class="tuici" @click="linkDetail1(30,'退磁')" style="cursor:pointer;">
             <div class="dv-title">{{ arb5.title }}</div>
             <div
               class="LEDbtn greenBtn"
@@ -55,6 +55,9 @@
           <one-cell :device="arb1"></one-cell>
         </div>
         <div class="al-line-bottom"></div>
+      </div>
+         <div class="al-five">
+           <div class="divided" @click="linkDetail1(29, '分钢仪')">分钢仪</div>
       </div>
     </div>
   </div>
@@ -92,14 +95,6 @@ export default {
         title: "斯惠顿",
         status: "nomal",
       },
-      // arb7: {
-      //   title: "烘干节距链",
-      //   status: "nomal",
-      // },
-      // arb8: {
-      //   title: "烘干机",
-      //   status: "nomal",
-      // },
     };
   },
   methods: {
@@ -165,11 +160,11 @@ export default {
         content: "";
         position: absolute;
         top: 40%;
-        width: 90%;
+        width: 100%;
         height: 1em;
         text-align: right;
         position: absolute;
-        left: 32px;
+        left: 0px;
         background: linear-gradient(
             135deg,
             transparent,
@@ -256,6 +251,14 @@ export default {
         width: 50%;
         left: -5vh;
       }
+    }
+    .al-five{
+      width: 100px;
+      height: 28px;
+      border: 1px solid #6591e2;
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
 }

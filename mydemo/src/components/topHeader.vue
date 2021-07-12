@@ -4,21 +4,8 @@
     <dv-decoration-5 class="header-center-decoration" />
     <dv-decoration-8 class="header-right-decoration" :reverse="true" />
     <div class="center-title">宝钢钢管7号线智能诊断系统</div>
-      <img src="@/assets/img/logo.png" alt="">
-    <!-- <div class="userMane">
-      <el-dropdown>
-        <span class="el-dropdown-link">
-          用户管理<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>用户注册</el-dropdown-item>
-          <el-dropdown-item>密码修改</el-dropdown-item>
-          <el-dropdown-item>权限管理</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
-          <el-dropdown-item disabled>登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div> -->
+      <img src="@/assets/img/logo.png" alt="" class="img1">
+      <img src="@/assets/img/logo1.png" alt="" class="img2">
   </div>
 </template>
 
@@ -37,12 +24,20 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
-  img{
+  .img1{
   width: 180px!important;
   height: 50px!important;
   position:absolute;
   right: 1vh;
-  top: 7vh;
+  top: 5.5vh;
+  display: block;
+}
+  .img2{
+  width: 280px!important;
+  height: 290px!important;
+  position:absolute;
+  left: -3.5vh;
+  top: -5vh;
   display: block;
 }
   .header-center-decoration {

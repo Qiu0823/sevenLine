@@ -59,11 +59,9 @@
         </div>
         <div class="square">返修台架</div>
         <div class="doorOne">
-          <!-- <img src="@/assets/img/door.png" alt=""> -->
           <i class="iconfont icon-mendoor13"></i>
         </div>
         <div class="doorTwo">
-          <!-- <img src="@/assets/img/door.png" alt=""> -->
           <i class="iconfont icon-mendoor13"></i>
         </div>
         <div class="returnFix-top" @click="linkDetail1(20, '2#带锯')">
@@ -188,7 +186,7 @@ export default {
     }
     .shangliao-center {
       width: 27%;
-      height: 100%;
+      // height: 100%;
       text-align: center;
       line-height: 5vh;
      border: 1px solid royalblue;

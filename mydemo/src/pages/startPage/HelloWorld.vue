@@ -6,6 +6,9 @@
       </div>
       <div class="data-view">
         <div class="my-nav">
+          <div class="imgCon">
+            <img src="~@/assets/img/logo1.png" alt="" />
+          </div>
           <sidebar-nav />
         </div>
         <div class="topDeviceArea">
@@ -51,11 +54,9 @@
           <!-- 车丝区 -->
           <div class="second-container-right areaBorderStyle">
             <div class="doorOne">
-              <!-- <img src="@/assets/img/door.png" alt="" /> -->
               <i class="iconfont icon-mendoor13"></i>
             </div>
             <div class="doorTwo">
-              <!-- <img src="@/assets/img/door.png" alt="" /> -->
               <i class="iconfont icon-mendoor13"></i>
             </div>
             <div class="area-name">车丝区域</div>
@@ -102,9 +103,6 @@
           </div>
         </div>
         <div class="detect">
-          <!-- <div class="one">
-		
-		      </div> -->
           <div
             class="area-dry"
             style="width: 40%; height: 36.7%; margin-left: 16vh"
@@ -134,7 +132,6 @@
         </div>
         <!-- 打包区 -->
         <div class="bagBotDeviceArea areaBorderStyle">
-          <!-- <area-one-com :deviceListName="deviceList8Name"> </area-one-com> -->
           <div class="da-container">
             <div class="square">出废区</div>
             <div class="area-name">打包区域</div>
@@ -191,7 +188,7 @@
           <div>
             <dv-percent-pond
               :config="config"
-              style="width: 200px; height: 40px; margin: auto; font-size: 24px"
+              style="width: 200px; height: 40px; margin: auto;"
             />
           </div>
           <div>
@@ -240,8 +237,12 @@
               <div class="texts">Y轴：</div>
               <div class="texts">Z轴：</div>
             </div>
-            <div class="dvGraph"  v-if="scrollChange">
-              <div id="main" ref="chartRing" style="width: 400px; height: 150px"></div>
+            <div class="dvGraph">
+              <div
+                class="main"
+                ref="chartRing1"
+                style="width: 350px; height: 150px"
+              ></div>
             </div>
           </dv-border-box-11>
         </div>
@@ -252,8 +253,12 @@
               <div class="texts">Y轴：</div>
               <div class="texts">Z轴：</div>
             </div>
-            <div class="dvGraph"  v-if="scrollChange">
-              <div id="main" ref="chartRing" style="width: 400px; height: 150px"></div>
+            <div class="dvGraph">
+              <div
+                class="main"
+                ref="chartRing2"
+                style="width: 350px; height: 150px"
+              ></div>
             </div>
           </dv-border-box-11>
         </div>
@@ -264,7 +269,13 @@
               <div class="texts">Y轴：</div>
               <div class="texts">Z轴：</div>
             </div>
-            <div class="dvGraph"></div>
+            <div class="dvGraph">
+               <div
+                class="main"
+                ref="chartRing3"
+                style="width: 350px; height: 150px"
+              ></div>
+            </div>
           </dv-border-box-11>
         </div>
         <div class="rightBox">
@@ -274,7 +285,13 @@
               <div class="texts">Y轴：</div>
               <div class="texts">Z轴：</div>
             </div>
-            <div class="dvGraph"></div>
+            <div class="dvGraph">
+               <div
+                class="main"
+                ref="chartRing4"
+                style="width: 350px; height: 150px"
+              ></div>
+            </div>
           </dv-border-box-11>
         </div>
       </div>
@@ -348,6 +365,8 @@ export default {
   data() {
     return {
       data: [],
+      data1: [],
+      data2: [],
       testValue: {},
       arb7: {
         title: "烘干节距链",
@@ -528,39 +547,104 @@ export default {
             animation: false,
           },
         },
+        legend: {
+          // data: ['X轴', 'Y轴',"Z轴"]
+          data: [
+            {
+              name: "X轴",
+              textStyle: {
+                color: "#fff",
+              },
+            },
+            {
+              name: "Y轴",
+              textStyle: {
+                color: "#fff",
+              },
+            },
+            {
+              name: "Z轴",
+              textStyle: {
+                color: "#fff",
+              },
+            },
+          ],
+        },
         xAxis: {
           type: "time",
           splitLine: {
             show: false,
           },
+          splitNumber: 4,
+          axisLine: {
+            lineStyle: {
+              color: "#fff",
+              width: 1, //这里是为了突出显示加上的
+            },
+          },
         },
         yAxis: {
           type: "value",
+          // min:0, //y轴的最小值
+          // max:100, //y轴最大值
+          // interval:20, //值之间的间隔
           boundaryGap: [0, "100%"],
           splitLine: {
             show: false,
           },
+           axisLine: {
+            lineStyle: {
+              color: "#fff",
+              width: 1, //这里是为了突出显示加上的
+            },
+          },
         },
         series: [
           {
-            name: "模拟数据",
+            name: "X轴",
             type: "line",
             showSymbol: false,
+            stack: "总量",
             // hoverAnimation: false,
             emphasis: {
               focus: "series",
             },
             data: data,
           },
+          {
+            name: "Y轴",
+            type: "line",
+            showSymbol: false,
+            stack: "总量",
+            // hoverAnimation: false,
+            emphasis: {
+              focus: "series",
+            },
+            data: [],
+          },
+          {
+            name: "Z轴",
+            type: "line",
+            showSymbol: false,
+            stack: "总量",
+            // hoverAnimation: false,
+            emphasis: {
+              focus: "series",
+            },
+            data: [],
+          },
         ],
-			grid: {
-				x: 30,
-				y: 30,
-				x2: 30,
-				y2: 30
-			},
+        grid: {
+          x: 40,
+          y: 30,
+          x2: 30,
+          y2: 30,
+        },
       },
-      myChart: null,
+      myChart1: null,
+      myChart2: null,
+      myChart3: null,
+      myChart4: null,
       now: +new Date(1997, 9, 3),
       oneDay: 24 * 3600 * 1000,
       value: Math.random() * 1000,
@@ -618,18 +702,75 @@ export default {
   mounted() {
     setTimeout(() => {
       // this.myChart = echarts.init(document.getElementById("main"));
-			this.myChart = echarts.init(this.$refs.chartRing)
-      this.myChart.setOption(this.option);
+      this.myChart1 = echarts.init(this.$refs.chartRing1);
+      this.myChart2 = echarts.init(this.$refs.chartRing2);
+      this.myChart3 = echarts.init(this.$refs.chartRing3);
+      this.myChart4 = echarts.init(this.$refs.chartRing4);
+      this.myChart1.setOption(this.option);
+      this.myChart2.setOption(this.option);
+      this.myChart3.setOption(this.option);
+      this.myChart4.setOption(this.option);
     }, 0);
     setInterval(() => {
       for (var i = 0; i < 5; i++) {
         this.data.shift();
+        this.data1.shift();
+        this.data2.shift();
         this.data.push(randomData());
+        this.data1.push(randomData());
+        this.data2.push(randomData());
+        // console.log("data",this.data);
+        // console.log("data1",this.data1)
       }
-      this.myChart.setOption({
+      this.myChart1.setOption({
         series: [
           {
             data: this.data,
+          },
+          {
+            data: this.data1,
+          },
+          {
+            data: this.data2,
+          },
+        ],
+      });
+        this.myChart2.setOption({
+        series: [
+          {
+            data: this.data,
+          },
+          {
+            data: this.data1,
+          },
+          {
+            data: this.data2,
+          },
+        ],
+      });
+        this.myChart3.setOption({
+        series: [
+          {
+            data: this.data,
+          },
+          {
+            data: this.data1,
+          },
+          {
+            data: this.data2,
+          },
+        ],
+      });
+        this.myChart4.setOption({
+        series: [
+          {
+            data: this.data,
+          },
+          {
+            data: this.data1,
+          },
+          {
+            data: this.data2,
           },
         ],
       });
@@ -654,11 +795,13 @@ export default {
     areabottom,
     detect,
     oneCell,
-},
+  },
   created() {
     for (var i = 0; i < 1000; i++) {
-    this.data.push(randomData());
-}
+      this.data.push(randomData());
+      this.data1.push(randomData());
+      this.data2.push(randomData());
+    }
   },
   // mounted() {
   //   for (var i = 0; i < 1000; i++) {
@@ -756,8 +899,19 @@ export default {
         height: 70vh;
         position: absolute;
         left: 1.5vw;
-        top: 9vh;
+        top: 10vh;
         z-index: 10;
+        .imgCon {
+          position: absolute;
+          width: 250px;
+          height: 224px;
+          top: -145px;
+          left: -40px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
       .my-top {
         position: relative;
@@ -825,7 +979,7 @@ export default {
         margin-bottom: 1vh;
       }
       .second-container {
-        width: 90.6%;
+        width: 90%;
         height: 23%;
         display: flex;
         margin-left: 20vh;
@@ -835,7 +989,7 @@ export default {
           box-sizing: border-box;
         }
         .second-container-right {
-          width: 82%;
+          width: 100%;
           height: 100%;
           box-sizing: border-box;
           display: flex;
@@ -881,7 +1035,7 @@ export default {
       }
       .third-container {
         height: 28%;
-        width: 100%;
+        width: 99%;
         margin-left: 6.5vh;
         .third-container-left {
           width: 62%;
@@ -1037,14 +1191,15 @@ export default {
           }
           .dvGraph {
             flex: 4;
-            #main {
+              // padding-right: 50px;
+            .main {
               width: 50%;
               padding-right: 50px;
               box-sizing: border-box;
               height: 100%;
               div {
                 canvas {
-                  width: 320px !important;
+                  width: 310px !important;
                 }
               }
             }

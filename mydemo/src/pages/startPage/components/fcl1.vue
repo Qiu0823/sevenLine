@@ -79,7 +79,7 @@ div {
 }
 .fcl12 {
   height: 10%;
-  margin-top: 50%;
+  margin-top: 45%;
   cursor: pointer;
 }
 .fcl13 {

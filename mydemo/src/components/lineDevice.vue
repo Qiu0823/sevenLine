@@ -1,50 +1,50 @@
 <template>
-  <div class="line-container" v-if="lineNum==1">
+  <div class="line-container" v-if="lineNum == 1">
     <div class="top">
-      <div style="width:15vh;margin-top: 5px;">
-      <one-cell :device="dv1" ></one-cell>
+      <div style="width: 15vh; margin-top: 5px">
+        <one-cell :device="dv1"></one-cell>
       </div>
-      <div style="margin-left:400px;width:15vh;margin-top: 5px;" >
-      <one-cell :device="dv2"></one-cell>
+      <div style="margin-left: 450px; width: 15vh; margin-top: 5px">
+        <one-cell :device="dv2"></one-cell>
       </div>
     </div>
     <div class="center">
-    <dv-decoration-6 style="width:70vw;height:10px;" />
+      <dv-decoration-6 style="width: 70vw; height: 10px" />
     </div>
-    <div class="one-cell-bottom" @click="linkDetail1(12,'1#RGV')">
+    <div class="one-cell-bottom" @click="linkDetail1(12, '1#RGV')">
       <one-cell :device="dvCar1"></one-cell>
     </div>
   </div>
-  <div class="line-container" v-else-if="lineNum==2">
-     <div class="top">
-      <div style="width:15vh;margin-top: 5px;">
-      <one-cell :device="dv5" ></one-cell>
+  <div class="line-container" v-else-if="lineNum == 2">
+    <div class="top">
+      <div style="width: 15vh; margin-top: 5px">
+        <one-cell :device="dv5"></one-cell>
       </div>
-      <div style="margin-left:400px;width:15vh;margin-top: 5px;" >
-      <one-cell :device="dv6"></one-cell>
+      <div style="margin-left: 400px; width: 15vh; margin-top: 5px">
+        <one-cell :device="dv6"></one-cell>
       </div>
     </div>
     <div class="center">
-    <dv-decoration-6 style="width:70vw;height:10px;" />
+      <dv-decoration-6 style="width: 70vw; height: 10px" />
     </div>
-      <div class="one-cell-bottom" @click="linkDetail1(13,'2#RGV')">
+    <div class="one-cell-bottom" @click="linkDetail1(13, '2#RGV')">
       <one-cell :device="dvCar2"></one-cell>
     </div>
   </div>
-  <div class="line-container" v-else-if="lineNum==3">
-      <div class="top last">
-      <div style="width:15vh">
-      <one-cell :device="dv8" ></one-cell>
+  <div class="line-container" v-else-if="lineNum == 3">
+    <div class="third">
+      <div class="third-top">
+        <dv-decoration-6 style="width: 40vw; height: 10px" />
       </div>
-      <div style="margin-left:200px;width:15vh" >
-      <one-cell :device="dv9"></one-cell>
+      <div class="one">
+        <one-cell :device="dv8"></one-cell>
       </div>
-    </div>
-    <div class="center last">
-    <dv-decoration-6 style="width:40vw;height:10px;" />
-    </div>
-      <div class="one-cell-bottom last" @click="linkDetail1(14,'3#RGV')">
-      <one-cell :device="dvCar3"></one-cell>
+      <div class="two">
+        <one-cell :device="dv9"></one-cell>
+      </div>
+      <div class="three">
+        <one-cell :device="dvCar3"></one-cell>
+      </div>
     </div>
   </div>
 </template>
@@ -55,179 +55,142 @@ export default {
   components: {
     oneCell,
   },
-  props:['lineNum'],
+  props: ["lineNum"],
   data() {
     return {
-      dvCar1:{
-           title: "1#RGV",
+      dvCar1: {
+        title: "1#RGV",
         status: "nomal",
       },
-        dvCar2:{
-           title: "2#RGV",
+      dvCar2: {
+        title: "2#RGV",
         status: "nomal",
       },
-        dvCar3:{
-           title: "3#RGV",
+      dvCar3: {
+        title: "3#RGV",
         status: "nomal",
       },
       dv1: {
         title: "3#桁架",
         status: "nomal",
       },
-       dv2: {
+      dv2: {
         title: "1#桁架",
         status: "nomal",
       },
-       dv3: {
+      dv3: {
         title: "1#RGV",
         status: "nomal",
       },
-       dv4: {
+      dv4: {
         title: "2#RGV",
         status: "nomal",
       },
-       dv5: {
+      dv5: {
         title: "4#桁架",
         status: "nomal",
       },
-       dv6: {
+      dv6: {
         title: "2#桁架",
         status: "nomal",
       },
-       dv7: {
+      dv7: {
         title: "3#RGV",
         status: "nomal",
       },
-       dv8: {
+      dv8: {
         title: "6#桁架",
         status: "nomal",
       },
-       dv9: {
+      dv9: {
         title: "7#桁架",
         status: "nomal",
       },
-        dv10: {
+      dv10: {
         title: "5#桁架",
         status: "nomal",
       },
     };
   },
-	methods:{
-		linkDetail1(id, name) {
-		  console.log(name);
-		  this.$router.push({
-		    path: "/index",
-		    query: { id: id, name: name },
-		  });
-		},
-	}
+  methods: {
+    linkDetail1(id, name) {
+      this.$router.push({
+        path: "/index",
+        query: { id: id, name: name },
+      });
+    },
+  },
 };
 </script>
 
 <style lang='less' scoped>
 .line-container {
   width: 100%;
-  height: 80%;
+  height: 100%;
   position: relative;
-  margin-left: 5vh;
-  margin-left: 20vh;
-    // border: 1px solid red;
-
-  ::after{
-     content: "";
-        display: block;
-        height: 0;
-        clear:both;
-        visibility: hidden;
+  .third {
+    position: relative;
+    .one {
+      position: absolute;
+      left: 28vh;
+      width: 15vh;
+    }
+    .two {
+      position: absolute;
+      left: 85vh;
+      width: 15vh;
+    }
+    .three {
+      position: absolute;
+      right: 5vh;
+      width: 15vh;
+      top: 1vh;
+    }
+    .third-top {
+      position: absolute;
+      left: 8vh;
+      top: 1vh;
+    }
   }
   .top {
-    // border: 1px solid red;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    margin-right: 8vw;
+    margin-right: 9vw;
     position: absolute;
     right: 6vh;
     top: 1vh;
     font-size: 16px;
-    &.last{
-        position: absolute;
-      left: -2vw;
-      top: 0;
-      // border: 1px solid red;
-       .line-text{
-      position: absolute;
-      left: 10vw;
-      top: 0;
-    }
-    }
-    .line-text{
+    .line-text {
       position: absolute;
       left: -30vw;
       top: 0;
     }
   }
-  .one-cell-bottom{
+  .one-cell-bottom {
     width: 15vh;
     position: absolute;
-    bottom: -1vh;
-    right: -6vh;
-		cursor: pointer;
-    &.last{
-      right: 54vh;
-      bottom: -1vh;
-    }
+    bottom: 0vh;
+    right: -3vh;
+    cursor: pointer;
   }
-  .bottom{
+  .bottom {
     height: 100%;
-     display: flex;
+    display: flex;
     justify-content: space-between;
     margin-left: 55vw;
   }
-  .center-top{
+  .center-top {
     height: 100%;
     position: absolute;
     left: -3vw;
     top: 1.5vh;
   }
-  .center{
+  .center {
     height: 100%;
     position: absolute;
     left: -25vw;
     top: 1vh;
-  }
-   .center{
-     &.last{
-        height: 100%;
-    position: absolute;
-    left: -15vw;
-    top: 1vh;
-     }
-  }
-}
-.line-container{
-  height: 100%;
-  &.lineCon3{
-    height: 100%;
-    .center{
-      height: 100%;
-        position: absolute;
-        left: -29.5vw;
-        top: 2vh;
-        .top{
-          top: -2vh;
-          width: 100%;
-          position: absolute;
-          left: 60vh;
-        }
-    }
-    .bottom{
-      height: 100%;
-         height: 100%;
-     display: flex;
-    justify-content: space-between;
-    margin-left: 55vw;
-    }
   }
 }
 </style>

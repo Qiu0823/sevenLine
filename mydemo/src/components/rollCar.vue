@@ -28,7 +28,7 @@ import $ from 'jquery'
 export default {
    props:['carNum','left'],
    created() {
-      
+      console.log(this.left);
    },
    mounted(){
       var that = this;
@@ -56,7 +56,6 @@ export default {
          },  
          step:rotate  
      };  
-  
          options.complete();  
       }); 
    }
@@ -70,7 +69,7 @@ body {
   .container {
     position: relative;
     width: 100%;
-    height: 80px;
+    height: 100%;
     overflow: hidden; /*这个很重要*/
    //  border: 1px solid red;
     .car {
