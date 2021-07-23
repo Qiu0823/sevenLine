@@ -16,13 +16,13 @@
           :device="arb4"
           :color="this.$store.state.WebsocketMessage.Equipment31_FaultStatus"
         ></one-cell> -->
-        <div class="tuceng" @click="linkDetail1(31,'涂层')" style="cursor:pointer;">
+        <div class="tuceng" @click="linkDetail1(31,'涂层','T031')" style="cursor:pointer;">
           <div class="dv-title">{{ arb4.title }}</div>
           <div
             class="LEDbtn greenBtn tuceng-deng"
             :style="{
               backgroundColor:
-                this.$store.state.WebsocketMessage.Equipment31_FaultStatus,
+                this.$store.state.WebsocketMessage.Data31,
             }"
           ></div>
         </div>
@@ -34,13 +34,13 @@
             :device="arb5"
             :color="this.$store.state.WebsocketMessage.Equipment30_FaultStatus"
           ></one-cell> -->
-          <div class="tuici" @click="linkDetail1(30,'退磁')" style="cursor:pointer;">
+          <div class="tuici" @click="linkDetail1(30,'退磁','T030')" style="cursor:pointer;">
             <div class="dv-title">{{ arb5.title }}</div>
             <div
               class="LEDbtn greenBtn"
               :style="{
                 backgroundColor:
-                  this.$store.state.WebsocketMessage.Equipment30_FaultStatus,
+                  this.$store.state.WebsocketMessage.Data30,
               }"
             ></div>
           </div>
@@ -101,11 +101,11 @@ export default {
     link(id) {
       this.$emit("linkDetail", id);
     },
-    linkDetail1(id, name) {
+    linkDetail1(id, name,str) {
       console.log(name);
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
   },

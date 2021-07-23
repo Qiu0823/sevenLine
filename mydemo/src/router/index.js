@@ -2,16 +2,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HelloWorld from '@/pages/startPage/copy'
 import copy from '@/pages/startPage/HelloWorld'
-import test1 from '@/pages/test/test1'
 import Index from '../pages/devDetail/index'
+import store from '../store'
 
 import thirdDetail from '../pages/thirdDetail/index'
 import loginCom from '../pages/loginCom/index'
+import PageHouse from '../pages/housePage/index'
+// import carTestIndex from '@/components/carTestIndex'
+
+
+
 
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
 
     routes: [
         {
@@ -30,10 +35,6 @@ export default new VueRouter({
             }
         },
         {
-            path: '/test1',
-            component: test1
-        },
-        {
             path: '/thirdDetail',
             component: thirdDetail
         },
@@ -45,5 +46,18 @@ export default new VueRouter({
             path: '/copy',
             component: copy
         },
+        {
+            path: '/pageHouse',
+            component: PageHouse
+        },
+        // {
+        //     path: '/car',
+        //     component: carTestIndex
+        // },
     ]
 })
+router.beforeEach((to,from,next)=>{
+    store.state.WebsocketMessage = {}
+    next()
+})
+export default router

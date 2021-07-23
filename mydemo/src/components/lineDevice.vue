@@ -1,48 +1,51 @@
 <template>
   <div class="line-container" v-if="lineNum == 1">
     <div class="top">
-      <div style="width: 15vh; margin-top: 5px">
+      <div style="width: 15vh; margin-top: 5px"  @click="linkDetail1(162, '1#RGV','T040')">
         <one-cell :device="dv1"></one-cell>
       </div>
-      <div style="margin-left: 450px; width: 15vh; margin-top: 5px">
+      <div style="margin-left: 450px; width: 15vh; margin-top: 5px"  @click="linkDetail1(160, '1#RGV','T038')">
         <one-cell :device="dv2"></one-cell>
       </div>
     </div>
     <div class="center">
       <dv-decoration-6 style="width: 70vw; height: 10px" />
     </div>
-    <div class="one-cell-bottom" @click="linkDetail1(12, '1#RGV')">
+    <div class="one-cell-bottom" @click="linkDetail1(12, '1#RGV','T015')">
       <one-cell :device="dvCar1"></one-cell>
     </div>
   </div>
   <div class="line-container" v-else-if="lineNum == 2">
     <div class="top">
-      <div style="width: 15vh; margin-top: 5px">
+      <div style="width: 15vh; margin-top: 5px"  @click="linkDetail1(163, '1#RGV','T041')">
         <one-cell :device="dv5"></one-cell>
       </div>
-      <div style="margin-left: 400px; width: 15vh; margin-top: 5px">
+      <div style="margin-left: 400px; width: 15vh; margin-top: 5px"  @click="linkDetail1(161, '1#RGV','T039')">
         <one-cell :device="dv6"></one-cell>
       </div>
     </div>
     <div class="center">
       <dv-decoration-6 style="width: 70vw; height: 10px" />
     </div>
-    <div class="one-cell-bottom" @click="linkDetail1(13, '2#RGV')">
+    <div class="one-cell-bottom" @click="linkDetail1(13, '2#RGV','T016')">
       <one-cell :device="dvCar2"></one-cell>
     </div>
   </div>
   <div class="line-container" v-else-if="lineNum == 3">
     <div class="third">
+          <div class="doorFive">
+              <i class="iconfont icon-mendoor13"></i>
+            </div>
       <div class="third-top">
         <dv-decoration-6 style="width: 40vw; height: 10px" />
       </div>
-      <div class="one">
+      <div class="one" @click="linkDetail1(165, '2#RGV','T043')">
         <one-cell :device="dv8"></one-cell>
       </div>
       <div class="two">
-        <one-cell :device="dv9"></one-cell>
+        <one-cell :device="dv9"  @click="linkDetail1(166, '2#RGV','T044')"></one-cell>
       </div>
-      <div class="three">
+      <div class="three" @click="linkDetail1(13, '2#RGV','T017')">
         <one-cell :device="dvCar3"></one-cell>
       </div>
     </div>
@@ -113,10 +116,10 @@ export default {
     };
   },
   methods: {
-    linkDetail1(id, name) {
+    linkDetail1(id, name,str) {
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
   },
@@ -129,26 +132,32 @@ export default {
   height: 100%;
   position: relative;
   .third {
+  width: 100%;
     position: relative;
+    height: 100%;
+    .doorFive{
+      position: absolute;
+      left: 39vh;
+    }
     .one {
       position: absolute;
-      left: 28vh;
+      // left: 28vh;
       width: 15vh;
     }
     .two {
       position: absolute;
-      left: 85vh;
+      left: 60vh;
       width: 15vh;
     }
     .three {
       position: absolute;
-      right: 5vh;
+      right: 25vh;
       width: 15vh;
       top: 1vh;
     }
     .third-top {
       position: absolute;
-      left: 8vh;
+      left: -20vh;
       top: 1vh;
     }
   }

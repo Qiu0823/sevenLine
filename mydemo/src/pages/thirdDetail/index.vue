@@ -1,11 +1,11 @@
 <template>
   <div class="page-box">
     <div class="page-header">
-			<top-header></top-header>
-			<router-link to="/">
-				<img src="~@/assets/img/home.png" class="img1" />
-			</router-link>
-		</div>
+      <top-header></top-header>
+      <router-link to="/">
+        <img src="~@/assets/img/home.png" class="img1" />
+      </router-link>
+    </div>
     <div class="page-body">
       <div class="body-sidebar">侧边栏</div>
       <div class="body-context">
@@ -80,6 +80,24 @@
                   </el-button>
                 </template>
               </el-table-column>
+              <el-table-column label="操作电机信息">
+                <template slot-scope="scope">
+                  <el-button
+                    v-if="!scope.row.machine"
+                    @click="showAddElecDialog(scope.$index,'新增')"
+                    type="text"
+                    size="nomal"
+                    >新增
+                  </el-button>
+                  <el-button
+                    v-else
+                    @click="showAddElecDialog(scope.$index,'修改')"
+                    type="text"
+                    size="nomal"
+                    >修改
+                  </el-button>
+                </template>
+              </el-table-column>
             </el-table>
           </div>
         </div>
@@ -90,7 +108,7 @@
       title="提示"
       :visible.sync="addDialog"
       width="30%"
-      @close='closeAddDialog'
+      @close="closeAddDialog"
     >
       <el-form ref="addForm" :model="addForm" label-width="80px">
         <el-form-item label="故障原因">
@@ -139,8 +157,54 @@
       </el-form>
     </el-dialog>
 
+    <!-- 修改电表信息新增弹出的dialog框 -->
+    <el-dialog
+      title="提示"
+      :visible.sync="addElecDialog"
+      width="40%"
+      @close="closeAddDialog"
+      class="addElecDialog"
+    >
+      <el-form ref="addForm" :model="addElecForm" label-width="100px">
+        <el-form-item label="电机名称">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="电机位号">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="电气室">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="电气柜">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="器件代号">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="电机开关箱">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="变频器型号">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="操作台">
+          <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item style="margin: 0 auto !important">
+          <el-button type="primary" @click="addElecSubmit('addElecForm')"
+            >提交原因和措施</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
     <!-- 修改弹出的dialog框 -->
-    <el-dialog title="修改原因措施" :visible.sync="updateDialog" width="30%" @close='closeUpdateDialog'>
+    <el-dialog
+      title="修改原因措施"
+      :visible.sync="updateDialog"
+      width="30%"
+      @close="closeUpdateDialog"
+    >
       <el-form ref="updateForm" :model="updateForm" label-width="80px">
         <el-form-item label="故障原因">
           <el-select
@@ -200,11 +264,11 @@ import {
   postUpdateReason,
   addReaAndMea,
 } from "../../api/detail.js";
-import topHeader from './components/topHeader1.vue'
+import topHeader from "./components/topHeader1.vue";
 export default {
-	components:{
-		topHeader
-	},
+  components: {
+    topHeader,
+  },
   data() {
     return {
       faultId: "", //table里每个故障问题对应的id
@@ -228,10 +292,41 @@ export default {
         reason: "",
         measuresList: [],
       }, //控制更新表格的提交数据
+      addElecDialog: true,
+      updateElecDialog:true,
+      addElecForm:{
+        machineName:'',
+        tagNumber:'',
+        electricRoom:'',
+        electricCabinet:'',
+        powerSwitch:'',
+        inverter:'',
+        ct:'',
+      },
+        updateElecForm:{
+        machineName:'',
+        tagNumber:'',
+        electricRoom:'',
+        electricCabinet:'',
+        powerSwitch:'',
+        inverter:'',
+        ct:'',
+      }
     };
   },
 
   methods: {
+    // 修改电机信息的新增按钮
+    showAddElecDialog(index,type) {
+      console.log(type)
+    },
+    // 修改电机信息的修改按钮
+    showUpdateElecDialog() {},
+
+    // 修改电机信息的提交按钮
+    addElecSubmit(){
+
+    },
     //新增原因和措施
     onSubmit(formName) {
       this.addReaAndMeaWrapper();
@@ -297,6 +392,12 @@ export default {
     },
     //点击修改
     updateDialogClick(tableIndex) {
+      this.updateForm = {
+        reasonId: null,
+        reason: "",
+        measuresList: [],
+      };
+      this.reasonSelect = [];
       var item = this.tableData[tableIndex];
       var data = {
         faultId: item.faultId,
@@ -306,6 +407,11 @@ export default {
     },
     //点击新增
     showAddDialog(tableIndex) {
+      this.addForm = {
+        faultReason: "", //新增dialog下拉框选择的原因
+        input: [""], //输入框的值
+      };
+      this.reasonSelect = [];
       var item = this.tableData[tableIndex];
       console.log(item);
       this.addDialog = true;
@@ -327,11 +433,11 @@ export default {
     },
     //获取单个原因所有的措施
     async getAllErrReasonMeasure(id) {
-			for(let i = 0;i<this.reasonSelect.length;i++){
-				if(id === this.reasonSelect[i].reasonId){
-					this.updateForm.reason = this.reasonSelect[i].reason
-				}
-			}
+      for (let i = 0; i < this.reasonSelect.length; i++) {
+        if (id === this.reasonSelect[i].reasonId) {
+          this.updateForm.reason = this.reasonSelect[i].reason;
+        }
+      }
       let data = {
         reasonId: id,
       };
@@ -350,7 +456,7 @@ export default {
     },
     //修改措施点击提交
     submitUpdate() {
-      console.log("update",this.updateForm);
+      console.log("update", this.updateForm);
       postUpdateReason(this.updateForm).then((res) => {
         if (res.data.state === true) {
           this.$message({
@@ -438,21 +544,20 @@ export default {
   .page-header {
     width: 100%;
     height: 10%;
-		.img1{
-			position: absolute;
-			display: inline-block;
-			width: 70px;
-			height: 70px;
-			top: 30px;
-			left: 30px;
-		}
+    .img1 {
+      position: absolute;
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      top: 30px;
+      left: 30px;
+    }
   }
 
   .page-body {
     width: 100%;
     height: 89%;
     display: flex;
-
     .body-sidebar {
       height: 100%;
       width: 20%;

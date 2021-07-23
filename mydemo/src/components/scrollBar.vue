@@ -9,9 +9,9 @@ export default {
     return {
       config: {
         header: ['时间',"设备", "重故障"],
-        data: this.$store.state.WebsocketMessage.EquipmentFaultRollDatas,
+        data: this.$store.state.WebsocketMessage.Data127,
         // index: true,
-        columnWidth: [160,250, 220],
+        columnWidth: [160,150, 320],
         align: ["center"],
         headerBGC: "#213454",
         oddRowBGC: "#266090",
@@ -22,9 +22,9 @@ export default {
     };
   },
 	watch:{
-		'$store.state.WebsocketMessage'(newVal,oldVal){
+		'$store.state.WebsocketMessage.Data127'(newVal,oldVal){
 			const { config } = this
-			this.config.data = newVal.EquipmentFaultRollDatas
+			this.config.data = newVal
 			this.config = { ...this.config }
 		}
 	},
@@ -39,7 +39,7 @@ export default {
 }
 .scroll-bar {
   width: 100%;
-  padding: 0 1vw;
+  // padding: 0 1vw;
   height: 100%;
   margin-right: 1vh;
   overflow: hidden;

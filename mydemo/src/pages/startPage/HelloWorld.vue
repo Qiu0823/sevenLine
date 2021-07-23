@@ -331,7 +331,7 @@ import gnleft from "./components/gnleft";
 import gncenter from "./components/gncenter";
 import gnright from "./components/gnright";
 import areabottom from "./components/areabottom";
-import detect from "./components/detect";
+// import detect from "./components/detect";
 import ScrollBar from "@/components/scrollBar";
 import SidebarNav from "@/components/sidebarNav";
 import { indexScrollBar } from "@/api/detail.js";
@@ -793,7 +793,7 @@ export default {
     AreaOneCom,
     SidebarNav,
     areabottom,
-    detect,
+    // detect,
     oneCell,
   },
   created() {
@@ -828,7 +828,7 @@ export default {
 };
 </script>
 
-<style lang='less'>
+<style lang='less' scoped>
 #data-view {
   width: 100%;
   height: 100%;

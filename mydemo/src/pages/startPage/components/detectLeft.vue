@@ -5,8 +5,8 @@
       <div class="dev1">
         <oneCell :device="arb1"></oneCell>
       </div>
-      <div class="dev2" @click="linkDetail1(32, '烘干机')" style="cursor: pointer" :color="this.$store.state.WebsocketMessage.Equipment32_FaultStatus">
-        <oneCell :device="arb2"></oneCell>
+      <div class="dev2" @click="linkDetail1(32, '烘干机','T032')" style="cursor: pointer">
+        <oneCell :device="arb2" :color="this.$store.state.WebsocketMessage.Data32"></oneCell>
       </div>
     </div>
     <div class="detect-area areaBorderStyle">
@@ -24,30 +24,30 @@
       </div>
       <div class="detect-right">
              <!-- <div class="detect2"> -->
-        <div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-          <span class="dv-title">{{ decArr[0].title }}</span>
+        <div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+          <span class="dv-title-cell">{{ decArr[0].title }}</span>
         </div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[1].title }}</span>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[1].title }}</span>
 				</div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[2].title }}</span>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[2].title }}</span>
 				</div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[3].title }}</span>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[3].title }}</span>
 				</div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[4].title }}</span>
-				  <div class="LEDbtn greenBtn" :style="{backgroundColor:this.$store.state.WebsocketMessage.Equipment33_FaultStatus}"></div>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[4].title }}</span>
+				  <div class="LEDbtn greenBtn" :style="{backgroundColor:this.$store.state.WebsocketMessage.Data33}"></div>
 				</div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[5].title }}</span>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[5].title }}</span>
 				</div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[6].title }}</span>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[6].title }}</span>
 				</div>
-				<div class="detect2-onecell" @click="linkDetail1(33,'测量点')">
-				  <span class="dv-title">{{ decArr[7].title }}</span>
+				<div class="detect2-onecell" @click="linkDetail1(33,'测量点','T033')">
+				  <span class="dv-title-cell">{{ decArr[7].title }}</span>
 				</div>
       <!-- </div> -->
       </div>
@@ -124,10 +124,10 @@ export default {
     };
   },
   methods: {
-       linkDetail1(id, name) {
+       linkDetail1(id, name,str) {
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
   },
@@ -209,7 +209,7 @@ export default {
       width: 13px !important;
       height: 13px !important;
     }
-    .dv-title {
+    .dv-title-cell {
       width: 40%;
       text-align: right;
       padding-right: 2vh;

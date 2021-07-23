@@ -4,13 +4,13 @@
       <div class="shangliao-left">
         <div
           style="flex: 1; cursor: pointer"
-          @click="linkDetail1(10, '乳化液')"
+          @click="linkDetail1(10, '乳化液','T013')"
         >
           <one-cell :device="shang01"></one-cell>
         </div>
         <div
           style="flex: 1; cursor: pointer"
-          @click="linkDetail1(11, '液压油')"
+          @click="linkDetail1(11, '液压油','T014')"
         >
           <one-cell :device="shang02"></one-cell>
         </div>
@@ -25,21 +25,21 @@
         <div
           class="shaoliao-right-left"
           style="cursor: pointer"
-          @click="linkDetail1(35, '1#喷码机')"
+          @click="linkDetail1(35, '1#喷码机','T036')"
         >
           <one-cell
             :device="shang03"
-            :color="this.$store.state.WebsocketMessage.Equipment35_FaultStatus"
+            :color="this.$store.state.WebsocketMessage.Data35"
           ></one-cell>
         </div>
         <div class="shangliao-right-center">
           <one-cell :device="shang04"></one-cell>
           <one-cell :device="shang05"></one-cell>
         </div>
-        <div class="shangliao-right-right" @click="linkDetail1(36, '2#喷码机')">
+        <div class="shangliao-right-right" @click="linkDetail1(36, '2#喷码机','T037')">
           <one-cell
             :device="shang06"
-            :color="this.$store.state.WebsocketMessage.Equipment36_FaultStatus"
+            :color="this.$store.state.WebsocketMessage.Data36"
           ></one-cell>
         </div>
       </div>
@@ -64,19 +64,19 @@
         <div class="doorTwo">
           <i class="iconfont icon-mendoor13"></i>
         </div>
-        <div class="returnFix-top" @click="linkDetail1(20, '2#带锯')">
+        <div class="returnFix-top" @click="linkDetail1(20, '2#带锯','T022')">
           <one-cell
             :device="returnFix01"
-            :color="this.$store.state.WebsocketMessage.Equipment20_FaultStatus"
+            :color="this.$store.state.WebsocketMessage.Data20"
           ></one-cell>
         </div>
-        <div class="returnFix-center" @click="linkDetail1(19, '1#带锯')">
+        <div class="returnFix-center" @click="linkDetail1(19, '1#带锯','T023')">
           <one-cell
             :device="returnFix02"
-            :color="this.$store.state.WebsocketMessage.Equipment19_FaultStatus"
+            :color="this.$store.state.WebsocketMessage.Data19"
           ></one-cell>
         </div>
-        <div class="returnFix-bottom">
+        <div class="returnFix-bottom"  @click="linkDetail1(164, '1#RGV','T042')">
           <one-cell :device="returnFix03"></one-cell>
         </div>
         <div class="lineFive">
@@ -147,11 +147,11 @@ export default {
         query: { id: id },
       });
     },
-    linkDetail1(id, name) {
+    linkDetail1(id, name,str) {
       console.log(name);
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
   },
@@ -195,7 +195,7 @@ export default {
       p {
         position: absolute;
         left: 0;
-        top: -3vh;
+        top: -1vh;
       }
       img {
         width: 200px;
@@ -308,7 +308,7 @@ export default {
     }
     .doorOne {
       position: absolute;
-      right: 15px;
+      right: -18px;
       top: -1vh;
       width: 2vw;
       height: 1.5vw;
@@ -319,7 +319,7 @@ export default {
     }
     .doorTwo {
       position: absolute;
-      right: 15px;
+      right: -18px;
       bottom: 0.5vh;
       width: 2vw;
       height: 1.5vw;

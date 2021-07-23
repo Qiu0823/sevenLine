@@ -1,38 +1,28 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1622687417471') format('truetype');
+  font-family: "iconfont"; /* Project id 2693340 */
+  src: url('iconfont.woff2?t=1626941780581') format('woff2'),
+       url('iconfont.woff?t=1626941780581') format('woff'),
+       url('iconfont.ttf?t=1626941780581') format('truetype');
 }
 
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 24px;
-	color: yellow;
+  font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-mendoor13:before {
-  content: "\e50c";
+.icon-ic_zhishideng_:before {
+  content: "\e62a";
 }
 
-.icon-lujing:before {
-  content: "\e8e4";
+.icon-mendoor13:before {
+  content: "\e600";
+  color: rgb(238, 230, 4);
 }
 
 .icon-lu:before {
   content: "\e66c";
-}
-
-.icon-lujing1:before {
-  content: "\e607";
-}
-
-.icon-lu1:before {
-  content: "\e601";
-}
-
-.icon-lujing2:before {
-  content: "\e606";
 }
 

@@ -1,25 +1,25 @@
 <template>
   <div class="container">
-    <div class="gnr1" @click="linkDetail1(22,'2#抛丸机')">
-      <oneCell :device="gnr1" :color="this.$store.state.WebsocketMessage.Equipment22_FaultStatus"></oneCell>
+    <div class="gnr1" @click="linkDetail1(22,'2#抛丸机','T025')">
+      <oneCell :device="gnr1" :color="this.$store.state.WebsocketMessage.Data22"></oneCell>
     </div>
-    <div class="gnr2" @click="linkDetail1(24,'2#三角标')">
-      <oneCell :device="gnr2" :color="this.$store.state.WebsocketMessage.Equipment24_FaultStatus"></oneCell>
+    <div class="gnr2" @click="linkDetail1(24,'2#三角标','T012')">
+      <oneCell :device="gnr2" :color="this.$store.state.WebsocketMessage.Data24"></oneCell>
     </div>
-    <div class="gnr3" @click="linkDetail1(26,'接箍上下料')">
-      <oneCell :device="gnr3" :color="this.$store.state.WebsocketMessage.Equipment26_FaultStatus"></oneCell>
+    <div class="gnr3" @click="linkDetail1(26,'接箍上下料','T027')">
+      <oneCell :device="gnr3" :color="this.$store.state.WebsocketMessage.Data26"></oneCell>
     </div>
-    <div class="gnr4" @click="linkDetail1(27,'管拧机')">
-      <oneCell :device="gnr4" :color="this.$store.state.WebsocketMessage.Equipment27_FaultStatus"></oneCell>
+    <div class="gnr4" @click="linkDetail1(27,'管拧机','T028')">
+      <oneCell :device="gnr4" :color="this.$store.state.WebsocketMessage.Data27"></oneCell>
     </div>
-    <div class="gnr5">
+    <div class="gnr5"  @click="linkDetail1(168,'2#通径机','T045')">
       <oneCell :device="gnr5"></oneCell>
     </div>
-    <div class="gnr7">
+    <!-- <div class="gnr7">
       <oneCell :device="gnr7"></oneCell>
-    </div>
-    <div class="gnr6" @click="linkDetail1(28,'内保拧接')">
-      <oneCell :device="gnr6" :color="this.$store.state.WebsocketMessage.Equipment28_FaultStatus"></oneCell>
+    </div> -->
+    <div class="gnr6" @click="linkDetail1(28,'内保拧接','T029')">
+      <oneCell :device="gnr6" :color="this.$store.state.WebsocketMessage.Data28"></oneCell>
     </div>
   </div>
 </template>
@@ -53,24 +53,24 @@ export default {
         status: "nomal",
       },
       gnr6: {
-        title: "内保拧接",
+        title: "内保涂油拧接",
         status: "nomal",
       },
-      gnr7: {
-        title: "涂油拧接",
-        status: "nomal",
-      },
+      // gnr7: {
+      //   title: "涂油拧接",
+      //   status: "nomal",
+      // },
     };
   },
   methods: {
     link(id) {
       this.$emit("linkDetail", id);
     },
-    linkDetail1(id, name) {
+    linkDetail1(id, name,str) {
       console.log(name);
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
   },
@@ -110,6 +110,7 @@ div {
 .gnr6 {
   height: 10%;
   cursor: pointer;
+  margin-top: 8%;
 }
 .gnr7 {
   height: 10%;

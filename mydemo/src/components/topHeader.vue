@@ -3,8 +3,8 @@
     <dv-decoration-8 class="header-left-decoration" />
     <dv-decoration-5 class="header-center-decoration" />
     <dv-decoration-8 class="header-right-decoration" :reverse="true" />
-    <div class="center-title">宝钢钢管7号线智能诊断系统</div>
-      <img src="@/assets/img/logo.png" alt="" class="img1">
+    <div class="center-title">无缝管加工7号线智能诊断系统</div>
+      <img src="@/assets/img/logo.png" alt="" class="imgOne">
       <img src="@/assets/img/logo1.png" alt="" class="img2">
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
-  .img1{
+  .imgOne{
   width: 180px!important;
   height: 50px!important;
   position:absolute;

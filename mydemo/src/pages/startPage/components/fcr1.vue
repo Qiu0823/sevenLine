@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <div class="fcr11" @click="linkDetail1(2,'2#收口机')">
-      <oneCell :device="fcr11" :color="this.$store.state.WebsocketMessage.Equipment2_FaultStatus"></oneCell>
+    <div class="fcr11" @click="linkDetail1(2,'2#收口机','T003')">
+      <oneCell :device="fcr11" :color="this.$store.state.WebsocketMessage.Data2"></oneCell>
     </div>
-    <div class="fcr12" @click="linkDetail1(6,'2#车丝机')">
-      <oneCell :device="fcr12" :color="this.$store.state.WebsocketMessage.Equipment6_FaultStatus"></oneCell>
+    <div class="fcr12" @click="linkDetail1(6,'2#车丝机','T007')">
+      <oneCell :device="fcr12" :color="this.$store.state.WebsocketMessage.Data6"></oneCell>
     </div>
-    <div class="fcr13" @click="linkDetail1(16,'2#吹水黑皮扣')">
-      <oneCell :device="fcr13" :color="this.$store.state.WebsocketMessage.Equipment16_FaultStatus"></oneCell>
+    <div class="fcr13" @click="linkDetail1(16,'2#吹水黑皮扣','T019')">
+      <oneCell :device="fcr13" :color="this.$store.state.WebsocketMessage.Data16"></oneCell>
     </div>
-    <div class="fcr14" @click="linkDetail1(16,'2#修扣黑皮扣')">
-      <oneCell :device="fcr14" :color="this.$store.state.WebsocketMessage.Equipment16_FaultStatus"></oneCell>
+    <div class="fcr14" @click="linkDetail1(16,'2#修扣黑皮扣','T019')">
+      <oneCell :device="fcr14" :color="this.$store.state.WebsocketMessage.Data16"></oneCell>
     </div>
   </div>
 </template>
@@ -45,11 +45,11 @@ export default {
     link(id) {
       this.$emit("linkDetail", id);
     },
-    linkDetail1(id, name) {
+    linkDetail1(id, name,str) {
       console.log(name);
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
   },

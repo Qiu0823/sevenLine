@@ -2,7 +2,7 @@
   <div class="container">
     <div class="detect2">
       <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title)">
-        <span class="dv-title">{{ item.title }}</span>
+        <span class="dv-title-gc">{{ item.title }}</span>
         <div class="LEDbtn greenBtn"></div>
       </div>
     </div>
@@ -147,13 +147,13 @@ div {
     box-sizing: border-box;
     border-bottom: 1px solid #203456;
     display: flex;
-    padding-top: 1vh;
+    // padding-top: 1vh;
     .LEDbtn {
       width: 13px !important;
       height: 13px !important;
     }
-    .dv-title {
-      width: 40%;
+    .dv-title-gc {
+      width: 50%;
       text-align: right;
       // border: 1px solid red;
       padding-right: 2vh;

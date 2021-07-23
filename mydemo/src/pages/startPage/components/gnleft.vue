@@ -1,19 +1,19 @@
 <template>
   <div class="container">
-    <div class="gnl1">
+    <div class="gnl1"  @click="linkDetail1(167,'1#通径机','T035')">
       <oneCell :device="gnl1"></oneCell>
     </div>
-    <div class="gnl2" @click="linkDetail1(21,'1#抛丸机')">
-      <oneCell :device="gnl2" :color="this.$store.state.WebsocketMessage.Equipment21_FaultStatus"></oneCell>
+    <div class="gnl2" @click="linkDetail1(21,'1#抛丸机','T024')">
+      <oneCell :device="gnl2" :color="this.$store.state.WebsocketMessage.Data21"></oneCell>
     </div>
-			<div class="gnl3" @click="linkDetail1(23,'1#三角标')">
-			  <oneCell :device="gnl3" :color="this.$store.state.WebsocketMessage.Equipment23_FaultStatus"></oneCell>
+			<div class="gnl3" @click="linkDetail1(23,'1#三角标','T011')">
+			  <oneCell :device="gnl3" :color="this.$store.state.WebsocketMessage.Data23"></oneCell>
 			</div>
-    <div class="gnl5">
+    <!-- <div class="gnl5" style="display:none">
       <oneCell :device="gnl5"></oneCell>
-    </div>
-    <div class="gnl4" @click="linkDetail1(25,'外保拧接')">
-      <oneCell :device="gnl4" :color="this.$store.state.WebsocketMessage.Equipment25_FaultStatus"></oneCell>
+    </div> -->
+    <div class="gnl4" @click="linkDetail1(25,'外保涂油拧接','T026')">
+      <oneCell :device="gnl4" :color="this.$store.state.WebsocketMessage.Data25"></oneCell>
     </div>
   </div>
 </template>
@@ -39,24 +39,24 @@ export default {
         status: "nomal",
       },
       gnl4: {
-        title: "外保拧接",
+        title: "外保涂油拧接",
         status: "nomal",
       },
-      gnl5: {
-        title: "涂油拧接",
-        status: "nomal",
-      },
+      // gnl5: {
+      //   title: "涂油拧接",
+      //   status: "nomal",
+      // },
     };
   },
 	methods:{
 		link(id){
 			this.$emit('linkDetail',id)
 		},
-      linkDetail1(id, name) {
+      linkDetail1(id, name,str) {
       console.log(name);
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
 	}
@@ -71,7 +71,7 @@ div {
 .gnl1 {
   height: 10%;
 	cursor:pointer;
-  margin-left: -2.5vh;
+  /* margin-left: -2.5vh; */
 }
 .gnl2 {
   height: 10%;
@@ -85,6 +85,7 @@ div {
 .gnl4 {
   height: 10%;
 	cursor:pointer;
+  margin-top: 8%;
 }
 .gnl5 {
   height: 10%;

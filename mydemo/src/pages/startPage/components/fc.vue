@@ -17,7 +17,7 @@
     </div> -->
      <div class="detect2">
         <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title)">
-        <span class="dv-title">{{item.title}}</span>
+        <span class="dv-title-fc">{{item.title}}</span>
         <div class="LEDbtn greenBtn"></div>
         </div>         
       </div>
@@ -134,8 +134,8 @@ export default {
       width: 13px!important;
       height: 13px!important;
     }
-    .dv-title{
-      width: 40%;
+    .dv-title-fc{
+      width: 50%;
       text-align: right;
       padding-right: 2vh;
       padding-left: 4vh;

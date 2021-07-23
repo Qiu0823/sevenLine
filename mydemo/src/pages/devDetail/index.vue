@@ -28,152 +28,173 @@
         <div class="right-main-container">
           <div class="rmc-top-container" ref="rmcTop">
             <dv-border-box-3 class="rmctc-left-container">
-              <div class="rmctc-left-table1">
-                <div style="width: 100%; height: 25px; text-align: center">
-                  待处理故障
-                </div>
-                <el-table
-                  :data="pendingError"
-                  :row-style="TableRowStyle"
-                  :header-cell-style="{
-                    'background-color': '#003B51',
-                    color: 'white',
-                    'text-align': 'center',
-                  }"
-                  :height="table_height"
-                  style="width: 100%; height: 90%"
-                  class="customer-no-border-table"
-                >
-                  <el-table-column prop="fault" label="故障名称" align="center">
-                  </el-table-column>
-                  <el-table-column label="故障原因" width="180">
-                    <template slot-scope="scope">
-                      <p
-                        v-for="(item, i) in pendingError[scope.$index]
-                          .reasonVOList"
-                        v-bind:key="i"
+              <el-tabs v-model="activeName" @tab-click="handleTabClick" stretch>
+                <el-tab-pane label="待处理故障" name="first">
+                  <div class="rmctc-left-table1">
+                    <!-- <div style="width: 100%; height: 25px; text-align: center">
+                      待处理故障
+                    </div> -->
+                    <el-table
+                      :data="pendingError"
+                      :row-style="TableRowStyle"
+                      :header-cell-style="{
+                        'background-color': '#003B51',
+                        color: 'white',
+                        'text-align': 'center',
+                      }"
+                      :height="table_height"
+                      style="width: 100%; height: 90%"
+                      class="customer-no-border-table"
+                    >
+                      <el-table-column
+                        prop="fault"
+                        label="故障名称"
+                        align="center"
                       >
-                        {{ i + 1 }}: {{ item.reason }}
-                      </p>
-                    </template>
-                  </el-table-column>
-                  <el-table-column
-                    prop="faultType"
-                    align="center"
-                    label="故障级别"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                    prop="occurTime"
-                    align="center"
-                    label="故障发生时间"
-                  >
-                  </el-table-column>
-                  <el-table-column align="center" label="操作">
-                    <template slot-scope="scope">
-                      <el-button @click="showDialog3" type="text" size="small"
-                        >查看电机信息</el-button
+                      </el-table-column>
+                      <el-table-column label="故障原因" width="180">
+                        <template slot-scope="scope">
+                          <p
+                            v-for="(item, i) in pendingError[scope.$index]
+                              .reasonVOList"
+                            v-bind:key="i"
+                          >
+                            {{ i + 1 }}: {{ item.reason }}
+                          </p>
+                        </template>
+                      </el-table-column>
+                      <el-table-column
+                        prop="faultType"
+                        align="center"
+                        label="故障级别"
                       >
-                      <br />
-                      <el-button
-                        @click="showDialog4(scope.row, scope.$index)"
-                        type="text"
-                        size="small"
-                        >查看措施</el-button
+                      </el-table-column>
+                      <el-table-column
+                        prop="occurTime"
+                        align="center"
+                        label="故障发生时间"
                       >
-                      <br />
-                      <el-button
-                        @click="showDialog6(scope.$index)"
-                        type="text"
-                        size="small"
-                        >查看历史故障</el-button
-                      >
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
-              <div class="rmctc-left-table2">
-                <div style="width: 100%; height: 25px; text-align: center">
-                  已处理故障
-                </div>
+                      </el-table-column>
+                      <el-table-column align="center" label="操作">
+                        <template slot-scope="scope">
+                          <el-button
+                            @click="showDialog3"
+                            type="text"
+                            size="small"
+                            >查看电机信息</el-button
+                          >
+                          <br />
+                          <el-button
+                            @click="showDialog4(scope.row, scope.$index)"
+                            type="text"
+                            size="small"
+                            >查看措施</el-button
+                          >
+                          <br />
+                          <el-button
+                            @click="showDialog6(scope.$index)"
+                            type="text"
+                            size="small"
+                            >查看历史故障</el-button
+                          >
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane label="已处理故障" name="second">
+                  <div class="rmctc-left-table2">
+                    <!-- <div style="width: 100%; height: 25px; text-align: center">
+                      已处理故障
+                    </div> -->
 
-                <el-table
-                  :data="handledError"
-                  :row-style="TableRowStyle"
-                  :header-cell-style="{
-                    'background-color': '#003B51',
-                    color: 'white',
-                    'text-align': 'center',
-                  }"
-                  :height="table_height"
-                  style="width: 100%; height: 90%"
-                  class="customer-no-border-table"
-                >
-                  <el-table-column prop="fault" label="故障名称" align="center">
-                  </el-table-column>
+                    <el-table
+                      :data="handledError"
+                      :row-style="TableRowStyle"
+                      :header-cell-style="{
+                        'background-color': '#003B51',
+                        color: 'white',
+                        'text-align': 'center',
+                      }"
+                      :height="table_height"
+                      style="width: 100%; height: 90%"
+                      class="customer-no-border-table"
+                    >
+                      <el-table-column
+                        prop="fault"
+                        label="故障名称"
+                        align="center"
+                      >
+                      </el-table-column>
 
-                  <el-table-column label="故障原因" width="180">
-                    <template slot-scope="scope">
-                      <p
-                        v-for="(item, i) in handledError[scope.$index]
-                          .reasonVOList"
-                        v-bind:key="i"
+                      <el-table-column label="故障原因" width="180">
+                        <template slot-scope="scope">
+                          <p
+                            v-for="(item, i) in handledError[scope.$index]
+                              .reasonVOList"
+                            v-bind:key="i"
+                          >
+                            {{ i + 1 }}: {{ item.reason }}
+                          </p>
+                        </template>
+                      </el-table-column>
+                      <el-table-column
+                        prop="faultType"
+                        align="center"
+                        label="故障措施"
                       >
-                        {{ i + 1 }}: {{ item.reason }}
-                      </p>
-                    </template>
-                  </el-table-column>
-                  <el-table-column
-                    prop="faultType"
-                    align="center"
-                    label="故障措施"
-                  >
-                    <template slot-scope="scope">
-                      <p
-                        v-for="(item, i) in handledError[scope.$index]
-                          .reasonVOList"
-                        v-bind:key="i"
+                        <template slot-scope="scope">
+                          <p
+                            v-for="(item, i) in handledError[scope.$index]
+                              .reasonVOList"
+                            v-bind:key="i"
+                          >
+                            <span
+                              v-for="(item1, j) in item.measuresVOList"
+                              v-bind:key="j"
+                              >{{ item1.measures }}</span
+                            >
+                          </p>
+                        </template>
+                      </el-table-column>
+                      <el-table-column
+                        prop="remark"
+                        align="center"
+                        label="备注"
                       >
-                        <span
-                          v-for="(item1, j) in item.measuresVOList"
-                          v-bind:key="j"
-                          >{{ item1.measures }}</span
-                        >
-                      </p>
-                    </template>
-                  </el-table-column>
-                  <el-table-column prop="remark" align="center" label="备注">
-                  </el-table-column>
-                  <el-table-column
-                    prop="faultType"
-                    align="center"
-                    label="故障级别"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                    prop="occurTime"
-                    align="center"
-                    label="故障发生时间"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                    prop="solveTime"
-                    align="center"
-                    label="故障处理时间"
-                  >
-                  </el-table-column>
-                  <el-table-column align="center" label="操作">
-                    <template slot-scope="scope">
-                      <el-button
-                        @click="showDialog5(scope.$index)"
-                        type="text"
-                        size="small"
-                        >处理结果
-                      </el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
+                      </el-table-column>
+                      <el-table-column
+                        prop="faultType"
+                        align="center"
+                        label="故障级别"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                        prop="occurTime"
+                        align="center"
+                        label="故障发生时间"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                        prop="solveTime"
+                        align="center"
+                        label="故障处理时间"
+                      >
+                      </el-table-column>
+                      <el-table-column align="center" label="操作">
+                        <template slot-scope="scope">
+                          <el-button
+                            @click="showDialog5(scope.$index)"
+                            type="text"
+                            size="small"
+                            >处理结果
+                          </el-button>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                  </div>
+                </el-tab-pane>
+              </el-tabs>
             </dv-border-box-3>
           </div>
 
@@ -300,9 +321,6 @@
             </tr>
             <tr>
               <td class="left_title bottom_border">电机开关箱</td>
-            </tr>
-            <tr>
-              <td class="left_title bottom_border">IP地址</td>
             </tr>
             <tr>
               <td class="left_title bottom_border">变频器型号</td>
@@ -496,9 +514,14 @@
 
     <!-- 查看历史故障dialog -->
     <el-dialog :visible.sync="centerDialogVisible6" width="40%" center>
-      <div class="block" style="margin-bottom:20px">
+      <div class="block" style="margin-bottom: 20px">
         <span class="demonstration">月</span>
-        <el-date-picker v-model="selectMonth" type="month" placeholder="选择月" @change="monthHandle">
+        <el-date-picker
+          v-model="selectMonth"
+          type="month"
+          placeholder="选择月"
+          @change="monthHandle"
+        >
         </el-date-picker>
       </div>
       <el-table :data="ErrorMessage" border height="190" style="width: 100%">
@@ -557,13 +580,14 @@ export default {
   },
   data() {
     return {
+      activeName: "second",
       form: {
         reasons: [],
         checkboxGroup1: [],
         resultNote: "",
       },
-	  monthTime : "",
-	  selectMonth:'',	//选择月份
+      monthTime: "",
+      selectMonth: "", //选择月份
       devName: "",
       tableData1: null,
       centerDialogVisible: false,
@@ -600,25 +624,29 @@ export default {
         path: "/thirdDetail",
       });
     },
-	//查看历史故障选择年份后
-	monthHandle(val){
-		this.chartMessage = {};
-		this.ErrorMessage = [];
-		var str = val.toLocaleDateString().replace('/','0');
-		const realStr = str.substring(0,str.length-2);
-		this.monthTime = realStr;
-		console.log(typeof realStr)
-		this.ErrorMessageHistory(
+    //tab页切换事件
+    handleTabClick(tab, event) {
+      console.log(tab, event);
+    },
+    //查看历史故障选择年份后
+    monthHandle(val) {
+      this.chartMessage = {};
+      this.ErrorMessage = [];
+      var str = val.toLocaleDateString().replace("/", "0");
+      const realStr = str.substring(0, str.length - 2);
+      this.monthTime = realStr;
+      console.log(typeof realStr);
+      this.ErrorMessageHistory(
         this.$route.query.id,
         this.faultRecordid,
-		this.monthTime
+        this.monthTime
       );
       this.getErrorChartMessage(
         this.$route.query.id,
         this.faultRecordid,
-		this.monthTime
+        this.monthTime
       );
-	},
+    },
     //查询处理结果的接口
     async getHandleResult(id) {
       let data = {
@@ -708,11 +736,11 @@ export default {
       myChart.setOption(option);
     },
     //查询历史故障信息
-    async ErrorMessageHistory(deviceId, faultId,month) {
+    async ErrorMessageHistory(deviceId, faultId, month) {
       let data = {
         deviceId: deviceId,
         faultId: faultId,
-		time: month
+        time: month,
       };
       await ErrorMessageHistory(data).then((res) => {
         this.ErrorMessage = res.data.result;
@@ -756,14 +784,18 @@ export default {
       });
     },
     //查询故障信息图表
-    async getErrorChartMessage(deviceId, faultId,month) {
+    async getErrorChartMessage(deviceId, faultId, month) {
       let data = {
         deviceId: deviceId,
         faultId: faultId,
-		time: month
+        time: month,
       };
       await ErrorMessageChart(data).then((res) => {
-        if (res.data.state === true&&res.data.result&&res.data.result.reason.length!==0) {
+        if (
+          res.data.state === true &&
+          res.data.result &&
+          res.data.result.reason.length !== 0
+        ) {
           console.log(res.data.result);
           this.chartMessage = {
             xAxis: {
@@ -785,9 +817,9 @@ export default {
             ],
           };
           this.drawLine(this.chartMessage);
-        } else if(res.data.result&&res.data.result.reason.length == 0){
-			this.drawLine({});
-		}
+        } else if (res.data.result && res.data.result.reason.length == 0) {
+          this.drawLine({});
+        }
       });
     },
 
@@ -935,11 +967,12 @@ export default {
     // getnews(this.name).then(res =>{
     // 	console.log(res)
     // })
+    console.log(this.$route.query)
     this.queryPendingError(this.$route.query.id);
     this.queryHandledError(this.$route.query.id);
     this.devName = this.$route.query.name;
     setTimeout(() => {
-      this.table_height = this.$refs.rmcTop.offsetHeight / 2 - 50;
+      this.table_height = this.$refs.rmcTop.offsetHeight - 200;
     }, 100);
     // alert(this.pendingError)
   },
@@ -1007,21 +1040,39 @@ export default {
       flex-direction: column;
 
       .rmc-top-container {
+        .rmctc-left-table1 {
+          width: 100%;
+          height: 90%;
+        }
         flex: 3;
         .rmctc-left-container {
+          .el-tabs {
+            margin-top: 3vh;
+            .el-tabs__header {
+              // left: 3vh;
+              width: 50%;
+              margin-left: auto;
+              margin-right: auto;
+              margin-bottom: 20px;
+              .el-tabs__item {
+                color: #fff !important;
+                font-size: 16px !important;
+              }
+            }
+          }
           .border-box-content {
             display: flex;
             flex-direction: column;
           }
           .rmctc-left-table1 {
             margin: auto;
-            width: 90%;
+            width: 95%;
             flex: 1;
           }
 
           .rmctc-left-table2 {
-            margin: auto;
-            width: 90%;
+            margin: 0 auto;
+            width: 95%;
             flex: 1;
           }
         }

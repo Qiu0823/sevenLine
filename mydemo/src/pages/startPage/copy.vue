@@ -1,5 +1,5 @@
 <template>
-  <div class="data-view">
+  <div id="data-view">
     <dv-full-screen-container v-title data-title="宝钢钢管7号线智能诊断系统">
       <div class="main-header">
         <top-header />
@@ -39,14 +39,14 @@
             <el-col :span="24" style="height: 100%">
               <line-device :lineNum="1"></line-device>
               <div class="carCom">
-                <roll-car :carNum="1" :left="1200"></roll-car>
+								<img src="../../assets/img/car.png" class="imgCar1" :style="{ left: left1 + 'px' }" />
               </div>
             </el-col>
           </el-row>
           <el-row class="third-row" type="“flex”">
             <el-col style="height: 100%; width: 19%">
               <!-- 返修区 -->
-              <div class="areaBorderStyle" style="height: 100%">
+              <div class="" style="height: 100%">
                 <area-one-com :deviceListName="deviceList9Name" />
               </div>
             </el-col>
@@ -86,7 +86,7 @@
             <el-col :span="24" style="height: 100%">
               <line-device :lineNum="2"></line-device>
               <div class="carCom">
-                <roll-car :carNum="2" :left="1200"></roll-car>
+                <img src="../../assets/img/car.png" class="imgCar2" :style="{ left: left2 + 'px' }" />
               </div>
             </el-col>
           </el-row>
@@ -119,7 +119,9 @@
           </el-row>
           <div class="seven-row">
             <div class="seven-left">
+              <dv-border-box-12>
               <div class="tempture">
+                
                 <div class="car-dataShow">
                   <div>
                     <span style="font-size: 14px">1#RGV电池电量及温度</span>
@@ -129,31 +131,32 @@
                       :config="config"
                       style="
                         width: 200px;
-                        height: 40px;
-                        margin: auto;
-                        font-size: 24px;
+                        height: 50px;
+                        margin: 2px auto;
                       "
                     />
                   </div>
                   <div>
                     <dv-percent-pond
                       :config="config3"
-                      style="width: 200px; height: 40px; margin: auto"
+                      style="width: 200px; height: 50px; margin: 2px auto"
                     />
                   </div>
                 </div>
+               
+
                 <div class="car-dataShow">
                   <span style="font-size: 14px">2#RGV电池电量及温度</span>
                   <div>
                     <dv-percent-pond
                       :config="config1"
-                      style="width: 200px; height: 40px; margin: auto"
+                      style="width: 200px; height: 50px; margin: 2px auto"
                     />
                   </div>
                   <div>
                     <dv-percent-pond
                       :config="config4"
-                      style="width: 200px; height: 40px; margin: auto"
+                      style="width: 200px; height: 50px; margin: 2px auto"
                     />
                   </div>
                 </div>
@@ -162,20 +165,21 @@
                   <div>
                     <dv-percent-pond
                       :config="config2"
-                      style="width: 200px; height: 40px; margin: auto;"
+                      style="width: 200px; height: 50px; margin: 2px auto;"
                     />
                   </div>
                   <div>
                     <dv-percent-pond
                       :config="config5"
-                      style="width: 200px; height: 40px; margin: auto"
+                      style="width: 200px; height: 50px; margin: 2px auto"
                     />
                   </div>
                 </div>
               </div>
+               </dv-border-box-12>
             </div>
             <div class="seven-right">
-              <el-row style="width: 100%; height: 100%">
+              <el-row style="width: 100%; height: 75%">
                 <el-col :span="9" style="height: 100%">
                   <detect-left></detect-left>
                 </el-col>
@@ -183,24 +187,59 @@
                   <detect-right></detect-right>
                 </el-col>
               </el-row>
+              <el-row style="width: 100%; height: 11%">
+                   <el-col :span="24" style="height: 100%;">
+              <line-device :lineNum="3"></line-device>
+              <div class="carCom">
+                <img src="../../assets/img/car.png" class="imgCar3" :style="{ left: left3 + 'px' }" />
+              </div>
+            </el-col>
+              </el-row>
+              <el-row style="width: 100%; height: 14%"> 
+                            <el-col style="height: 100%; width: 95%" :span='24'>
+              <!-- 打包区 -->
+              <div class="bagBotDeviceArea areaBorderStyle">
+                <div class="da-container">
+                  <div class="square">出废区</div>
+                  <div class="area-name">打包区域</div>
+                  <div class="da-container-left">成型区</div>
+                  <div
+                    class="da-container-center"
+                    @click="linkDetail1(34, '打捆机','T034')"
+                    style="cursor: pointer"
+                  >
+                    <div class="dv-title">打捆机</div>
+                    <div
+                      class="LEDbtn greenBtn packPosition"
+                      :style="{
+                        backgroundColor:
+                          this.$store.state.WebsocketMessage
+                            .Data34,
+                      }"
+                    ></div>
+                  </div>
+                  <div class="da-container-right">成捆移送</div>
+                </div>
+              </div>
+            </el-col>
+              </el-row>
             </div>
           </div>
-          <el-row class="eight-row">
+          <!-- <el-row class="eight-row">
             <el-col :span="4"></el-col>
             <el-col :span="20" style="height: 100%">
               <line-device :lineNum="3"></line-device>
               <div class="carCom">
-                <roll-car :carNum="3" :left="100"></roll-car>
+                <img src="../../assets/img/car.png" class="imgCar3" :style="{ left: left3 + 'px' }" />
               </div>
             </el-col>
-          </el-row>
-          <el-row class="nine-row">
+          </el-row> -->
+          <!-- <el-row class="nine-row">
               <div class="doorThree">
               <i class="iconfont icon-mendoor13"></i>
             </div>
             <el-col style="height: 100%; width: 20%"></el-col>
             <el-col style="height: 100%; width: 80%">
-              <!-- 打包区 -->
               <div class="bagBotDeviceArea areaBorderStyle">
                 <div class="da-container">
                   <div class="square">出废区</div>
@@ -217,7 +256,7 @@
                       :style="{
                         backgroundColor:
                           this.$store.state.WebsocketMessage
-                            .Equipment34_FaultStatus,
+                            .Data34,
                       }"
                     ></div>
                   </div>
@@ -225,74 +264,87 @@
                 </div>
               </div>
             </el-col>
-          </el-row>
+          </el-row> -->
         </div>
         <div class="body-right">
           <div class="tableCon">
             <div class="rightBox">
               <dv-border-box-11 title="1#车丝机振动">
                 <div class="dvHeader">
-                  <div class="texts">X轴：</div>
-                  <div class="texts">Y轴：</div>
-                  <div class="texts">Z轴：</div>
+                  <div class="texts">主轴箱：</div>
                 </div>
                 <div class="dvGraph">
                   <div
                     class="main"
                     ref="chartRing1"
-                    style="width: 310px; height: 150px"
+                    style="width: 310px; height: 140px"
                   ></div>
                 </div>
+								<div class="dvHeader" style="margin-top: 0px!important;">
+								  <div class="stopTime">停机时间：</div>
+								</div>
               </dv-border-box-11>
             </div>
             <div class="rightBox">
               <dv-border-box-11 title="2#车丝机振动">
                 <div class="dvHeader">
-                  <div class="texts">X轴：</div>
-                  <div class="texts">Y轴：</div>
-                  <div class="texts">Z轴：</div>
+                  <div class="texts">主轴箱：</div>
                 </div>
                 <div class="dvGraph">
                   <div
                     class="main"
                     ref="chartRing2"
-                    style="width: 310px; height: 150px"
+                    style="width: 310px; height: 140px"
                   ></div>
                 </div>
+								<div class="dvHeader" style="margin-top: 0px!important;">
+								  <div class="stopTime">停机时间：</div>
+								</div>
               </dv-border-box-11>
             </div>
             <div class="rightBox">
               <dv-border-box-11 title="3#车丝机振动">
                 <div class="dvHeader">
-                  <div class="texts">X轴：</div>
-                  <div class="texts">Y轴：</div>
-                  <div class="texts">Z轴：</div>
+                  <div class="texts">主轴箱：</div>
                 </div>
                 <div class="dvGraph">
                   <div
                     class="main"
                     ref="chartRing3"
-                    style="width: 310px; height: 150px"
+                    style="width: 310px; height: 140px"
                   ></div>
                 </div>
+								<div class="dvHeader" style="margin-top: 0px!important;">
+								  <div class="stopTime">停机时间：</div>
+								</div>
               </dv-border-box-11>
             </div>
             <div class="rightBox">
               <dv-border-box-11 title="4#车丝机振动">
                 <div class="dvHeader">
-                  <div class="texts">X轴：</div>
-                  <div class="texts">Y轴：</div>
-                  <div class="texts">Z轴：</div>
+                  <div class="texts">主轴箱：</div>
                 </div>
                 <div class="dvGraph">
                   <div
                     class="main"
                     ref="chartRing4"
-                    style="width: 310px; height: 150px"
+                    style="width: 310px; height: 140px"
                   ></div>
                 </div>
+								<div class="dvHeader" style="margin-top: 0px!important;">
+								  <div class="stopTime">停机时间：</div>
+								</div>
               </dv-border-box-11>
             </div>
+
+               <div class="rightBox last">
+              <dv-border-box-13>
+								<div class="dvHeader" style="margin-top: 0px!important;">
+								  <div class="stopTime" style="margin-bottom:20px;margin-left:-50px">管拧机停机时间：</div>
+								</div>
+              </dv-border-box-13>
+            </div>
+
           </div>
         </div>
       </div>
@@ -320,7 +372,6 @@ import store from "@/store/index.js";
 import TopHeader from "@/components/topHeader";
 import AreaOneCom from "./components/AreaOneCom";
 import lineDevice from "@/components/lineDevice";
-import RollCar from "@/components/rollCar";
 import fc from "./components/fc";
 import fc1 from "./components/fc1";
 import fcl1 from "./components/fcl1";
@@ -337,35 +388,84 @@ import detectRight from "./components/detectRight";
 
 import { indexScrollBar } from "@/api/detail.js";
 import ScrollBar from '../../components/scrollBar.vue';
-// import carTest from "@/components/carTest";
 // import oneCell from "@/components/oneCell";
 export default {
   name: "HelloWorld",
   props: {},
   watch: {
-    "$store.state.WebsocketMessage"(newVal, oldVal) {
-      const { config } = this;
-      this.config.value = newVal.Equipment12_DumpEnergy;
-      this.config = { ...this.config };
-      const { config1 } = this;
-      this.config1.value = newVal.Equipment13_DumpEnergy;
-      this.config1 = { ...this.config1 };
-      const { config2 } = this;
-      this.config2.value = newVal.Equipment14_DumpEnergy;
-      this.config2 = { ...this.config2 };
-      const { config3 } = this;
-      this.config3.value = newVal.Equipment12_BatteryTemperature;
-      this.config3 = { ...this.config3 };
-      const { config4 } = this;
-      this.config4.value = newVal.Equipment13_BatteryTemperature;
-      this.config4 = { ...this.config4 };
-      const { config5 } = this;
-      this.config5.value = newVal.Equipment14_BatteryTemperature;
-      this.config5 = { ...this.config5 };
-    },
+		"$store.state.WebsocketMessage.Data118"(newVal,oldVal){
+			console.log("接收1号小车",newVal)
+			let length1 = newVal
+			if( length1 <= 2375){
+				this.left1 = 620 - (length1/2375)*210
+			}else if(2375<length1&&length1<=27924){
+				this.left1 = 410 - (length1-2375)/25549*560
+			}else if(length1>27924&&length1<=48385){
+				this.left1 = -150 - (length1-27924)/20461*400
+			}else{
+				this.left1 = -600
+			}
+		},
+		"$store.state.WebsocketMessage.Data119"(newVal,oldVal){
+			console.log("接收2号小车",newVal)
+			let length2 = newVal
+			if( length2 <= 2035){
+				this.left2 = 620 - (length2/2035)*210
+			}else if(2035<length2&&length2<=27068){
+				this.left2 = 410 - (length2-2035)/25033*560
+			}else if(length2>27068&&length2<=47855){
+				this.left2 = -150 - (length2-27068)/20787*400
+			}else{
+				this.left2 = -600
+			}
+		},
+		"$store.state.WebsocketMessage.Data120"(newVal,oldVal){
+			console.log("接收3号小车",newVal)
+			let length3 = newVal
+			if( length3 <= 2155){
+				this.left3 = -480 + (length3/2155)*80
+			}else if(2155<length3&&length3<18585){
+				this.left3 = -400 + (length3 - 2155)/16430*400
+			}else{
+				this.left3 = 100
+			}
+		},
+		"$store.state.WebsocketMessage.Data112"(newVal,oldVal){
+				const { config } = this;
+				this.config.value = newVal;
+				this.config = { ...this.config };
+		},
+		"$store.state.WebsocketMessage.Data113"(newVal,oldVal){
+				const { config3 } = this;
+				this.config3.value = newVal;
+				this.config3 = { ...this.config3 };
+		},
+		"$store.state.WebsocketMessage.Data114"(newVal,oldVal){
+				const { config1 } = this;
+				this.config1.value = newVal;
+				this.config1 = { ...this.config1 };
+		},
+		"$store.state.WebsocketMessage.Data115"(newVal,oldVal){
+				const { config4 } = this;
+				this.config4.value = newVal;
+				this.config4 = { ...this.config4 };
+		},
+		"$store.state.WebsocketMessage.Data116"(newVal,oldVal){
+				const { config2 } = this;
+				this.config2.value = newVal;
+				this.config2 = { ...this.config2 };
+		},
+		"$store.state.WebsocketMessage.Data117"(newVal,oldVal){
+				const { config5 } = this;
+				this.config5.value = newVal;
+				this.config5 = { ...this.config5 };
+		},
   },
   data() {
     return {
+			left1:600,
+			left2:600,
+			left3:-480,
       data: [],
       data1: [],
       data2: [],
@@ -385,30 +485,30 @@ export default {
       deviceList9Name: "返修区域",
       scrollBarMessage: [],
       config: {
-        value: this.$store.state.WebsocketMessage.Equipment12_DumpEnergy,
+        value: this.$store.state.WebsocketMessage.Data112,
       //  textSize: '12px'
       },
       config1: {
-        value: this.$store.state.WebsocketMessage.Equipment13_DumpEnergy,
+        value: this.$store.state.WebsocketMessage.Data113,
       },
       config2: {
-        value: this.$store.state.WebsocketMessage.Equipment14_DumpEnergy,
+        value: this.$store.state.WebsocketMessage.Data114,
         // borderRadius:10,
-        colors: ['#ff0000', '#ff0000']
+        // colors: ['#ff0000', '#ff0000']
       },
       config3: {
         value:
-          this.$store.state.WebsocketMessage.Equipment12_BatteryTemperature,
+          this.$store.state.WebsocketMessage.Data115,
         formatter: "{value}­°C",
       },
       config4: {
         value:
-          this.$store.state.WebsocketMessage.Equipment13_BatteryTemperature,
+          this.$store.state.WebsocketMessage.Data116,
         formatter: "{value}­°C",
       },
       config5: {
         value:
-          this.$store.state.WebsocketMessage.Equipment14_BatteryTemperature,
+          this.$store.state.WebsocketMessage.Data117,
         formatter: "{value}­°C",
       },
       scrollChange: true,
@@ -552,29 +652,6 @@ export default {
             animation: false,
           },
         },
-        legend: {
-          // data: ['X轴', 'Y轴',"Z轴"]
-          data: [
-            {
-              name: "X轴",
-              textStyle: {
-                color: "#fff",
-              },
-            },
-            {
-              name: "Y轴",
-              textStyle: {
-                color: "#fff",
-              },
-            },
-            {
-              name: "Z轴",
-              textStyle: {
-                color: "#fff",
-              },
-            },
-          ],
-        },
         xAxis: {
           type: "time",
           splitLine: {
@@ -606,7 +683,6 @@ export default {
         },
         series: [
           {
-            name: "X轴",
             type: "line",
             showSymbol: false,
             stack: "总量",
@@ -615,35 +691,15 @@ export default {
               focus: "series",
             },
             data: data,
-          },
-          {
-            name: "Y轴",
-            type: "line",
-            showSymbol: false,
-            stack: "总量",
-            // hoverAnimation: false,
-            emphasis: {
-              focus: "series",
-            },
-            data: [],
-          },
-          {
-            name: "Z轴",
-            type: "line",
-            showSymbol: false,
-            stack: "总量",
-            // hoverAnimation: false,
-            emphasis: {
-              focus: "series",
-            },
-            data: [],
-          },
+          }
         ],
         grid: {
           x: 40,
           y: 30,
           x2: 30,
           y2: 30,
+          width: "60%",
+          height: '60%'
         },
       },
       myChart1: null,
@@ -680,10 +736,10 @@ export default {
         path: "/thirdDetail",
       });
     },
-    linkDetail1(id, name) {
+    linkDetail1(id, name,str) {
       this.$router.push({
         path: "/index",
-        query: { id: id, name: name },
+        query: { id: id, name: name,str },
       });
     },
     //首页滚动条获取数据
@@ -705,6 +761,15 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$store.state.ws)
+		var s = this.$store
+    if(this.$store.state.ws.readyState == 1){
+			s.state.ws.send('T001')
+    }
+		// setTimeout(() =>{
+		// 	s.state.ws.send('T001')
+		// },2000)
+
     setTimeout(() => {
       // this.myChart = echarts.init(document.getElementById("main"));
       this.myChart1 = echarts.init(this.$refs.chartRing1);
@@ -732,24 +797,12 @@ export default {
           {
             data: this.data,
           },
-          {
-            data: this.data1,
-          },
-          {
-            data: this.data2,
-          },
         ],
       });
       this.myChart2.setOption({
         series: [
           {
             data: this.data,
-          },
-          {
-            data: this.data1,
-          },
-          {
-            data: this.data2,
           },
         ],
       });
@@ -758,12 +811,6 @@ export default {
           {
             data: this.data,
           },
-          {
-            data: this.data1,
-          },
-          {
-            data: this.data2,
-          },
         ],
       });
       this.myChart4.setOption({
@@ -771,20 +818,20 @@ export default {
           {
             data: this.data,
           },
-          {
-            data: this.data1,
-          },
-          {
-            data: this.data2,
-          },
         ],
       });
-    }, 1000);
+    }, 5000);
   },
+	created() {
+		for (var i = 0; i < 1000; i++) {
+		  this.data.push(randomData());
+		  this.data1.push(randomData());
+		  this.data2.push(randomData());
+		}
+	},
   components: {
     TopHeader,
     lineDevice,
-    RollCar,
     fcl1,
     fcl2,
     fcr1,
@@ -803,44 +850,18 @@ export default {
     detectRight,
     detectLeft
   },
-  created() {
-    for (var i = 0; i < 1000; i++) {
-      this.data.push(randomData());
-      this.data1.push(randomData());
-      this.data2.push(randomData());
-    }
-  },
-  // mounted() {
-  //   for (var i = 0; i < 1000; i++) {
-  //     this.data.push(this.randomData());
-  //   }
-  //   this.$nextTick(() => {
-  //     let myChart = this.$echarts.init(this.$refs.chartRing);
-  //     setInterval(function () {
-  //       for (var i = 0; i < 5; i++) {
-  //         this.data.shift();
-  //         this.data.push(this.randomData());
-  //       }
-  //       console.log("22222", this.data);
-  //       myChart.setOption({
-  //         series: [
-  //           {
-  //             data: this.data,
-  //           },
-  //         ],
-  //       });
-  //     }, 1000);
-  //   });
-  // },
 };
 </script>
 
-<style lang="less" scoped>
-.data-view {
+<style lang="less">
+#data-view {
   width: 100%;
   height: 100%;
   color: #fff;
   #dv-full-screen-container {
+    .dv-percent-pond text{
+      font-size: 14px!important;
+    }
     .main-header {
       width: 100%;
       height: 8%;
@@ -849,6 +870,9 @@ export default {
       width: 100%;
       height: 92%;
       display: flex;
+      .dv-percent-pond text{
+      font-size: 14px!important;
+      }
       .body-left {
         height: 100%;
         width: 11%;
@@ -861,36 +885,50 @@ export default {
         width: 16%;
         padding-top: 20px;
         .tableCon {
-          width: 16%;
+          width: 15%;
           height: 90%;
+          margin-right: 1.5vh;
+          margin-left: 1vh;
+          box-sizing: border-box;
           position: absolute;
           top: 10%;
           right: 0;
           display: flex;
           flex-direction: column;
           .rightBox {
-            flex: 1;
+            // flex: 1;
+              height: 22%;
             display: flex;
             flex-direction: column;
+            &.last{
+              height: 9%;
+              margin-top: 2vh;
+            }
             .border-box-content {
               margin-left: 5%;
               width: 90%;
-              height: 96%;
+              height: 100%;
               display: flex;
               flex-direction: column;
               .dvHeader {
-                margin-top: 18%;
+                margin-top: 20%;
                 flex: 1;
                 display: flex;
                 .texts {
                   flex: 1;
                 }
+                .stopTime{
+                  position: absolute;
+                  bottom: 1vh;
+                  left: 35%;
+                }
               }
               .dvGraph {
                 flex: 4;
+                position: absolute;
+                top: 4.5vh;
                 .main {
                   width: 50%;
-                  padding-left: 20px;
                   box-sizing: border-box;
                   height: 100%;
                   div {
@@ -944,6 +982,13 @@ export default {
             position: absolute;
             left: 0vw;
             top: 0vh;
+						.imgCar1{
+							transform: scale(0.2);
+							position: relative;
+							top: -45px;
+							left: 450px;
+							transition: 1s;
+						}
           }
         }
         .third-row {
@@ -956,12 +1001,12 @@ export default {
             position: relative;
             .doorOne{
               position: absolute;
-              left: 42.5vw;
+              left: 42vw;
               top: 0;
             }
                .doorTwo{
               position: absolute;
-              left: 43vw;
+              left: 42vw;
               bottom: 0;
             }
             .area_name {
@@ -981,6 +1026,13 @@ export default {
             position: absolute;
             left: 0vw;
             top: 0vh;
+						.imgCar2{
+							transform: scale(0.2);
+							position: relative;
+							top: -45px;
+							left: 450px;
+							transition: 1s;
+						}
           }
         }
         .fivth-row {
@@ -1003,17 +1055,22 @@ export default {
         }
         .seven-row {
           width: 100%;
-          height: 29%;
+          height: 39%;
           display: flex;
           .seven-left {
             width: 20%;
             height: 100%;
+            margin-right: 10px;
             box-sizing: border-box;
-            .dv-percent-pond{
-              text{
-                font-size: 14px!important;
+            .tempture{
+              padding-top: 2px;
+              .car-dataShow{
+                .dv-percent-pond text{
+                font-size: 18px!important;
+                }
               }
             }
+
           }
           .seven-right {
             width: 80%;
@@ -1023,11 +1080,82 @@ export default {
               height: 30%;
               box-sizing: border-box;
             }
+              .carCom {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            // left: 18vw;
+            top: 0vh;
+						.imgCar3{
+							transform: scale(0.2);
+							position: relative;
+							top: -45px;
+							left: 130px;
+							transition: 1s;
+						}
+          }
             .detect-area {
               width: 100%;
               height: 70%;
               box-sizing: border-box;
             }
+                .da-container {
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            height: 100%;
+            position: relative;
+            padding-top: 1vh;
+            box-sizing: border-box;
+            .square {
+              width: 26%;
+              height: 50%;
+              left: 50%;
+              transform: translateX(-40%);
+              top: -2vh;
+              position: absolute;
+              z-index: 2;
+              border: 1px solid #203456;
+            }
+            
+            .da-container-left,
+            .da-container-right {
+              flex: 2;
+              height: 100%;
+              text-align: center;
+              border-right: 1px solid #203456;
+            }
+            .da-container-center {
+              flex: 1;
+              height: 100%;
+              border-right: 1px solid #203456;
+              display: flex;
+              justify-content: space-around;
+            }
+            .da-container-right {
+              flex: 1;
+              height: 100%;
+              text-align: center;
+            }
+            .area-name {
+              position: absolute;
+              top: -1vh;
+              color: #2155ad;
+            }
+          }
+          .bagBotDeviceArea {
+            width: 100%;
+            height: 100%;
+            // margin-left: 44vh;
+            // margin-right: 5vw;
+            position: relative;
+            box-sizing: border-box;
+            .area-name {
+              position: absolute;
+              left: 0;
+              top: 0;
+            }
+          }
           }
         }
         .eight-row {
@@ -1039,6 +1167,13 @@ export default {
             position: absolute;
             left: 18vw;
             top: 0vh;
+						.imgCar3{
+							transform: scale(0.2);
+							position: relative;
+							top: -45px;
+							left: 130px;
+							transition: 1s;
+						}
           }
         }
         .nine-row {

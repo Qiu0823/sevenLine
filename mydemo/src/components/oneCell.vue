@@ -1,7 +1,8 @@
 <template>
   <div class="oneCell">
-    <div class="dv-title">{{device.title}}</div>
-    <div v-show="device.title !== '1#通径机'" class="LEDbtn greenBtn" :style="{backgroundColor:color}"></div>
+    <div class="dv-title-my">{{device.title}}</div>
+    <!-- <div v-show="device.title !== '1#通径机'" class="LEDbtn greenBtn" :style="{backgroundColor:color}"></div> -->
+    <div class="LEDbtn greenBtn" :style="{backgroundColor:color}"></div>
   </div>
 </template>
 <script>
@@ -22,7 +23,7 @@ export default {
   display: flex;
   box-sizing: border-box;
   justify-content: center;
-  .dv-title{
+  .dv-title-my{
       margin-right: 1vh;
       width: 70%;
       height: 2.5vh;
