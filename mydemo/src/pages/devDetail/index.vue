@@ -197,12 +197,24 @@
               </el-tabs>
             </dv-border-box-3>
           </div>
-
+          <!-- 
+              <FourChart v-else-if="this.$route.query.name.includes('收口机')"></FourChart>
+            <FiveChart v-else-if="this.$route.query.name.includes('测量点')"></FiveChart>
+           -->
           <dv-border-box-4
-            v-if="this.$route.meta.hasint"
             class="rmc-bottom-container"
-          >
-            <Bottom-Charts />
+             v-if="this.$route.query.name.includes('车丝机')">
+            <ThereChart></ThereChart>
+          </dv-border-box-4>
+            <dv-border-box-4
+            class="rmc-bottom-container"
+             v-else-if="this.$route.query.name.includes('收口机')">
+              <FourChart></FourChart>
+          </dv-border-box-4>
+              <dv-border-box-4
+            class="rmc-bottom-container"
+             v-else-if="this.$route.query.name.includes('测量点')">
+              <FiveChart></FiveChart>
           </dv-border-box-4>
         </div>
       </dv-border-box-1>
@@ -548,9 +560,14 @@
 </template>
 
 <script>
+// import ThereChart from './components/ThereChart.vue'
 import topHeader from "./components/topHeader1.vue";
-import BottomCharts from "./components/BottomCharts.vue";
+import ThereChart from '@/pages/devDetail/components/ThereChart.vue';
 import deviceInfo from "./components/deviceInfo.vue";
+import FourChart from "./components/FourChart.vue";
+import FiveChart from "./components/FiveChart.vue";
+
+
 import {
   pending,
   handled,
@@ -566,8 +583,10 @@ export default {
   name: "DataView",
   components: {
     topHeader,
-    BottomCharts,
     deviceInfo,
+    ThereChart,
+    FourChart,
+    FiveChart,
   },
   filters: {
     ellipsis(value) {
@@ -972,7 +991,7 @@ export default {
     this.queryHandledError(this.$route.query.id);
     this.devName = this.$route.query.name;
     setTimeout(() => {
-      this.table_height = this.$refs.rmcTop.offsetHeight - 200;
+         this.table_height = this.$refs.rmcTop.offsetHeight - 130;
     }, 100);
     // alert(this.pendingError)
   },

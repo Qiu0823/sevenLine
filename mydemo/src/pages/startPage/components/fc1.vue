@@ -123,7 +123,7 @@ export default{
 	div{
 		width: 100%;
 		height: 100%;
-		padding-top: 0.5vh;
+		// padding-top: 0.5vh;
 		border-bottom: 1px solid #203456;
 	}
 	.detect2 {

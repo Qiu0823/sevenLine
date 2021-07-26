@@ -317,7 +317,7 @@ var oneDay = 24 * 3600 * 1000;
 var value = Math.random() * 1000;
 import * as echarts from "echarts";
 import store from "@/store/index.js";
-import TopHeader from "@/components/topHeader";
+// import TopHeader from "@/components/topHeader";
 import AreaOneCom from "./components/AreaOneCom";
 import lineDevice from "@/components/lineDevice";
 import RollCar from "@/components/rollCar";
@@ -777,7 +777,7 @@ export default {
     }, 1000);
   },
   components: {
-    TopHeader,
+    // TopHeader,
     lineDevice,
     RollCar,
     fcl1,

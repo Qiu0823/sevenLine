@@ -57,7 +57,7 @@
         <div class="al-line-bottom"></div>
       </div>
          <div class="al-five">
-           <div class="divided" @click="linkDetail1(29, '分钢仪')">分钢仪</div>
+           <div class="divided">分钢仪</div>
       </div>
     </div>
   </div>

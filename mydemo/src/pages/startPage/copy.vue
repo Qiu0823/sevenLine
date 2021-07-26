@@ -369,7 +369,7 @@ var oneDay = 24 * 3600 * 1000;
 var value = Math.random() * 1000;
 import * as echarts from "echarts";
 import store from "@/store/index.js";
-import TopHeader from "@/components/topHeader";
+import TopHeader from "./components/topHeader";
 import AreaOneCom from "./components/AreaOneCom";
 import lineDevice from "@/components/lineDevice";
 import fc from "./components/fc";

@@ -1,11 +1,12 @@
 <template>
   <div class="con">
     <div class="title">
-        <dv-decoration-7 class="border7" style="width:200px;height:50px;">{{singleTitle}}</dv-decoration-7>
+        <div class="border7" style="width:200px;height:50px;">{{singleTitle}}</div>
     </div>
     <div class="imgBox">
       <!-- <img src="~@/assets/img/lamp.png" alt="" /> -->
-      <i class="iconfont  icon-ic_zhishideng_ " :style="{color:color}" > </i>
+      <!-- <i class="iconfont  icon-ic_zhishideng_ " :style="{color:color}" > </i> -->
+      <i class="el-icon-timer"></i>
     </div>
     <!-- <div>
       {{value}}
@@ -21,12 +22,14 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.el-icon-timer{
+     color: rgb(156, 16, 16);
+    font-size: xxx-large;
+    font-weight: bolder;
+    font-stretch: expanded;
+}
 .icon-ic_zhishideng_{
-    // width: 100%;
-    // height: 100%;
     color: rgb(156, 16, 16);
-    // width: 5vh;
-    // height: 5vh;
     font-size: xxx-large;
     font-weight: bolder;
     font-stretch: expanded;
@@ -36,24 +39,29 @@ export default {
 }
 .con {
     width: 15%;
-    height: 10%;
+    height: 100%;
   display: flex;
   flex-direction: column;
   padding: 10px;
   .title {
       height: 55%;
-    //   border: 1px solid red;
+      height: 3vh;
+      background-color:#666;
+      color: black;
       .border7{
-          width: 100%!important;
-          height: 100%!important;
+          // width: 100%!important;
+          // height: 100%!important;
+      margin-top: 5px;
+      text-align: center;
       }
       text-align: center;
     //   flex: 2;
  
   }
   .imgBox {
-      margin-top: 2vh;
+      margin-top: 1vh;
       height: 40%;
+      height: 5vh;
     img{
         // width: 80%;
         // height: 80%;

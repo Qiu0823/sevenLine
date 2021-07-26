@@ -36,7 +36,6 @@
 			<div style="width: 50%;float: left;">
 				<vue-thermometer :value="67" :min="0" :max="100" :options="option6" />
 			</div>
-			<!-- 		  <dv-charts style="margin: auto; margin-top: -30px!important; width: 250px;height: 250px;" :option="option4" /> -->
 		</div>
 		<dv-decoration-2 class="decoration-3" :reverse="true" style="width:5px;margin-top: 20px;" />
 		<div class="bc-chart-item">
@@ -386,7 +385,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.bottom-charts {
 		width: 100%;
 		height: 100%;

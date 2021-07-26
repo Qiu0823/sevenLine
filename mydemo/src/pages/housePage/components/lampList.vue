@@ -87,12 +87,12 @@ export default {
      width: 95%;
      height: 100%;
      margin: 0 auto;
-     margin-top: 20px;
+     margin-top: 35px;
      .fir-row{
          width: 100%;
-         height: 11%;
+         height: 10%;
          display: flex;
-         justify-content: space-around;
+         justify-content: space-between;
      }
  }
 </style>

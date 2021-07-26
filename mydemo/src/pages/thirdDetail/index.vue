@@ -67,13 +67,13 @@
               <el-table-column label="操作原因措施">
                 <template slot-scope="scope">
                   <el-button
-                    @click="showAddDialog(scope.$index)"
+                    @click="showAddDialog(scope.$index,scope.row.fault)"
                     type="text"
                     size="nomal"
                     >新增
                   </el-button>
                   <el-button
-                    @click="updateDialogClick(scope.$index)"
+                    @click="updateDialogClick(scope.$index,scope.row.fault)"
                     type="text"
                     size="nomal"
                     >修改
@@ -83,15 +83,15 @@
               <el-table-column label="操作电机信息">
                 <template slot-scope="scope">
                   <el-button
-                    v-if="!scope.row.machine"
-                    @click="showAddElecDialog(scope.$index,'新增')"
+                    v-if="scope.row.machine"
+                    @click="showAddElecDialog(scope.$index, '新增',scope.row.fault)"
                     type="text"
                     size="nomal"
                     >新增
                   </el-button>
                   <el-button
                     v-else
-                    @click="showAddElecDialog(scope.$index,'修改')"
+                    @click="showAddElecDialog(scope.$index, '修改',scope.row.fault)"
                     type="text"
                     size="nomal"
                     >修改
@@ -105,7 +105,7 @@
     </div>
     <!-- 新增弹出的dialog框 -->
     <el-dialog
-      title="提示"
+      :title="dialogTitle1"
       :visible.sync="addDialog"
       width="30%"
       @close="closeAddDialog"
@@ -159,40 +159,41 @@
 
     <!-- 修改电表信息新增弹出的dialog框 -->
     <el-dialog
-      title="提示"
+      :title="dialogTitle2"
       :visible.sync="addElecDialog"
       width="40%"
       @close="closeAddDialog"
       class="addElecDialog"
+      ref="elecInfoTable"
     >
       <el-form ref="addForm" :model="addElecForm" label-width="100px">
         <el-form-item label="电机名称">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.machineName"></el-input>
         </el-form-item>
         <el-form-item label="电机位号">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.tagNumber"></el-input>
         </el-form-item>
         <el-form-item label="电气室">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.electricRoom"></el-input>
         </el-form-item>
         <el-form-item label="电气柜">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.electricCabinet"></el-input>
         </el-form-item>
         <el-form-item label="器件代号">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.deviceCode"></el-input>
         </el-form-item>
         <el-form-item label="电机开关箱">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.powerSwitch"></el-input>
         </el-form-item>
         <el-form-item label="变频器型号">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.inverter"></el-input>
         </el-form-item>
         <el-form-item label="操作台">
-          <el-input v-model="addForm.name"></el-input>
+          <el-input v-model="addElecForm.ct"></el-input>
         </el-form-item>
-        <el-form-item style="margin: 0 auto !important">
+        <el-form-item style="margin-right: 135px">
           <el-button type="primary" @click="addElecSubmit('addElecForm')"
-            >提交原因和措施</el-button
+            >提交</el-button
           >
         </el-form-item>
       </el-form>
@@ -200,7 +201,7 @@
 
     <!-- 修改弹出的dialog框 -->
     <el-dialog
-      title="修改原因措施"
+      :title="dialogTitle1"
       :visible.sync="updateDialog"
       width="30%"
       @close="closeUpdateDialog"
@@ -263,6 +264,9 @@ import {
   getAllErrReasonMeasure,
   postUpdateReason,
   addReaAndMea,
+  addElecInfo,
+  beforeUpdateElecInfo,
+  UpdateElecInfo
 } from "../../api/detail.js";
 import topHeader from "./components/topHeader1.vue";
 export default {
@@ -292,40 +296,120 @@ export default {
         reason: "",
         measuresList: [],
       }, //控制更新表格的提交数据
-      addElecDialog: true,
-      updateElecDialog:true,
-      addElecForm:{
-        machineName:'',
-        tagNumber:'',
-        electricRoom:'',
-        electricCabinet:'',
-        powerSwitch:'',
-        inverter:'',
-        ct:'',
+      addElecDialog: false,
+      updateElecDialog: true,
+      //修改电机信息的新增和修改公用一个form
+      addElecForm: {    
+        machineName: "",
+        tagNumber: "",
+        electricRoom: "",
+        electricCabinet: "",
+        deviceCode: "",
+        powerSwitch: "",
+        inverter: "",
+        ct: "",
       },
-        updateElecForm:{
-        machineName:'',
-        tagNumber:'',
-        electricRoom:'',
-        electricCabinet:'',
-        powerSwitch:'',
-        inverter:'',
-        ct:'',
-      }
+      dialogTitle1: "",
+      dialogTitle2: "",
     };
   },
 
   methods: {
     // 修改电机信息的新增按钮
-    showAddElecDialog(index,type) {
-      console.log(type)
+    showAddElecDialog(tableIndex, type,fault) {
+      var item = this.tableData[tableIndex];
+      this.faultId = item.faultId;
+       this.addElecForm = {    
+        machineName: "",
+        tagNumber: "",
+        electricRoom: "",
+        electricCabinet: "",
+        deviceCode: "",
+        powerSwitch: "",
+        inverter: "",
+        ct: "",
+      }
+      if (type == "新增") {
+        this.dialogTitle2 = fault + "————添加电机信息";
+      } else {
+        var data = {
+          faultId: this.faultId,
+          deviceId: this.devNum
+        }
+        console.log(data)
+        this.getBeforeElecInfo(data)
+        this.dialogTitle2 = fault + "————修改电机信息";
+      }
+      this.addElecDialog = true;
+      console.log(type);
+    },
+    //获取修改前电机信息
+    async getBeforeElecInfo(data){
+        await beforeUpdateElecInfo(data).then((res) => {
+          console.log(res);
+          let { state, message, result } = res.data;
+          if (state == true) {
+            this.addElecForm = {...result}
+          } else {
+            this.$message({
+              message: "获取失败",
+            });
+          }
+        });
     },
     // 修改电机信息的修改按钮
     showUpdateElecDialog() {},
 
     // 修改电机信息的提交按钮
-    addElecSubmit(){
-
+    async  addElecSubmit() {
+      var data = {
+        deviceId: this.devNum,
+        faultId: this.faultId ? this.faultId : ' ',
+        machineName: this.addElecForm.machineName,
+        tagNumber: this.addElecForm.tagNumber,
+        electricRoom: this.addElecForm.electricRoom,
+        electricCabinet: this.addElecForm.electricCabinet,
+        deviceCode: this.addElecForm.deviceCode,
+        powerSwitch: this.addElecForm.powerSwitch,
+        inverter: this.addElecForm.inverter,
+        ct: this.addElecForm.ct,
+      };
+      if (this.dialogTitle2 === "添加电机信息") {
+        await addElecInfo(data).then((res) => {
+          console.log(res);
+          let { state, message, result } = res.data;
+          if (state == true) {
+            this.addElecDialog = false
+            this.$message({
+              message,
+              type: "success",
+            });
+          } else {
+            this.$message({
+              message: "添加失败",
+            });
+          }
+        });
+      } else if(this.dialogTitle2 === "修改电机信息"){
+        var id = this.addElecForm.id;
+        data = {...data,id}
+        console.log(data)
+           await UpdateElecInfo(data).then((res) => {
+          console.log(res);
+          let { state, message, result } = res.data;
+          if (state == true) {
+            this.addElecDialog = false
+            this.$message({
+              message,
+              type: "success",
+            });
+          } else {
+            this.$message({
+              message: "添加失败",
+            });
+          }
+        });
+      }
     },
     //新增原因和措施
     onSubmit(formName) {
@@ -391,7 +475,8 @@ export default {
       }
     },
     //点击修改
-    updateDialogClick(tableIndex) {
+    updateDialogClick(tableIndex,fault) {
+      this.dialogTitle1 = fault;
       this.updateForm = {
         reasonId: null,
         reason: "",
@@ -406,7 +491,8 @@ export default {
       this.updateDialog = true;
     },
     //点击新增
-    showAddDialog(tableIndex) {
+    showAddDialog(tableIndex,fault) {
+      this.dialogTitle1 = fault;
       this.addForm = {
         faultReason: "", //新增dialog下拉框选择的原因
         input: [""], //输入框的值
