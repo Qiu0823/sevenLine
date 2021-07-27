@@ -25,9 +25,9 @@
         <!-- <div class="mc-content"></div> -->
         <div class="mc-right">
           <div class="tableArea">
-            <div class="table_c">
+            <!-- <div class="table_c"> -->
               <!-- <div class="table_all"> -->
-              <el-card shadow="hover" class="tebale_card">
+              <!-- <el-card shadow="hover" class="tebale_card"> -->
                 <el-table
                   :data="tableData"
                   border
@@ -44,12 +44,14 @@
                     min-width="180"
                   >
                   </el-table-column>
-                  <el-table-column prop="date" label="故障时间" width="180">
+                  <el-table-column prop="date" label="急停时间" width="180">
+                  </el-table-column>
+                     <el-table-column prop="date" label="恢复运行时间" width="180">
                   </el-table-column>
                 </el-table>
-              </el-card>
+              <!-- </el-card> -->
               <!-- </div> -->
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </dv-border-box-1>
@@ -156,7 +158,7 @@ export default {
       width: 33%;
       height: 100%;
       .tableArea {
-        width: 80%;
+        width: 95%;
         margin: 0 auto;
         height: 100%;
         margin-top: 2vh;
@@ -172,11 +174,11 @@ export default {
         .success-row {
           background-color: #3f5c6d2c;
         }
-        .table_c {
-          width: 100%;
-          height: 500px;
-          background-size: 100% auto;
-        }
+        // .table_c {
+        //   width: 100%;
+        //   height: 500px;
+        //   background-size: 100% auto;
+        // }
         .el-card__body {
           padding: 0;
           height: 100%;

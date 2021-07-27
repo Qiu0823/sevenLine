@@ -5,16 +5,16 @@
         <div class="mh-middle">设备故障诊断系统</div>
       </div> -->
       <top-header></top-header>
-      <router-link to="/">
+       <router-link to="/">
         <img src="~@/assets/img/home.png" class="img1" />
       </router-link>
-      <el-button
+      <!-- <el-button
         @click="goToThird"
         type="primary"
         style="position: absolute; top: 50px; left: 130px"
-        >修改原因措施</el-button
-      >
-
+        >修改原因措施</el-button> -->
+     
+      <NavBar></NavBar>
       <dv-border-box-1 class="main-container">
         <div class="left-container">
           <dv-border-box-3 class="left-chart-container">
@@ -566,6 +566,7 @@ import ThereChart from '@/pages/devDetail/components/ThereChart.vue';
 import deviceInfo from "./components/deviceInfo.vue";
 import FourChart from "./components/FourChart.vue";
 import FiveChart from "./components/FiveChart.vue";
+import NavBar from "./components/NavBar.vue";
 
 
 import {
@@ -587,6 +588,7 @@ export default {
     ThereChart,
     FourChart,
     FiveChart,
+    NavBar
   },
   filters: {
     ellipsis(value) {
@@ -1129,9 +1131,9 @@ export default {
   .img1 {
     position: absolute;
     display: inline-block;
-    width: 70px;
-    height: 70px;
-    top: 30px;
+    width: 50px;
+    height: 50px;
+    top: 50px;
     left: 30px;
   }
   .el-dialog--center {
