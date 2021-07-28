@@ -6,7 +6,7 @@
     <div class="imgBox">
       <!-- <img src="~@/assets/img/lamp.png" alt="" /> -->
       <!-- <i class="iconfont  icon-ic_zhishideng_ " :style="{color:color}" > </i> -->
-      <i class="el-icon-timer"></i>
+      <i class="el-icon-timer" :style="{color:color}"></i>
     </div>
     <!-- <div>
       {{value}}

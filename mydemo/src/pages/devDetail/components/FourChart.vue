@@ -1,7 +1,7 @@
 <template>
   <div class="table-container">
     <div class="bc-chart-item">
-      <div class="bcci-header">收口机主缸设定压力</div>
+      <div class="bcci-header">收口机主缸设定压力: {{option1.series[0].data[0].value}}</div>
       <dv-charts
         style="
           margin: auto;
@@ -13,7 +13,7 @@
       />
     </div>
     <div class="bc-chart-item">
-      <div class="bcci-header">收口机主缸设定实际位移</div>
+      <div class="bcci-header">收口机主缸设定实际位移: {{option2.series[0].data[0].value}}</div>
       <dv-charts
         style="
           margin: auto;
@@ -25,7 +25,7 @@
       />
     </div>
     <div class="bc-chart-item">
-      <div class="bcci-header">收口机主缸设定实际压力</div>
+      <div class="bcci-header">收口机主缸设定实际压力: {{option3.series[0].data[0].value}}</div>
       <dv-charts
         style="
           margin: auto;
@@ -37,7 +37,7 @@
       />
     </div>
     <div class="bc-chart-item">
-      <div class="bcci-header">收口机主缸设定位移</div>
+      <div class="bcci-header">收口机主缸设定位移: {{option4.series[0].data[0].value}}</div>
       <dv-charts
         style="
           margin: auto;
@@ -231,22 +231,22 @@ export default {
   },
   watch: {
     "$store.state.WebsocketMessage.Data14"(newVal, oldVal) {
-      console.log("交流电流显示" + newVal);
+      console.log("收口机主缸设定压力" + newVal);
       this.option1.series[0].data[0].value = newVal;
       this.option1 = { ...this.option1 };
     },
      "$store.state.WebsocketMessage.Data15"(newVal, oldVal) {
-      console.log("交流电流显示" + newVal);
+      console.log("收口机主缸设定实际位移" + newVal);
       this.option2.series[0].data[0].value = newVal;
       this.option2 = { ...this.option2 };
     },
      "$store.state.WebsocketMessage.Data16"(newVal, oldVal) {
-      console.log("交流电流显示" + newVal);
+      console.log("收口机主缸设定实际压力" + newVal);
       this.option3.series[0].data[0].value = newVal;
       this.option3 = { ...this.option3 };
     },
      "$store.state.WebsocketMessage.Data17"(newVal, oldVal) {
-      console.log("交流电流显示" + newVal);
+      console.log("收口机主缸设定位移" + newVal);
       this.option4.series[0].data[0].value = newVal;
       this.option4 = { ...this.option4 };
     },

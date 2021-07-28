@@ -105,11 +105,11 @@
     <!-- </div> -->
 
     <!-- 乳化液 -->
-    <div class="tableCom" v-if="str == 'T013' || str == 'T030'">
+    <div class="tableCom" v-if="str == 'T013'">
       <dv-border-box-2>
         <div class="title">电表展示</div>
         <div class="bc-chart-item table1">
-          <div class="bcci-header">{{tableHeaderTitle1}}</div>
+          <div class="bcci-header">{{tableHeaderTitle1}}: {{option1.series[0].data[0].value}}</div>
           <dv-charts
             style="
               margin: auto;
@@ -121,7 +121,7 @@
           />
         </div>
         <div class="bc-chart-item">
-          <div class="bcci-header">{{tableHeaderTitle2}}</div>
+          <div class="bcci-header">{{tableHeaderTitle2}}: {{option2.series[0].data[0].value}}</div>
           <dv-charts
             style="
               margin: auto;
@@ -136,11 +136,11 @@
     </div>
 
     <!-- 管体退磁 -->
-    <!-- <div class="tableCom" v-else-if="str == 'T030'">
+    <div class="tableCom" v-else-if="str == 'T030'">
       <dv-border-box-2>
         <div class="title">电表展示</div>
         <div class="bc-chart-item table1">
-          <div class="bcci-header">{{tableHeaderTitle1}}</div>
+          <div class="bcci-header">{{tableHeaderTitle1}}: {{option3.series[0].data[0].value}}</div>
           <dv-charts
             style="
               margin: auto;
@@ -148,11 +148,11 @@
               width: 250px;
               height: 250px;
             "
-            :option="option1"
+            :option="option3"
           />
         </div>
         <div class="bc-chart-item">
-          <div class="bcci-header">{{tableHeaderTitle2}}</div>
+          <div class="bcci-header">{{tableHeaderTitle2}}: {{option4.series[0].data[0].value}}</div>
           <dv-charts
             style="
               margin: auto;
@@ -160,11 +160,11 @@
               width: 250px;
               height: 250px;
             "
-            :option="option2"
+            :option="option4"
           />
         </div>
       </dv-border-box-2>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -218,11 +218,12 @@ export default {
                 textAlign: "left",
               },
             },
-            min: 160,
-            max: 2000,
+            min: -1,
+            max: 1,
           },
         ],
       },
+      //series[0].data[0].value
       option2: {
         series: [
           {
@@ -263,6 +264,92 @@ export default {
             },
             min: 160,
             max: 2000,
+          },
+        ],
+      },
+            option3: {
+        series: [
+          {
+            type: "gauge",
+            data: [
+              {
+                name: "1#电机",
+                value: 0,
+                radius: "60%",
+              },
+            ],
+            axisLabel: {
+              formatter: "{value}",
+              style: {
+                fill: "#fff",
+              },
+            },
+            axisTick: {
+              style: {
+                stroke: "#fff",
+              },
+            },
+            pointer: {
+              valueIndex: 1,
+              style: {
+                scale: [0.6, 0.6],
+              },
+            },
+            details: {
+              show: true,
+              formatter: "{name}{value}",
+              position: "start",
+              offset: [10, 0],
+              style: {
+                fontSize: 13,
+                textAlign: "left",
+              },
+            },
+            min: 1,
+            max: 20,
+          },
+        ],
+      },
+            option4: {
+        series: [
+          {
+            type: "gauge",
+            data: [
+              {
+                name: "1#电机",
+                value: 0,
+                radius: "60%",
+              },
+            ],
+            axisLabel: {
+              formatter: "{value}",
+              style: {
+                fill: "#fff",
+              },
+            },
+            axisTick: {
+              style: {
+                stroke: "#fff",
+              },
+            },
+            pointer: {
+              valueIndex: 1,
+              style: {
+                scale: [0.6, 0.6],
+              },
+            },
+            details: {
+              show: true,
+              formatter: "{name}{value}",
+              position: "start",
+              offset: [10, 0],
+              style: {
+                fontSize: 13,
+                textAlign: "left",
+              },
+            },
+            min: 1,
+            max: 20,
           },
         ],
       },
@@ -876,15 +963,18 @@ export default {
     "$store.state.WebsocketMessage.Data5"(newVal, oldVal) {
       if (this.$route.query.name.includes('退磁')) {
         console.log("直流电流显示" + newVal);
-        this.option1.series[0].data[0].value = newVal;
-        this.option1 = { ...this.option1 };
+        this.option3.series[0].data[0].value = newVal;
+        this.option3 = { ...this.option3 };
+        console.log(this.option3.series[0].data[0].value,'option3Value')
       }
     },
       "$store.state.WebsocketMessage.Data6"(newVal, oldVal) {
       if (this.$route.query.name.includes('退磁')) {
       console.log("交流电流显示" + newVal);
-      this.option2.series[0].data[0].value = newVal;
-      this.option2 = { ...this.option2 };
+      this.option4.series[0].data[0].value = newVal;
+      this.option4 = { ...this.option4 };
+        console.log(this.option4.series[0].data[0].value,'option4Value')
+
       }
     },
   },

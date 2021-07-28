@@ -1,7 +1,7 @@
 <template>
   <div class="table-container">
     <div class="bc-chart-item">
-      <div class="bcci-header">实际液压油箱液位</div>
+      <div class="bcci-header">实际液压油箱液位: {{config.data[0]}}</div>
       <!-- <dv-charts style="margin: auto; margin-top: -30px!important; width: 250px;height: 250px;"
 				:option="option" /> -->
       <dv-water-level-pond
@@ -11,24 +11,24 @@
       />
     </div>
     <div class="bc-chart-item">
-      <div class="bcci-header">实际液压油箱温度</div>
+      <div class="bcci-header">实际液压油箱温度: {{comTher1}}</div>
       <div class="bcci-table">
         <vue-thermometer
           :value="comTher1"
           :min="0"
           :max="100"
-          :options="option6"
+          :options="option1"
         />
       </div>
     </div>
     <div class="bc-chart-item">
-      <div class="bcci-header">实际主轴箱油箱温度</div>
+      <div class="bcci-header">实际主轴箱油箱温度: {{comTher2}}</div>
       <div class="bcci-table">
         <vue-thermometer
           :value="comTher2"
           :min="0"
           :max="100"
-          :options="option6"
+          :options="option2"
         />
       </div>
     </div>
@@ -42,7 +42,29 @@ export default {
       config: {
         data: [66],
       },
-      option6: {
+      option1: {
+        text: {
+          color: "white",
+          fontSize: 8,
+          textAdjustmentY: 2,
+          fontFamily: "Arial",
+          textEnabled: true,
+        },
+        thermo: {
+          color: "#FF0000",
+          backgroundColor: "#fcf9f9",
+          frameColor: "white",
+          ticks: 5,
+          ticksEnabled: true,
+          tickColor: "white",
+          tickWidth: "1",
+        },
+        layout: {
+          height: 170,
+          width: 100,
+        },
+      },
+      option2: {
         text: {
           color: "white",
           fontSize: 8,
@@ -80,7 +102,10 @@ export default {
   watch: {
     "$store.state.WebsocketMessage.Data11"(newVal, oldVal) {
       console.log("实际液压油箱液位" + newVal);
-      this.config.data.splice(0, 1, newVal);
+    //   this.config.data.splice(0, 1, newVal);
+      this.config.data[0] = newVal;
+      this.config = {...this.config}
+      console.log(this.config.data)
     },
     "$store.state.WebsocketMessage.Data12"(newVal, oldVal) {
       console.log("实际液压油箱温度" + newVal);
@@ -88,7 +113,7 @@ export default {
     },
     "$store.state.WebsocketMessage.Data13"(newVal, oldVal) {
       console.log("实际主轴箱油箱温度" + newVal);
-      this.ther1 = newVal;
+      this.ther2 = newVal;
     },
   },
 };

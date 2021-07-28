@@ -132,38 +132,47 @@ export function postUpdateResult(data) {
 //http://172.20.10.3:8181/fault/add/reason/measures
 export function addReaAndMea(data) {
 	return request({
-	  url: '/fault/add/reason/measures',
-	  method: 'post',
-	  data
+		url: '/fault/add/reason/measures',
+		method: 'post',
+		data
 	})
-  }
-  
+}
+
 //添加电机信息
 //http://127.0.0.1:8181/machine/add
 export function addElecInfo(data) {
 	return request({
-	  url: '/machine/add',
-	  method: 'post',
-	  data
+		url: '/machine/add',
+		method: 'post',
+		data
 	})
-  }
+}
 
-  //修改前查看电机信息
-  //http://172.20.10.3:8181/machine/query/all?faultId=1594&deviceId=19
-  export function beforeUpdateElecInfo(data) {
+//修改前查看电机信息
+//http://172.20.10.3:8181/machine/query/all?faultId=1594&deviceId=19
+export function beforeUpdateElecInfo(data) {
 	return request({
-	  url: '/machine/query/all',
-	  method: 'get',
-	  params: data
+		url: '/machine/query/all',
+		method: 'get',
+		params: data
 	})
-  }
+}
 
-    //修改电机信息
-  //http://127.0.0.1:8181/machine/update
-  export function UpdateElecInfo(data) {
+//修改电机信息
+//http://127.0.0.1:8181/machine/update
+export function UpdateElecInfo(data) {
 	return request({
-	  url: '/machine/update',
-	  method: 'post',
-	  data
+		url: '/machine/update',
+		method: 'post',
+		data
 	})
-  }
+}
+
+//查看急停历史记录
+//http://127.0.0.1:8181/emergency/query/record
+export function findStopHisInfo() {
+	return request({
+		url: '/emergency/query/record',
+		method: 'get',
+	})
+}

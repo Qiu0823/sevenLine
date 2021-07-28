@@ -382,7 +382,8 @@ import gnleft from "./components/gnleft";
 import gncenter from "./components/gncenter";
 import gnright from "./components/gnright";
 import areabottom from "./components/areabottom";
-import SidebarNav from "@/components/sidebarNav";
+import SidebarNav from "@/components/SideBarNav3";
+// import SidebarNav from "@/components/sidebarNav";
 import detectLeft from "./components/detectLeft";
 import detectRight from "./components/detectRight";
 
@@ -879,6 +880,7 @@ export default {
         padding-right: 1%;
         box-sizing: border-box;
         padding-top: 50px;
+        z-index:2021
       }
       .body-right {
         height: 95%;

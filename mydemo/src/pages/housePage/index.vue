@@ -3,12 +3,6 @@
     <dv-full-screen-container>
       <div class="main-header">
         <div class="mh-left">
-          <!-- <dv-border-box-2
-            style="width: 120px; height: 50px; line-height: 50px; text-align:center;margin-left:200px;"
-          >
-            <span>首页</span>
-            <i class="el-icon-s-home"></i>
-          </dv-border-box-2> -->
           <router-link to="/">
             <img src="~@/assets/img/home.png" class="houseImg" />
           </router-link>
@@ -25,9 +19,6 @@
         <!-- <div class="mc-content"></div> -->
         <div class="mc-right">
           <div class="tableArea">
-            <!-- <div class="table_c"> -->
-              <!-- <div class="table_all"> -->
-              <!-- <el-card shadow="hover" class="tebale_card"> -->
                 <el-table
                   :data="tableData"
                   border
@@ -39,19 +30,16 @@
                   }"
                 >
                   <el-table-column
-                    prop="name"
+                    prop="emergencyName"
                     label="急停盘名称"
                     min-width="180"
                   >
                   </el-table-column>
-                  <el-table-column prop="date" label="急停时间" width="180">
+                  <el-table-column prop="stopTime" label="急停时间" width="180">
                   </el-table-column>
-                     <el-table-column prop="date" label="恢复运行时间" width="180">
+                     <el-table-column prop="restartTime" label="恢复运行时间" width="180">
                   </el-table-column>
                 </el-table>
-              <!-- </el-card> -->
-              <!-- </div> -->
-            <!-- </div> -->
           </div>
         </div>
       </dv-border-box-1>
@@ -60,7 +48,9 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import LampList from "../housePage/components/lampList.vue";
+import {findStopHisInfo} from '@/api/detail.js'
 import { mapState } from "vuex";
 export default {
   name: "DataView",
@@ -69,22 +59,6 @@ export default {
     return {
       str: "",
       tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-        },
       ],
     };
   },
@@ -97,12 +71,35 @@ export default {
         return "warning-row";
       } else return "";
     },
+    async getHisInfo(){
+      console.log('ask')
+      await findStopHisInfo().then(res=>{
+        const {state,result} = res.data;
+        if(state == true){
+          this.tableData = result;
+        }
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
   },
   created() {
+    this.getHisInfo()
     this.str = this.$route.query.str;
     if (this.$store.state.ws.readyState == 1) {
       this.ws.send(this.str);
     }
+    var self = this;
+    this.$store.state.ws.onmessage = function(event) {
+			let datas = JSON.parse(event.data)
+			console.log(datas,'message!');
+      	for(var p in datas){
+				Vue.set(self.$store.state.WebsocketMessage,p,datas[p])
+			}
+      self.getHisInfo()
+		};
+    
   },
   computed: {
     ...mapState(["WebsocketMessage", "ws"]),

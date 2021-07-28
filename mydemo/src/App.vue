@@ -26,7 +26,6 @@ export default {
 		}
 
 		s.state.ws.onmessage = function(event) {
-			
 			let datas = JSON.parse(event.data)
 			console.log(datas)				
 			for(var p in datas){

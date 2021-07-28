@@ -190,13 +190,20 @@ export default {
     //登录页面的提交按钮
     loginSubmitForm(formName) {
       this.$refs[formName].validate((valid) => {
+        console.log(valid);
         if (valid) {
-          console.log("login  submit");
-          this.resetForm(formName);
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
+          if (
+            this.ruleForm.userName == this.$store.state.userInfo.name &&
+            this.ruleForm.pass == this.$store.state.userInfo.password
+          ) {
+            this.$router.push("/");
+          } else {
+            this.$message({
+              message: "用户名或密码错误",
+              type: "error",
+            });
+            console.log("密码错误");
+          }
         }
       });
     },
@@ -266,9 +273,9 @@ export default {
         }
       }
       .el-form-item:last-child {
-        .el-form-item__content{
-          margin-left: 30px!important;
-          .el-button{
+        .el-form-item__content {
+          margin-left: 30px !important;
+          .el-button {
             font-size: 18px;
             margin-right: 20px;
           }
@@ -292,10 +299,10 @@ export default {
           }
         }
       }
-        .el-form-item:last-child {
-        .el-form-item__content{
-          margin-left: 30px!important;
-          .el-button{
+      .el-form-item:last-child {
+        .el-form-item__content {
+          margin-left: 30px !important;
+          .el-button {
             font-size: 18px;
             margin-right: 20px;
           }

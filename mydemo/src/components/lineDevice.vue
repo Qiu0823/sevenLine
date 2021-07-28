@@ -39,13 +39,13 @@
       <div class="third-top">
         <dv-decoration-6 style="width: 40vw; height: 10px" />
       </div>
-      <div class="one" @click="linkDetail1(165, '2#RGV','T043')">
+      <div class="one" @click="linkDetail1(165, '6#桁架','T043')">
         <one-cell :device="dv8"></one-cell>
       </div>
       <div class="two">
-        <one-cell :device="dv9"  @click="linkDetail1(166, '2#RGV','T044')"></one-cell>
+        <one-cell :device="dv9"  @click="linkDetail1(166, '7#桁架','T044')"></one-cell>
       </div>
-      <div class="three" @click="linkDetail1(13, '2#RGV','T017')">
+      <div class="three" @click="linkDetail1(13, '3#RGV','T017')">
         <one-cell :device="dvCar3"></one-cell>
       </div>
     </div>
