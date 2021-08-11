@@ -12,7 +12,7 @@
     <div class="gnr4" @click="linkDetail1(27,'管拧机','T028')">
       <oneCell :device="gnr4" :color="this.$store.state.WebsocketMessage.Data27"></oneCell>
     </div>
-    <div class="gnr5"  @click="linkDetail1(168,'2#通径机','T045')">
+    <div class="gnr5"  @click="linkDetail1(152,'2#通径机','T045')">
       <oneCell :device="gnr5"></oneCell>
     </div>
     <!-- <div class="gnr7">

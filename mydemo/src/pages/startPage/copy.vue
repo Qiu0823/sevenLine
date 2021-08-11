@@ -143,8 +143,6 @@
                     />
                   </div>
                 </div>
-               
-
                 <div class="car-dataShow">
                   <span style="font-size: 14px">2#RGV电池电量及温度</span>
                   <div>
@@ -225,46 +223,6 @@
               </el-row>
             </div>
           </div>
-          <!-- <el-row class="eight-row">
-            <el-col :span="4"></el-col>
-            <el-col :span="20" style="height: 100%">
-              <line-device :lineNum="3"></line-device>
-              <div class="carCom">
-                <img src="../../assets/img/car.png" class="imgCar3" :style="{ left: left3 + 'px' }" />
-              </div>
-            </el-col>
-          </el-row> -->
-          <!-- <el-row class="nine-row">
-              <div class="doorThree">
-              <i class="iconfont icon-mendoor13"></i>
-            </div>
-            <el-col style="height: 100%; width: 20%"></el-col>
-            <el-col style="height: 100%; width: 80%">
-              <div class="bagBotDeviceArea areaBorderStyle">
-                <div class="da-container">
-                  <div class="square">出废区</div>
-                  <div class="area-name">打包区域</div>
-                  <div class="da-container-left">成型区</div>
-                  <div
-                    class="da-container-center"
-                    @click="linkDetail1(34, '打捆机')"
-                    style="cursor: pointer"
-                  >
-                    <div class="dv-title">打捆机</div>
-                    <div
-                      class="LEDbtn greenBtn packPosition"
-                      :style="{
-                        backgroundColor:
-                          this.$store.state.WebsocketMessage
-                            .Data34,
-                      }"
-                    ></div>
-                  </div>
-                  <div class="da-container-right">成捆移送</div>
-                </div>
-              </div>
-            </el-col>
-          </el-row> -->
         </div>
         <div class="body-right">
           <div class="tableCon">

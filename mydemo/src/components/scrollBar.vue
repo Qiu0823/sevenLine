@@ -11,7 +11,7 @@ export default {
         header: ['时间',"设备", "重故障"],
         data: this.$store.state.WebsocketMessage.Data127,
         // index: true,
-        columnWidth: [160,150, 320],
+        columnWidth: [160,120, 320],
         align: ["center"],
         headerBGC: "#213454",
         oddRowBGC: "#266090",

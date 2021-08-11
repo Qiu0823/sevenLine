@@ -27,7 +27,7 @@
 
         <div class="right-main-container">
           <div class="rmc-top-container" ref="rmcTop">
-            <dv-border-box-3 class="rmctc-left-container">
+            <dv-border-box-13 class="rmctc-left-container">
               <el-tabs v-model="activeName" @tab-click="handleTabClick" stretch>
                 <el-tab-pane label="待处理故障" name="first">
                   <div class="rmctc-left-table1">
@@ -195,7 +195,7 @@
                   </div>
                 </el-tab-pane>
               </el-tabs>
-            </dv-border-box-3>
+            </dv-border-box-13>
           </div>
           <!-- 
               <FourChart v-else-if="this.$route.query.name.includes('收口机')"></FourChart>
@@ -215,6 +215,16 @@
             class="rmc-bottom-container"
              v-else-if="this.$route.query.name.includes('测量点')">
               <FiveChart></FiveChart>
+          </dv-border-box-4>
+               <dv-border-box-4
+            class="rmc-bottom-container"
+             v-else-if="this.comStr">
+             <SupMachChart></SupMachChart>
+          </dv-border-box-4>
+            <dv-border-box-4
+            class="rmc-bottom-container"
+             v-else-if="this.$route.query.name.includes('#RGV') || this.$route.query.name.length == 5">
+             <RGVChart></RGVChart>
           </dv-border-box-4>
         </div>
       </dv-border-box-1>
@@ -560,14 +570,15 @@
 </template>
 
 <script>
-// import ThereChart from './components/ThereChart.vue'
+// import ThereChart from './components/SupMachChart.vue'
 import topHeader from "./components/topHeader1.vue";
 import ThereChart from '@/pages/devDetail/components/ThereChart.vue';
 import deviceInfo from "./components/deviceInfo.vue";
 import FourChart from "./components/FourChart.vue";
 import FiveChart from "./components/FiveChart.vue";
 import NavBar from "./components/NavBar.vue";
-
+import SupMachChart from "./components/SupChart.vue";
+import RGVChart from "./components/RGVChart.vue";
 
 import {
   pending,
@@ -579,7 +590,6 @@ import {
   postUpdateResult,
 } from "@/api/detail.js";
 // import {getnews} from '../../api/test.js'
-
 export default {
   name: "DataView",
   components: {
@@ -588,7 +598,9 @@ export default {
     ThereChart,
     FourChart,
     FiveChart,
-    NavBar
+    NavBar,
+    SupMachChart,
+    RGVChart
   },
   filters: {
     ellipsis(value) {
@@ -601,7 +613,7 @@ export default {
   },
   data() {
     return {
-      activeName: "second",
+      activeName: "first",
       form: {
         reasons: [],
         checkboxGroup1: [],
@@ -638,6 +650,8 @@ export default {
       faultRecordid: 0,
       resultMessage: {}, //处理结果返回的信息,
     };
+  },
+  created() {
   },
   methods: {
     goToThird() {
@@ -722,7 +736,6 @@ export default {
         }
       });
     },
-
     //修改changeStatus数组
     changeStatus1(i) {
       console.log("reasons", this.form.reasons);
@@ -734,7 +747,6 @@ export default {
       } else {
         this.resultMessage.resultVOList[i].checked = false;
       }
-
       // var d = this.resultMessage.resultVOList[i].checked
       // this.resultMessage.resultVOList[i].checked = !d
       // if(this.resultMessage.resultVOList[i].checked){
@@ -742,7 +754,6 @@ export default {
       // }else{
       // 	console.log(222222222222222)
       // }
-
       // this.changeStatus[i] = !this.changeStatus[i]
       // this.changeStatus.push({ events: [], name: '' })
       // this.changeStatus.splice(this.changeStatus.length - 1, 1)
@@ -843,7 +854,6 @@ export default {
         }
       });
     },
-
     closeDialog5() {
       let reas = [];
       for (let i = 0; i < this.form.reasons.length; i++) {
@@ -931,7 +941,6 @@ export default {
       this.input = s.date; //故障名称
       this.errorreason = this.reason[this.scout][i];
     },
-
     //查看措施触发的事件
     look(index, i) {
       this.srowindex = index;
@@ -946,7 +955,6 @@ export default {
       this.tableData1 = arr;
       //this.centerDialogVisible1 = true
     },
-
     //新增原因触发的事件
     submit() {
       // this.scout.index +=1
@@ -984,19 +992,24 @@ export default {
     },
   },
   mounted() {
-    // this.name  = this.$route.query.id
-    // getnews(this.name).then(res =>{
-    // 	console.log(res)
-    // })
     console.log(this.$route.query)
     this.queryPendingError(this.$route.query.id);
     this.queryHandledError(this.$route.query.id);
     this.devName = this.$route.query.name;
     setTimeout(() => {
          this.table_height = this.$refs.rmcTop.offsetHeight - 130;
+
     }, 100);
     // alert(this.pendingError)
   },
+  computed:{
+    comStr(){
+      var str = this.$route.query.str;
+      return (str.substr(1) - 0 >= 120 && str.substr(1) - 0 <= 125) || ( str.substr(1) - 0 >= 104 && str.substr(1) - 0 <= 113 ) || (str.substr(1) - 0 >= 96 && str.substr(1) - 0 <= 101) ||
+      (str.substr(1) - 0 >= 85 && str.substr(1) - 0 <= 93) ||  (str.substr(1) - 0 >= 80 && str.substr(1) - 0 <= 83) ||  (str.substr(1) - 0 >= 62 && str.substr(1) - 0 <= 78) ||  
+      (str.substr(1) - 0 >= 51 && str.substr(1) - 0 <= 60)  || str == 'T127' || str == "T049" || str == "T048" || str == "T061" || str == "T118"
+    }
+  }
 };
 </script>
 
@@ -1006,7 +1019,6 @@ export default {
   height: 100%;
   background-color: #030409;
   color: #fff;
-
   #dv-full-screen-container {
     background-image: url("~@/assets/img/bg.png");
     background-size: 100% 100%;
@@ -1014,33 +1026,27 @@ export default {
     display: flex;
     flex-direction: column;
   }
-
   .main-header {
     height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-
     .mh-left {
       font-size: 20px;
       color: rgb(1, 134, 187);
-
       a:visited {
         color: rgb(1, 134, 187);
       }
     }
-
     .mh-middle {
       font-size: 30px;
       margin: auto;
     }
-
     .mh-left,
     .mh-right {
       width: 450px;
     }
   }
-
   .main-container {
     height: calc(~"100% - 80px");
     display: flex;
@@ -1059,7 +1065,6 @@ export default {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-
       .rmc-top-container {
         .rmctc-left-table1 {
           width: 100%;
@@ -1068,7 +1073,7 @@ export default {
         flex: 3;
         .rmctc-left-container {
           .el-tabs {
-            margin-top: 3vh;
+            margin-top: 1vh;
             .el-tabs__header {
               // left: 3vh;
               width: 50%;
@@ -1090,7 +1095,6 @@ export default {
             width: 95%;
             flex: 1;
           }
-
           .rmctc-left-table2 {
             margin: 0 auto;
             width: 95%;
@@ -1106,20 +1110,16 @@ export default {
   .rmc-bottom-container {
     flex: 1;
   }
-
   .rmctc-chart-1,
   .rmctc-chart-2 {
     height: 50%;
   }
-
   .el-table .cell {
     white-space: pre-line;
   }
-
   table {
     border-collapse: collapse;
   }
-
   .tb2 {
     border-left: 0px;
   }
@@ -1148,7 +1148,6 @@ export default {
   .el-table__expanded-cell {
     background-color: white !important;
   }
-
   .buttonGroupLeft {
     width: 100px;
     float: left;
@@ -1165,7 +1164,6 @@ export default {
   // .eshover:hover{
   // 	background-color:yellow
   // }
-
   .dv-border-box-4 {
     height: 0;
   }

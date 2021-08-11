@@ -1,10 +1,10 @@
 <template>
   <div class="line-container" v-if="lineNum == 1">
     <div class="top">
-      <div style="width: 15vh; margin-top: 5px"  @click="linkDetail1(162, '1#RGV','T040')">
+      <div style="width: 15vh; margin-top: 5px"  @click="linkDetail1(146, '3#桁架','T040')">
         <one-cell :device="dv1"></one-cell>
       </div>
-      <div style="margin-left: 450px; width: 15vh; margin-top: 5px"  @click="linkDetail1(160, '1#RGV','T038')">
+      <div style="margin-left: 450px; width: 15vh; margin-top: 5px"  @click="linkDetail1(144, '1#桁架','T038')">
         <one-cell :device="dv2"></one-cell>
       </div>
     </div>
@@ -12,15 +12,15 @@
       <dv-decoration-6 style="width: 70vw; height: 10px" />
     </div>
     <div class="one-cell-bottom" @click="linkDetail1(12, '1#RGV','T015')">
-      <one-cell :device="dvCar1"></one-cell>
+      <one-cell :device="dvCar1" :color="this.$store.state.WebsocketMessage.Data12"></one-cell>
     </div>
   </div>
   <div class="line-container" v-else-if="lineNum == 2">
     <div class="top">
-      <div style="width: 15vh; margin-top: 5px"  @click="linkDetail1(163, '1#RGV','T041')">
+      <div style="width: 15vh; margin-top: 5px"  @click="linkDetail1(147, '4#桁架','T041')">
         <one-cell :device="dv5"></one-cell>
       </div>
-      <div style="margin-left: 400px; width: 15vh; margin-top: 5px"  @click="linkDetail1(161, '1#RGV','T039')">
+      <div style="margin-left: 400px; width: 15vh; margin-top: 5px"  @click="linkDetail1(145, '2#桁架','T039')">
         <one-cell :device="dv6"></one-cell>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <dv-decoration-6 style="width: 70vw; height: 10px" />
     </div>
     <div class="one-cell-bottom" @click="linkDetail1(13, '2#RGV','T016')">
-      <one-cell :device="dvCar2"></one-cell>
+      <one-cell :device="dvCar2" :color="this.$store.state.WebsocketMessage.Data13"></one-cell>
     </div>
   </div>
   <div class="line-container" v-else-if="lineNum == 3">
@@ -39,14 +39,14 @@
       <div class="third-top">
         <dv-decoration-6 style="width: 40vw; height: 10px" />
       </div>
-      <div class="one" @click="linkDetail1(165, '6#桁架','T043')">
+      <div class="one" @click="linkDetail1(149, '6#桁架','T043')">
         <one-cell :device="dv8"></one-cell>
       </div>
       <div class="two">
-        <one-cell :device="dv9"  @click="linkDetail1(166, '7#桁架','T044')"></one-cell>
+        <one-cell :device="dv9"  @click="linkDetail1(150, '7#桁架','T044')"></one-cell>
       </div>
       <div class="three" @click="linkDetail1(13, '3#RGV','T017')">
-        <one-cell :device="dvCar3"></one-cell>
+        <one-cell :device="dvCar3" :color="this.$store.state.WebsocketMessage.Data14"></one-cell>
       </div>
     </div>
   </div>

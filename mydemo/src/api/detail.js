@@ -176,3 +176,23 @@ export function findStopHisInfo() {
 		method: 'get',
 	})
 }
+
+//在首页以树状图的形式表示区域及其下属设备
+//http://127.0.0.1:8181/device/catalog
+export function findIndexMenu() {
+	return request({
+		url: '/device/catalog',
+		method: 'get',
+	})
+}
+
+//查询设备的状态列表
+//http://127.0.0.1:8181/device/query/status?deviceId=1
+export function getDeviceStatusList(data) {
+	return request({
+		url: '/device/query/status',
+		method: 'get',
+		params:data
+	})
+}
+

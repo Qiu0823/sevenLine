@@ -7,8 +7,8 @@
         >
           <one-cell :device="arb3"></one-cell>
         </div>
-        <div class="al-line-bottom"></div>
-        <one-cell :device="arb6"></one-cell>
+        <div class="al-line-bottom"  @click="linkDetail1(103,'：烘箱前斯惠顿','T118')"></div>
+        <one-cell :device="arb6" :color="this.$store.state.WebsocketMessage.Data103"></one-cell>
       </div>
       <div class="al-two areaBorderStyle">
         <!-- <one-cell

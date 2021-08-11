@@ -23,7 +23,7 @@ export default {
 
 <style lang='less' scoped>
 .el-icon-timer{
-     color: rgb(156, 16, 16);
+     color: #f0f0f0;
     font-size: xxx-large;
     font-weight: bolder;
     font-stretch: expanded;

@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <router-view />
+    <router-view :key="key"/>
   </div>
 </template>
 
@@ -18,11 +18,19 @@ export default {
   // }
 	created() {
 		//websocket接收各组件的状态信息
+		// console.log(this.$router.history.current,'router')
 		let s = this.$store
+		let that = this;
 		s.state.ws = new WebSocket(socketURL)
-		// s.state.ws = new WebSocket('ws://localhost:8080')
 		s.state.ws.onopen = function () {
-		s.state.ws.send('T001')
+		console.log(that.$router.history.current,'router')
+		const currentRou = that.$router.history.current
+		if(currentRou.path == '/index'){
+			const str = currentRou.query.str;
+			s.state.ws.send(str)
+		} else{
+			s.state.ws.send('T001')
+		}
 		}
 
 		s.state.ws.onmessage = function(event) {
@@ -33,6 +41,11 @@ export default {
 			}
 		};
 	},
+computed: {
+    key() {
+        return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
+    }
+ }
 }
 </script>
 

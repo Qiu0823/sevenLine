@@ -52,13 +52,36 @@
 </template>
 
 <script>
+const comOptionConfig = {
+            type: "gauge",
+             axisTick: {
+              style: {
+                stroke: "#fff",
+              },
+            },
+            pointer: {
+              valueIndex: 1,
+              style: {
+                scale: [0.6, 0.6],
+              },
+            },
+               details: {
+              show: true,
+              // formatter: "压力值：{value}",
+              position: "start",
+              offset: [10, 0],
+              style: {
+                fontSize: 13,
+                textAlign: "left",
+              },
+            },
+}
 export default {
   data() {
     return {
       option1: {
         series: [
           {
-            type: "gauge",
             data: [
               {
                 name: "1#电机",
@@ -72,29 +95,13 @@ export default {
                 fill: "#fff",
               },
             },
-            axisTick: {
-              style: {
-                stroke: "#fff",
-              },
-            },
-            pointer: {
-              valueIndex: 1,
-              style: {
-                scale: [0.6, 0.6],
-              },
-            },
+          ...comOptionConfig,
             details: {
-              show: true,
+              ...comOptionConfig.details,
               formatter: "压力值：{value}",
-              position: "start",
-              offset: [10, 0],
-              style: {
-                fontSize: 13,
-                textAlign: "left",
-              },
             },
-            min: 0,
-            max: 100,
+            min: -20,
+            max: 120,
           },
         ],
       },
@@ -115,29 +122,13 @@ export default {
                 fill: "#fff",
               },
             },
-            axisTick: {
-              style: {
-                stroke: "#fff",
-              },
-            },
-            pointer: {
-              valueIndex: 1,
-              style: {
-                scale: [0.6, 0.6],
-              },
-            },
+           ...comOptionConfig,
             details: {
-              show: true,
+              ...comOptionConfig.details,
               formatter: "位移值：{value}",
-              position: "start",
-              offset: [10, 0],
-              style: {
-                fontSize: 13,
-                textAlign: "left",
-              },
             },
-            min: 10,
-            max: 50,
+          min: -20,
+            max: 120,
           },
         ],
       },
@@ -158,29 +149,13 @@ export default {
                 fill: "#fff",
               },
             },
-            axisTick: {
-              style: {
-                stroke: "#fff",
-              },
-            },
-            pointer: {
-              valueIndex: 1,
-              style: {
-                scale: [0.6, 0.6],
-              },
-            },
+               ...comOptionConfig,
             details: {
-              show: true,
-              formatter: "实际压力:{value}",
-              position: "start",
-              offset: [10, 0],
-              style: {
-                fontSize: 13,
-                textAlign: "left",
-              },
+              ...comOptionConfig.details,
+              formatter: "实际压力{value}",
             },
-            min: 0,
-            max: 100,
+            min: -20,
+            max: 120,
           },
         ],
       },
@@ -201,29 +176,13 @@ export default {
                 fill: "#fff",
               },
             },
-            axisTick: {
-              style: {
-                stroke: "#fff",
-              },
-            },
-            pointer: {
-              valueIndex: 1,
-              style: {
-                scale: [0.6, 0.6],
-              },
-            },
+             ...comOptionConfig,
             details: {
-              show: true,
+              ...comOptionConfig.details,
               formatter: "实际位移：{value}",
-              position: "start",
-              offset: [10, 0],
-              style: {
-                fontSize: 13,
-                textAlign: "left",
-              },
             },
-            min: 10,
-            max: 50,
+            min: -20,
+            max: 120,
           },
         ],
       },

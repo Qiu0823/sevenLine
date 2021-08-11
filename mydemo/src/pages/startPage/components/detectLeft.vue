@@ -2,8 +2,8 @@
   <div class="detect-container">
      
     <div class="dry-area areaBorderStyle">
-      <div class="dev1">
-        <oneCell :device="arb1"></oneCell>
+      <div class="dev1" @click="linkDetail1(104, '烘干设备内节距式输送链','T119')" style="cursor: pointer">
+        <oneCell :device="arb1" :color="this.$store.state.WebsocketMessage.Data104"></oneCell>
       </div>
       <div class="dev2" @click="linkDetail1(32, '烘干机','T032')" style="cursor: pointer">
         <oneCell :device="arb2" :color="this.$store.state.WebsocketMessage.Data32"></oneCell>
@@ -15,11 +15,11 @@
       </div>
       <div class="gulp"></div>
       <div class="detect-left">
-        <div class="detect-left-top">
-          <oneCell :device="dec1"></oneCell>
+        <div class="detect-left-top"  @click="linkDetail1(107,'测量点','T120')">
+          <oneCell :device="dec1" :color="this.$store.state.WebsocketMessage.Data107"></oneCell>
         </div>
-        <div class="detect-left-bottom">
-          <oneCell :device="dec2"></oneCell>
+        <div class="detect-left-bottom"  @click="linkDetail1(109,'测量点','T124')">
+          <oneCell :device="dec2" :color="this.$store.state.WebsocketMessage.Data109"></oneCell>
         </div>
       </div>
       <div class="detect-right">

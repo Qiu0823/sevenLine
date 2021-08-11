@@ -6,5 +6,6 @@ export default{
 	userInfo:{
 		name:'why',
 		password:1
-	}
+	},
+	storeItemList:[]
 }

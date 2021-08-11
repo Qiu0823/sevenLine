@@ -76,7 +76,7 @@
             :color="this.$store.state.WebsocketMessage.Data19"
           ></one-cell>
         </div>
-        <div class="returnFix-bottom"  @click="linkDetail1(164, '1#RGV','T042')">
+        <div class="returnFix-bottom"  @click="linkDetail1(148, '5#桁架','T042')">
           <one-cell :device="returnFix03"></one-cell>
         </div>
         <div class="lineFive">

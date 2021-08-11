@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="gnl1"  @click="linkDetail1(167,'1#通径机','T035')">
+    <div class="gnl1"  @click="linkDetail1(151,'1#通径机','T035')">
       <oneCell :device="gnl1"></oneCell>
     </div>
     <div class="gnl2" @click="linkDetail1(21,'1#抛丸机','T024')">

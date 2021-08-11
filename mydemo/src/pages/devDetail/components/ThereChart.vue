@@ -100,18 +100,17 @@ export default {
   },
 
   watch: {
-    "$store.state.WebsocketMessage.Data11"(newVal, oldVal) {
+    "$store.state.WebsocketMessage.Data11"(newVal) {
       console.log("实际液压油箱液位" + newVal);
-    //   this.config.data.splice(0, 1, newVal);
       this.config.data[0] = newVal;
       this.config = {...this.config}
       console.log(this.config.data)
     },
-    "$store.state.WebsocketMessage.Data12"(newVal, oldVal) {
+    "$store.state.WebsocketMessage.Data12"(newVal) {
       console.log("实际液压油箱温度" + newVal);
       this.ther1 = newVal;
     },
-    "$store.state.WebsocketMessage.Data13"(newVal, oldVal) {
+    "$store.state.WebsocketMessage.Data13"(newVal) {
       console.log("实际主轴箱油箱温度" + newVal);
       this.ther2 = newVal;
     },
