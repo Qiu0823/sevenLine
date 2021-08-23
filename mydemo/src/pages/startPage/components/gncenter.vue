@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="detect2">
-      <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title)">
+      <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title,item.str)">
         <span class="dv-title-gc">{{ item.title }}</span>
         <div class="LEDbtn greenBtn"></div>
       </div>
@@ -43,66 +43,45 @@ export default {
           title: "1#抛丸机前步进梁",
           status: "nomal",
           id: 76,
+          str:'T086'
         },
         {
           title: "1#抛丸机后步进梁",
           status: "nomal",
           id: 81,
+          str:'T088'
         },
         {
           title: "2#抛丸机后步进梁",
           status: "nomal",
           id: 87,
+          str:'T096'
         },
         {
           title: "外保步进梁",
           status: "nomal",
           id: 90,
+          str:'T104'
         },
         {
           title: "管拧机步进梁",
           status: "nomal",
           id: 27,
+          str:'T028'
         },
         {
           title: "管拧机后步进梁",
           status: "nomal",
           id: 95,
+          str:'T107'
         },
         {
           title: "内保步进梁",
           status: "nomal",
           id: 98,
+          str:'T111'
         },
       ],
-      gnc1: {
-        title: "1#抛丸机前步进梁",
-        status: "nomal",
-      },
-      gnc2: {
-        title: "1#抛丸机后步进梁",
-        status: "nomal",
-      },
-      gnc3: {
-        title: "2#抛丸机后步进梁",
-        status: "nomal",
-      },
-      gnc4: {
-        title: "外保步进梁",
-        status: "nomal",
-      },
-      gnc5: {
-        title: "管拧机步进梁",
-        status: "nomal",
-      },
-      gnc6: {
-        title: "管拧机后步进梁",
-        status: "nomal",
-      },
-      gnc7: {
-        title: "内保步进梁",
-        status: "nomal",
-      },
     };
   },
 	methods: {
@@ -112,11 +91,11 @@ export default {
 	      query: { id: id },
 	    });
 	  },
-	  linkDetail1(id, name) {
+	  linkDetail1(id, name,str) {
 	    console.log(name);
 	    this.$router.push({
 	      path: "/index",
-	      query: { id: id, name: name },
+	      query: { id: id, name: name,str },
 	    });
 	  },
 	},

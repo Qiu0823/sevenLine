@@ -44,9 +44,11 @@
                 '-' +
                 (thirdIndex + 1)
               "
-            >
+              >
               {{ thirdItem.device }}
-            </el-menu-item>
+
+              </el-menu-item
+            >
           </el-submenu>
         </el-submenu>
       </el-menu>
@@ -62,7 +64,7 @@ export default {
     return {
       activeIndex: "1",
       activeIndex2: "1",
-      firstList: [
+         firstList: [
         {
           areaId: 4,
           area: "管拧区域",
@@ -1127,34 +1129,32 @@ export default {
     async getIndexMenu() {
       await findIndexMenu().then((res) => {
         this.firstList = res.data.result;
-        this.$store.commit("setItemList", res.data.result);
-        console.log(this.$store.state.storeItemList);
+        this.$store.commit('setItemList',res.data.result)
+        console.log(this.$store.state.storeItemList)
         console.log(res);
       });
     },
     handleClick(name, id, str) {
-      if (id === 153) {
-        this.$router.push({
-          path: "/devTruss",
-          query: { id: id, name: name, str },
-        });
-      } else {
-        this.$router.push({
-          path: "/index",
-          query: { id: id, name: name, str },
-        });
-      }
+      console.log(name, id, str);
+      this.$router.replace({
+        path: "/index",
+        query: { id: id, name: name, str },
+      });
+        // this.$nextTick(() => {
+        // });
+        // window.open(`index?id=${id}&name=${name}&str=${str}`)
     },
   },
+  
 };
 </script>
 
 <style lang='less'>
-.el-submenu__title {
-  display: flex !important;
+.el-submenu__title{
+  display: flex!important;
 }
-.el-submenu__icon-arrow {
-  margin-top: 22px !important;
+.el-submenu__icon-arrow{
+  margin-top: 22px!important;
   height: 12px;
 }
 .el-submenu__title:hover {

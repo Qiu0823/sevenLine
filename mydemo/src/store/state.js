@@ -3,9 +3,10 @@ export default{
 	testValue:null,
 	tableWebsoketMessage:{},
 	ws:null,
+	storeItemList:[],
+	allRoutes:[],
 	userInfo:{
-		name:'why',
-		password:1
 	},
-	storeItemList:[]
+	currentNav:''
+	// userToken:''
 }

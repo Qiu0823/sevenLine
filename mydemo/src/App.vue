@@ -25,10 +25,10 @@ export default {
 		s.state.ws.onopen = function () {
 		console.log(that.$router.history.current,'router')
 		const currentRou = that.$router.history.current
-		if(currentRou.path == '/index'){
+		if(currentRou.path == '/index' || currentRou.path == '/devTruss'){
 			const str = currentRou.query.str;
 			s.state.ws.send(str)
-		} else{
+		} else {
 			s.state.ws.send('T001')
 		}
 		}

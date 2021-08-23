@@ -16,7 +16,7 @@
       <oneCell :device="fcl5"></oneCell>
     </div> -->
      <div class="detect2">
-        <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title)">
+        <div class="detect2-onecell" v-for="item in decArr" :key="item.id" @click="linkDetail1(item.id, item.title,item.str)">
         <span class="dv-title-fc">{{item.title}}</span>
         <div class="LEDbtn greenBtn"></div>
         </div>         
@@ -35,63 +35,51 @@ export default {
         decArr:[{
         title: "3#收口步进梁",
         status: "nomal",
-        id:3
+        id:3,
+        str:'T004'
       },
        {
         title: "4#收口步进梁",
         status: "nomal",
-        id:4
+        id:4,
+        str:'T005'
       },
        {
         title: "3#车丝步进梁",
         status: "nomal",
-        id:7
+        id:7,
+        str:'T008'
       },
        {
         title: "3#车丝后步进梁",
         status: "nomal",
-        id:58
+        id:58,
+        str:'T067'
       },
        {
         title: "3#车丝检验步进梁",
         status: "nomal",
-        id:61
+        id:61,
+        str:'T070'
       },
        {
         title: "4#车丝步进梁",
         status: "nomal",
-        id:8
+        id:8,
+        str:'T009'
       },
        {
         title: "4#车丝后步进梁",
         status: "nomal",
-        id:64
+        id:64,
+        str:'T073'
       },
        {
         title: "4#车丝检验步进梁",
         status: "nomal",
-        id:67
+        id:67,
+        str:'T076'
       },],
-      fcl1: {
-        title: "步进梁",
-        status: "nomal",
-      },
-      fcl2: {
-        title: "3#车丝后步进梁",
-        status: "nomal",
-      },
-      fcl3: {
-        title: "3#车丝检验步进梁",
-        status: "nomal",
-      },
-      fcl4: {
-        title: "4#车丝后步进梁",
-        status: "nomal",
-      },
-      fcl5: {
-        title: "4#车丝检验步进梁",
-        status: "nomal",
-      },
     };
   },
 	methods: {
@@ -101,11 +89,11 @@ export default {
 	      query: { id: id },
 	    });
 	  },
-	  linkDetail1(id, name) {
+	  linkDetail1(id, name,str) {
 	    console.log(name);
 	    this.$router.push({
 	      path: "/index",
-	      query: { id: id, name: name },
+	      query: { id: id, name: name,str },
 	    });
 	  },
 	},

@@ -7,12 +7,30 @@
     <img src="@/assets/img/logo.png" alt="" class="imgOne" />
     <!-- <img src="@/assets/img/logo1.png" alt="" class="img2"> -->
     <img src="@/assets/img/leftLogo.png" alt="" class="img2" />
+    <div class="user"  @click="goToUser">
+      <dv-border-box-5 style="width:300px;height:50px">
+      <span style="margin-right:10px">用户管理</span>
+      <i class="el-icon-s-custom"></i> 
+      </dv-border-box-5>
+    </div>
+    <!-- <div class="user-dec">
+      <dv-decoration-1 style="width:100px;height:50px;" />
+    </div> -->
+    <div class="userRight">
+       <span style="margin-right:20px"><i class="el-icon-s-custom"></i> {{ $store.state.userInfo.username }}</span>
+        <span><i class="el-icon-message-solid"></i>  {{ $store.state.userInfo.role }}</span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "TopHeader",
+  methods: {
+    goToUser(){
+      this.$router.push('menu')
+    }
+  },
 };
 </script>
 
@@ -24,6 +42,25 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
+  .user{
+    position: absolute;
+    top: 40px;
+    left: 240px;
+    color: #ccc;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .user-dec{
+        position: absolute;
+    top: 40px;
+    left: 200px;
+  }
+  .userRight{
+    position: absolute;
+    top: 40px;
+    right: 240px;
+    color: #ccc;
+  }
   .imgOne {
     width: 180px !important;
     height: 50px !important;

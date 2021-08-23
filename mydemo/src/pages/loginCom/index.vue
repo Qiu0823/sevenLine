@@ -18,8 +18,8 @@
             class="demo-ruleForm"
             id="selectForm"
           >
-            <el-form-item label="用户名" prop="userName">
-              <el-input v-model="ruleForm.userName" size="medium">
+            <el-form-item label="用户名" prop="username">
+              <el-input v-model="ruleForm.username" size="medium">
                 <el-button
                   slot="append"
                   icon="el-icon-s-custom"
@@ -27,11 +27,11 @@
                 ></el-button>
               </el-input>
             </el-form-item>
-            <el-form-item label="密码" prop="pass">
+            <el-form-item label="密码" prop="password">
               <el-input
                 size="medium"
                 type="password"
-                v-model="ruleForm.pass"
+                v-model="ruleForm.password"
                 autocomplete="off"
               >
                 <el-button
@@ -60,8 +60,8 @@
           class="demo2-ruleForm"
           id="selectForm"
         >
-          <el-form-item label="用户名" prop="userName">
-            <el-input v-model="ruleFormRegister.userName" size="medium">
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="ruleFormRegister.username" size="medium">
               <el-button
                 slot="append"
                 icon="el-icon-s-custom"
@@ -69,11 +69,11 @@
               ></el-button>
             </el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="pass">
+          <el-form-item label="密码" prop="password">
             <el-input
               size="medium"
               type="password"
-              v-model="ruleFormRegister.pass"
+              v-model="ruleFormRegister.password"
               autocomplete="off"
             >
               <el-button
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+import store from '@/store/index.js'
 export default {
   data() {
     //登录输入框验证
@@ -150,7 +151,7 @@ export default {
     var validatePass2Res = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== this.ruleFormRegister.pass) {
+      } else if (value !== this.ruleFormRegister.password) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -159,21 +160,21 @@ export default {
     return {
       showForm: true,
       ruleForm: {
-        pass: "",
-        userName: "",
+        password: "",
+        username: "",
       },
       ruleFormRegister: {
-        pass: "",
-        userName: "",
+        password: "",
+        username: "",
         checkPass: "",
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        userName: [{ validator: checkUserName, trigger: "blur" }],
+        password: [{ validator: validatePass, trigger: "blur" }],
+        username: [{ validator: checkUserName, trigger: "blur" }],
       },
       rulesRegister: {
-        userName: [{ validator: checkUserNameRes, trigger: "blur" }],
-        pass: [{ validator: validatePassRes, trigger: "blur" }],
+        username: [{ validator: checkUserNameRes, trigger: "blur" }],
+        password: [{ validator: validatePassRes, trigger: "blur" }],
         checkPass: [{ validator: validatePass2Res, trigger: "blur" }],
       },
     };
@@ -192,18 +193,27 @@ export default {
       this.$refs[formName].validate((valid) => {
         console.log(valid);
         if (valid) {
-          if (
-            this.ruleForm.userName == this.$store.state.userInfo.name &&
-            this.ruleForm.pass == this.$store.state.userInfo.password
-          ) {
-            this.$router.push("/");
-          } else {
-            this.$message({
-              message: "用户名或密码错误",
+          store.dispatch('acSetUserInfo',this.ruleForm).then(()=>{
+            console.log('登录完成')
+            this.$router.push('/')
+          }).catch((error)=>{
+              this.$message({
+              message: error,
               type: "error",
             });
-            console.log("密码错误");
-          }
+          })
+          // if (
+          //   this.ruleForm.username == this.$store.state.userInfo.name &&
+          //   this.ruleForm.password == this.$store.state.userInfo.password
+          // ) {
+          //   this.$router.push("/");
+          // } else {
+          //   this.$message({
+          //     message: "用户名或密码错误",
+          //     type: "error",
+          //   });
+          //   console.log("密码错误");
+          // }
         }
       });
     },

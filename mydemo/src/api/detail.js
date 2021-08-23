@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const request = axios.create({
+ const request = axios.create({
 	//baseURL: 'http://192.168.1.232:9001' // url = base url + request url
 	// withCredentials: true, // send cookies when cross-domain requests
 	baseURL: _LOGIN_URL
@@ -195,4 +195,11 @@ export function getDeviceStatusList(data) {
 		params:data
 	})
 }
+
+export function getTrussInfo() {
+	return request({
+	 url: '/fault/truss/status/record',
+	 method: 'get'
+	})
+   }
 

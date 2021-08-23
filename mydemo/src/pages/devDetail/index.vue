@@ -203,17 +203,17 @@
            -->
           <dv-border-box-4
             class="rmc-bottom-container"
-             v-if="this.$route.query.name.includes('车丝机')">
+             v-if="this.$route.query.name.includes('车丝机') && this.$route.query.name.length == 5">
             <ThereChart></ThereChart>
           </dv-border-box-4>
             <dv-border-box-4
             class="rmc-bottom-container"
-             v-else-if="this.$route.query.name.includes('收口机')">
+             v-else-if="this.$route.query.name.includes('收口机') && this.$route.query.name.length == 5">
               <FourChart></FourChart>
           </dv-border-box-4>
               <dv-border-box-4
             class="rmc-bottom-container"
-             v-else-if="this.$route.query.name.includes('测量点')">
+             v-else-if="this.$route.query.name.includes('测量点') && this.$route.query.name.length == 3">
               <FiveChart></FiveChart>
           </dv-border-box-4>
                <dv-border-box-4
@@ -223,7 +223,7 @@
           </dv-border-box-4>
             <dv-border-box-4
             class="rmc-bottom-container"
-             v-else-if="this.$route.query.name.includes('#RGV') || this.$route.query.name.length == 5">
+             v-else-if="this.$route.query.name.includes('#RGV') && this.$route.query.name.length == 5">
              <RGVChart></RGVChart>
           </dv-border-box-4>
         </div>
@@ -1003,11 +1003,11 @@ export default {
     // alert(this.pendingError)
   },
   computed:{
-    comStr(){
-      var str = this.$route.query.str;
-      return (str.substr(1) - 0 >= 120 && str.substr(1) - 0 <= 125) || ( str.substr(1) - 0 >= 104 && str.substr(1) - 0 <= 113 ) || (str.substr(1) - 0 >= 96 && str.substr(1) - 0 <= 101) ||
+    comStr(){ 
+      var str = this.$route.query.str;   //115 116 117  118 119
+      return (str.substr(1) - 0 >= 120 && str.substr(1) - 0 <= 125) ||  (str.substr(1) - 0 >= 115 && str.substr(1) - 0 <= 119) || ( str.substr(1) - 0 >= 104 && str.substr(1) - 0 <= 113 ) || (str.substr(1) - 0 >= 96 && str.substr(1) - 0 <= 101) ||
       (str.substr(1) - 0 >= 85 && str.substr(1) - 0 <= 93) ||  (str.substr(1) - 0 >= 80 && str.substr(1) - 0 <= 83) ||  (str.substr(1) - 0 >= 62 && str.substr(1) - 0 <= 78) ||  
-      (str.substr(1) - 0 >= 51 && str.substr(1) - 0 <= 60)  || str == 'T127' || str == "T049" || str == "T048" || str == "T061" || str == "T118"
+      (str.substr(1) - 0 >= 51 && str.substr(1) - 0 <= 60)  || str == 'T127' || str == "T049" || str == "T048" || str == "T061" || str == 'T079' ||  str == 'T050'
     }
   }
 };

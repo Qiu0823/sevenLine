@@ -31,7 +31,7 @@
         />
         <div
           class="houseDev"
-          @click="linkDetail1(169, '打捆机', 'T046')"
+          @click="linkDetail1()"
           style="cursor: pointer"
         >
           <oneCell
@@ -64,10 +64,9 @@ export default {
     };
   },
   methods: {
-          linkDetail1(id, name,str) {
+          linkDetail1() {
       this.$router.push({
         path: "/pageHouse",
-        query: { id: id, name: name,str },
       });
     },
   },

@@ -146,14 +146,14 @@ export default {
     }
     .two {
       position: absolute;
-      left: 60vh;
+      left: 59vh;
       width: 15vh;
     }
     .three {
       position: absolute;
-      right: 25vh;
+      right: 21vh;
       width: 15vh;
-      top: 1vh;
+      top: 1.5vh;
     }
     .third-top {
       position: absolute;
